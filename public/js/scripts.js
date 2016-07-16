@@ -1,16 +1,14 @@
+
 $(function() {
-    $('#ms-filter').magicSuggest({
+    $('#company').magicSuggest({
+        
         placeholder: 'Select...',
         allowFreeEntries: false,
-        data: [{
-            name: 'Anadarko',
-               }, {
-           name: 'Saudi Aramco'
-        }],
+        data: 'comp_register.php',
+        valueField: 'company',
+        displayField: 'company',
         selectionPosition: 'bottom',
         selectionStacked: true,
-        selectionRenderer: function(data){
-            return data.name + ' (<b>' + data.nb + '</b>)';
-        }
     });
-});
+    console.log(company);
+    });
