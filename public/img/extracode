@@ -1,0 +1,20 @@
+<div class="input-group company col-md-pull-1">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Company Name
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a name="company" value="Halliburton">Halliburton</a></li>
+                        <li class="divider"></li>
+                        <?php 
+                        foreach ($options as $option) 
+                        {
+                            $company_name=$option["company_option"];
+                            echo '<li><a name="company" value="' . "$company_name" . '">' ."$company_name" . '</a></li>' ;
+                        }
+                        ?> 
+                        <li class="divider"></li>
+                        <li><a name="company" value="Other">Other</a></li>
+                    </ul>
+                </div>
+            </div>
