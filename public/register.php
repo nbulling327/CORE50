@@ -15,6 +15,7 @@
             ];
         } 
         
+        
         render("register_form.php", ["title" => "Register","options"=>$options]);
         
     } 

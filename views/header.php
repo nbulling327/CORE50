@@ -12,13 +12,24 @@ CORE
         <!-- http://getbootstrap.com/ -->
         <link href="/css/bootstrap.min.css" rel="stylesheet"/>
         
+        <!-- http://nicolasbize.com/magicsuggest/ -->
+        <link href="/css/magicsuggest-min.css" rel="stylesheet"/>
+        
         <!-- website's own css -->
         <link rel="stylesheet" href="/css/styles.css">
         
         <!-- https://jquery.com/ -->
         <script src="/js/jquery-1.11.3.min.js"></script>
+        
+        <!-- http://twitter.github.io/typeahead.js/ -->
+        <script src="/js/bloodhound.min.js"></script>
+        <script src="/js/typeahead.jquery.min.js"></script>
+        <script src="/js/typeahead.bundle.min.js"></script>
+        
 
-        <!-- https://github.com/twitter/typeahead.js/ -->
+
+        
+        <!-- http://nicolasbize.com/magicsuggest/ -->
         <script src="/js/magicsuggest.js"></script>
         
         <!-- http://getbootstrap.com/ -->

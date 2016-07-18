@@ -11,8 +11,10 @@
     foreach ($comps as $comp) {
             array_push($rows, $comp);
     }
- 
-        
+    $end =count($rows); 
+    $rows[$end]["id"] = "$end";
+    $rows[$end]["company"]="Other";
+    $rows[$end]["domain"]="noaddress.com";
+    
         print json_encode($rows);
-
 ?>

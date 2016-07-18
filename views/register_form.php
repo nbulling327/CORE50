@@ -1,9 +1,10 @@
 <br/><br/><br/>
 <form action="register.php" method="post">
-    <fieldset>
+    
         <div class="form-group">
             <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
         </div>
+    
         <div class="form-group">
             <input class="form-control" name="password" placeholder="Password" type="password"/>
         </div>
@@ -12,11 +13,19 @@
             <input class="form-control" name="confirmation" placeholder="Password" type="password"/>
         </div>
         
+        <div class="form-group" id="companyselect">
+            <input id="company" class="typeahead" autocomplete="off"/>
+        </div>
         
-            <div class="form-group">
-                <input class="form-control" id="company" autocomplete="off" placeholder="Company"/>
-            </div>
-       
+        <div id="default-suggestions">
+            <input class="typeahead" type="text" placeholder="Enter Company">
+        </div>
+        <br/>
+        
+        <select class="form-control" id="com_select">
+
+        </select>
+        
         <div class="form-group">
             <input class="form-control" name="email" placeholder="E-mail Address" type="email"/>
         </div>
@@ -27,12 +36,8 @@
                 Register
             </button>
         </div>
-    </fieldset>
-</form>
+    </form>
 
-<div id="company_match">
-                <input type="text" class="typeahead" autocomplete="off"/>
-            </div>
 
 <br/><br/>
 
