@@ -15,6 +15,9 @@ CORE
         <!-- http://nicolasbize.com/magicsuggest/ -->
         <link href="/css/magicsuggest-min.css" rel="stylesheet"/>
         
+        <!-- http://silviomoreto.github.io/bootstrap-select/ -->
+        <link href="/css/bootstrap-select.min.css" rel="stylesheet"/>
+        
         <!-- website's own css -->
         <link rel="stylesheet" href="/css/styles.css">
         
@@ -25,6 +28,8 @@ CORE
         <script src="/js/bloodhound.min.js"></script>
         <script src="/js/typeahead.jquery.min.js"></script>
         <script src="/js/typeahead.bundle.min.js"></script>
+        
+        <script src="/js/bootstrap-select.min.js"></script>
         
 
 

@@ -13,11 +13,21 @@
             $options[] = [
             "company_option" => $row["company"],
             ];
+        }
+        $rows= CS50::query("SELECT * FROM places ORDER BY region, district");
+        $regions = [];
+        $current = "blank";
+        foreach ($rows as $row)
+        {
+            if($row["region"]!=$current)
+            {
+                $regions[] = [
+                "region_option" => $row["region"],
+                ];
+            }
+            $current = $row["region"];
         } 
-        
-        
-        render("register_form.php", ["title" => "Register","options"=>$options]);
-        
+        render("register_form.php", ["title" => "Register","options"=>$options,"regions"=>$regions]);
     } 
     //else if user reached page via POST (as by submitting a form via POST)
     else if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -47,22 +57,37 @@
             
             else
             {
-                CS50::query("INSERT IGNORE INTO users (username, hash, company, email) 
-                VALUES(?, ?, ?, ?)", 
-                $_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT),$_POST["company"],$_POST["email"]);
-                
+                $hemisphere = CS50:: query("SELECT hemisphere from places WHERE region = ?", $_POST["region"]);
+                CS50::query("INSERT IGNORE INTO users (username, hash, company, email, region,hemisphere) 
+                VALUES(?, ?, ?, ?,?,?)", 
+                $_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT),$_POST["chosen_company"],$_POST["email"],$_POST["region"],$hemisphere[0]["hemisphere"]);
                 $rows = CS50::query("SELECT LAST_INSERT_ID() AS id");
                 $id = $rows[0]["id"];
                 $_SESSION["id"] = $id;
+                $_SESSION["region"]   = $_POST["region"];
                 
-                // redirect to portfolio
-                redirect("/userinfo.php");
+                if($_POST["chosen_company"]=="Halliburton")
+                {
+                    // redirect to portfolio
+                    redirect("/userinfo.php");
+                }
+                if($_POST["chosen_company"]=="other")
+                {
+                    // redirect to portfolio
+                    redirect("/newcompany.php");
+                }
+                else
+                {
+                    // redirect to home
+                    CS50::query("UPDATE users SET role=? WHERE id = ?", 
+                    "Customer",$_SESSION["id"]);
+                    redirect("/");
+                }
             }
-        }
+        }    
         else
         {
             apologize("You did not type the same password twice.");
         }
     }
-    
 ?>

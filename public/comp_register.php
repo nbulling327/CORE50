@@ -1,5 +1,4 @@
 <?php
-
 //configuration
     require("../includes/config.php");
     $rows[0]["id"] = "0";
@@ -15,6 +14,5 @@
     $rows[$end]["id"] = "$end";
     $rows[$end]["company"]="Other";
     $rows[$end]["domain"]="noaddress.com";
-    
         print json_encode($rows);
 ?>

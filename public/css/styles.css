@@ -1,3 +1,7 @@
+.container-fluid
+{
+    background: rgba(166, 172, 175, 0.3);
+}
 .container
 {
     /* center contents */
