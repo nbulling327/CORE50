@@ -18,14 +18,16 @@
         }
         else
         {
-        CS50::query("UPDATE users SET company=? WHERE id = ?", 
-            $_POST["company"],$_SESSION["id"]);
-        CS50::query("UPDATE users SET role=? WHERE id = ?", 
+            $company=CS50::query("Select * FROM users WHERE id = ?", $_SESSION["id"]);
+            if($company[0]["company"]!="Halliburton")
+            {
+                CS50::query("UPDATE users SET company=? WHERE id = ?", 
+                $_POST["company"],$_SESSION["id"]);
+                CS50::query("UPDATE users SET role=? WHERE id = ?", 
                 "Customer",$_SESSION["id"]);
-                    
-        CS50::query("INSERT IGNORE INTO companies (company, domain) 
-                VALUES(?, ?)", 
-                $_POST["company"],$_POST["domain"]);
+            }        
+            CS50::query("INSERT IGNORE INTO companies (company, domain) 
+            VALUES(?, ?)", $_POST["company"],$_POST["domain"]);
             // redirect to home
             redirect("/");
         }

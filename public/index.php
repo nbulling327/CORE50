@@ -6,42 +6,39 @@ CORE
 -->
 
 <?php
-
+    $slurry_number;
     // configuration
     require("../includes/config.php"); 
 
-
-render("data.php");
-    
+    $rows= CS50::query("SELECT * FROM companies ORDER BY company");
+        $options = [];
+        foreach ($rows as $row)
+        {
+            $options[] = [
+            "company_option" => $row["company"],
+            ];
+        }
+    $rows= CS50::query("SELECT * FROM jobtypes ORDER BY type");
+        $jobs = [];
+        foreach ($rows as $row)
+        {
+            $primsec = "secondary";
+            if($row["primary"]==1)
+            {
+                $primsec = "primary";
+            }
+            $jobs[] = [
+            "jobtype" => $row["type"],
+            "primsec" => $primsec
+            ];
+        }
+    $rows= CS50::query("SELECT * FROM places ORDER BY district");
+        $districts = [];
+        foreach ($rows as $row)
+        {
+            $districts[] = [
+            "district" => $row["district"],
+            ];
+        }    
+        render("data.php",["title" => "Main Page","options"=>$options,"jobs"=>$jobs,"districts"=>$districts]);
 ?>
-<!--
-<!DOCTYPE html>
-<html>
-    <head>
-        http://getbootstrap.com/
-        <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-        
-        website's own css
-        <link rel="stylesheet" href="/css/styles.css">
-        
-        <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
-    
-        <title>CORE</title>
-    </head>    
-    <body>
-        <h1>Cement Operational Results Evaluation</h1>
-        <br/>
-        
-        <div class="container">
-            <div class="row">
-                <div class="btn-group btn-group-justified">
-                    <a href="#" class="btn btn-primary">Input</a> 
-                    <a href="#" class="btn btn-info">View Data</a></a>
-                    <a href="#" class="btn btn-success">Analyze Data</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
-
--->
