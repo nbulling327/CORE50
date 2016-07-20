@@ -7,6 +7,7 @@ CORE
 
 <?php
     $slurry_number;
+    $job_id;
     // configuration
     require("../includes/config.php"); 
 

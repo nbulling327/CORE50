@@ -1,4 +1,4 @@
-</<div>
+
 <div class="container-fluid">
     <ul class="nav nav-justified">
         <li><a id="current" href="#">Input Proposal Information</a></li>
@@ -6,7 +6,7 @@
         <li><a href="#">View Job Database</a></li>
         <li><a href="#">Analyze Job Data</a></li>
     </ul>
-</div>
+
 <br/><br/><br/>
 <form action="slurryinfo.php" method="post">
     <fieldset>
