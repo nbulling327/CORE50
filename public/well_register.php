@@ -1,13 +1,13 @@
 <?php
 //configuration
     require("../includes/config.php");
-    $names = CS50::query("SELECT * FROM wells ORDER BY name");
+    $names = CS50::query("SELECT DISTINCT name FROM wells ORDER BY name");
     $i=0;
     foreach ($names as $name) {
          $rows[$i]["name"]=$name["name"];   
          $i=$i+1;
     }
-    $numbers = CS50::query("SELECT * FROM wells ORDER BY number");
+    $numbers = CS50::query("SELECT DISTINCT number FROM wells ORDER BY number");
     $i=0;
     foreach ($numbers as $number) {
          $rows[$i]["number"]=$number["number"];   

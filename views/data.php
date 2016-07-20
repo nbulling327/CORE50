@@ -1,18 +1,18 @@
 
 <div class="container-fluid">
     <ul class="nav nav-justified">
-        <li><a id="current" href="#">Input Proposal Information</a></li>
-        <li><a href="#">Input Post-Job Information</a></li>
+        <li><a id="current" href="/">Input Proposal Information</a></li>
+        <li><a href="/postjob.php">Input Post-Job Information</a></li>
         <li><a href="#">View Job Database</a></li>
         <li><a href="#">Analyze Job Data</a></li>
     </ul>
 
 <br/><br/><br/>
 <form action="slurryinfo.php" method="post">
-    <fieldset>
+<fieldset>
 <div class="row">
     <div class="col-xs-5 col-xs-offset-1 text-left">
-        <select  name="district" class="selectpicker" title="Select Job District.." data-size="8">
+        <select  name="district" class="selectpicker" title="Select Job District.." data-size="8" data-live-search="true">
             <?php
                 foreach ($districts as $district) 
                 {
@@ -26,7 +26,7 @@
 <br/><br/>
 <div class="row">
     <div class="col-xs-5 col-xs-offset-1 text-left">
-        <select  name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12">
+        <select  name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">
             <?php 
                 foreach ($options as $option) 
                 {
@@ -122,11 +122,10 @@
 </div>
 <br/>
 <div class="form-group">
-            <button class="btn btn-primary" type="submit">
-                Go to Slurry Information 
-                <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
-                
-            </button>
-        </div>
-    </fieldset>
+    <button class="btn btn-primary" type="submit">
+    Go to Slurry Information 
+        <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+    </button>
+</div>
+</fieldset>
 </form>

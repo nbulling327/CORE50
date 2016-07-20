@@ -46,7 +46,7 @@
             $i=$i+1;
             echo "Slurry "."$i"." information:";
 ?>
-            <select  name="type_<?php echo "$i";?>" class="selectpicker" multiple data-size="10">
+            <select  name="type_<?php echo "$i";?>" class="selectpicker" data-size="10" title="Slurry Function">
                 <option value="Scavenger">Scavenger</option>
                 <option value="Lead">Lead</option>
                 <option value="Tail">Tail</option>
