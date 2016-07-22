@@ -20,8 +20,15 @@
             ?>
         </select>
     </div>
-    <div id="post_well_choice" hidden class="col-xs-5 col-xs-offset-1">
-        <select  name="job_select" class="selectpicker" title="Select Correct Job.." data-size="12" data-live-search="true">
+    <!--<div id="post_well_choice" hidden class="col-xs-5 col-xs-offset-1">-->
+    <div id="scrollable-dropdown-menu" hidden class="col-xs-5 col-xs-offset-1">
+            <input name="wellsite" class="typeahead form-control" type="text" placeholder="Well Name">
+    </div>
+</div>
+<div class="row">
+        
+    <div>
+        <select id="post_well_choice" name="job_select" class="typeahead" title="Select Correct Job.." data-size="12" data-live-search="true">
             <?php 
                 foreach ($jobs as $job) 
                 {

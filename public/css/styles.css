@@ -28,9 +28,10 @@
     width: auto;
 }
 
-
-
-
+#scrollable-dropdown-menu .tt-dropdown-menu {
+  max-height: 150px;
+  overflow-y: auto;
+}
 
 .tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
