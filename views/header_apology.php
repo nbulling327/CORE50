@@ -46,28 +46,11 @@ CORE
     </head>    
     <body>
         <nav class="navbar navbar-default" role="navigation" style="color: #ffffff;">
-            <div id="loghead" class = "container-fluid">
-                <div class="col-xs-3">
-                    <div class="row">
-                    Cement
-                    </div>
-                    <div class="row">
-                    Operational 
-                    </div>
-                    <div class="row">
-                    Results 
-                    </div>
-                    <div class="row">
-                    Evaluation 
-                    </div>
+            <div id="errhead" class = "container-fluid">
+                <div class="row"></div>
+                <div class="row col-xs-10">
+                    Cement Operational Results Evaluation 
                 </div>
-                <div class="col-xs-2 col-xs-offset-7 pull-left">
-                    
-                    <div id="loginpageheaderbutton">
-                        <br/>
-                     <button id="register" type="button" class="btn my-btn"> <a id="signup" href="index.php"> Go Back to Sign In</a></button>
-                    </div>
-                </div>    
             </div>
         </nav>
         <div id="middle">

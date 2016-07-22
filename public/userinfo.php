@@ -15,7 +15,7 @@
             "district_option" => $row["district"],
             ];
         } 
-        render("additional_info_form.php", ["title" => "Additional Information","options"=>$options]);
+        render("header_register.php","additional_info_form.php", ["title" => "Additional Information","options"=>$options]);
     }
 
     else if($_SERVER["REQUEST_METHOD"] == "POST")

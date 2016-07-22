@@ -50,36 +50,37 @@ $(document).ready(function () {
 $(document).ready(function () { 
     $("#post_well_customer").change(function(event){
         $("#scrollable-dropdown-menu").removeAttr("hidden");
-        var customer = $("#comp_choice").val(); 
-        console.log(customer);
-    
-        var wellnumbers = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('number'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            identify: function(obj) { return obj.number; },
-            prefetch: {
-                url: "well_registers.php",
-                cache:"false",
-            }
-        });
-        
-        console.log(wellnumbers);    
-        $('#scrollable-dropdown-menu .typeahead').typeahead(null,{
+        var custom = $("#comp_choice").val(); 
+        console.log(custom);
+        ($.ajax({
+            url: "search.php",
+            type: "GET",
+            dataType:"json",
+            data: {
+                customer: custom
+                },
+        })        
+        .done(function(data,textStatus,jqXHR){
+            $('#scrollable-dropdown-menu .typeahead').typeahead(null,{
             hint:true,
             minLength: 1,
             display:'number',
-            source: wellnumbers
-        });
+            source: data
+            });
+        })
+        .fail(function(xhr,status,errorThrown){
+            alert("Sorry, there was a problem!");
+            console.log("Error: " + errorThrown);
+            console.log("Status: " + status);
+            console.dir(xhr);    
+        }));
     });
 });
-    
+       
     /**
     * Try to implement query for customer name well choices
     * 
     */
-
-    
-
 /**
 *$("post_well_choice").typeahead(null,{
         autoselect: true,
