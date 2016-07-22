@@ -5,7 +5,16 @@
     //if user reached page via GET (as by clicking a link or via redirect)
     if($_SERVER["REQUEST_METHOD"] == "GET")
     {
-        render("enternewcompany.php", ["title" => "Add New Company"]);
+        $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+        $users = [];
+        foreach ($rows as $row)
+        {
+            $users[] = [
+            "firstname" => $row["firstname"],
+            "lastname" => $row["lastname"],
+            ];
+        }
+        render("header.php","enternewcompany.php", ["title" => "Add New Company","users"=>$users]);
     }
     else if($_SERVER["REQUEST_METHOD"] == "POST")
     {

@@ -1,0 +1,43 @@
+/*.container-fluid
+{
+  background: rgba(166, 172, 175, 0.3);
+}*/
+/* #top
+{
+    width: 100%;
+    background-color: #a6acaf;
+    color: #ffffff;
+}*/
+
+/*#middle
+{
+    background-color: #a6acaf;
+    background: rgba(166, 172, 175, 0.3);
+}*/
+
+
+/*#bottom
+{
+    background-color: #a6acaf;
+    background: rgba(166, 172, 175, 0.3);
+}*/
+
+.tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
+.tt-hint {
+    outline: none;
+}
+
+.navbar-default {
+  background-color: #000000;
+  border-color: #000000;
+}
+.navbar-default .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-default .navbar-text {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ffffff;
+}

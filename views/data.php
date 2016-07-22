@@ -1,17 +1,17 @@
 
 <div class="container-fluid">
-    <ul class="nav nav-justified">
-        <li><a id="current" href="/">Input Proposal Information</a></li>
+    <ul class="nav nav-tabs nav-justified">
+        <li class="active"><a href="/">Input Proposal Information</a></li>
         <li><a href="/postjob.php">Input Post-Job Information</a></li>
         <li><a href="#">View Job Database</a></li>
         <li><a href="#">Analyze Job Data</a></li>
     </ul>
 
-<br/><br/><br/>
+<br/><br/>
 <form action="slurryinfo.php" method="post">
 <fieldset>
 <div class="row">
-    <div class="col-xs-5 col-xs-offset-1 text-left">
+    <div class="col-xs-4 col-xs-offset-2 text-left">
         <select  name="district" class="selectpicker" title="Select Job District.." data-size="8" data-live-search="true">
             <?php
                 foreach ($districts as $district) 
@@ -25,7 +25,7 @@
 </div>
 <br/><br/>
 <div class="row">
-    <div class="col-xs-5 col-xs-offset-1 text-left">
+    <div class="col-xs-4 col-xs-offset-2 text-left">
         <select  name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">
             <?php 
                 foreach ($options as $option) 
@@ -38,13 +38,13 @@
     </div>
     <div class="col-xs-5 col-xs-offset-1">
         <span class="pull-left">
-            <a href="newcompany.php" class="btn btn-info col-xs-offset-1" role="button">Add New Company</a>
+            <a href="newcompany.php" class="btn my-btn col-xs-offset-1" role="button">Add New Company</a>
         </span>
     </div>
 </div>    
 <br/><br/>
 <div class="row">
-    <div class="col-xs-5 col-xs-offset-1 text-left">
+    <div class="col-xs-4 col-xs-offset-2 text-left">
         <select  name="job_type" class="selectpicker" title="Select Job Type.." data-size="8">
             <optgroup label = "Primary Jobs">
                 <?php
@@ -85,9 +85,9 @@
         </div>
     </div>
 </div>
-<br/><br/>
+<br/>
 <div class="row">
-    <div class="col-xs-5 col-xs-offset-1 text-left"> Enter Well Name:
+    <div class="col-xs-4 col-xs-offset-2 text-left"> Enter Well Name:
         <div class="row">
             <div id="prefetch_name" class="col-xs-5 text-left">
                 <input name="well" class="typeahead form-control" type="text" placeholder="Well Name">
@@ -104,7 +104,7 @@
 </div>    
 <br/><br/>
 <div class="row">
-    <div class="col-xs-5 col-xs-offset-1 text-left">
+    <div class="col-xs-4 col-xs-offset-2 text-left">
         Total Number of Slurries:
         <div class="row">
             <div class="col-xs-5 text-left">
@@ -121,11 +121,15 @@
     </div>
 </div>
 <br/>
-<div class="form-group">
-    <button class="btn btn-primary" type="submit">
-    Go to Slurry Information 
-        <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
-    </button>
+<div class="row">
+    <div class="col-xs-2 center-block" style="float:none">
+        <div class="form-group">
+            <button class="btn my-btn" type="submit">
+            Go to Slurry Information 
+                <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+            </button>
+        </div>
+    </div>
 </div>
 </fieldset>
 </form>

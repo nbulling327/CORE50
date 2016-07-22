@@ -1,58 +1,36 @@
-.container-fluid
+#foot_nav_container
 {
-    background: rgba(166, 172, 175, 0.3);
+    text-align: center;
+    line-height : 17px;
+}
+#footer {
+  width: 100%;
+}
+#loghead
+{
+  font-size:x-small;
+}
+#register
+{
+  vertical-align: middle;
 }
 .container
 {
-    /* center contents */
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    border-radius: 5px;
-    background: #FFF;
-    border: 1px solid #CCC;
-    min-height: 400px;
 }
-
-#top
-{
-    width: 100%;
-    background-color: #a6acaf;
-    color: #ffffff;
-}
-#middle
-{
-    /*background-color: #a6acaf;*/
-    background: rgba(166, 172, 175, 0.3);
-}
-
-#bottom
-{
-    /*background-color: #a6acaf;*/
-    background: rgba(166, 172, 175, 0.3);
-}
-
 #middle .form-control
 {
     /* center form controls */
     display: inline-block;
-
     /* override Bootstrap's 100% width for form controls */
     width: auto;
 }
 
-#current
-{
-  background:#4F9E47;
-  color:#B20000;
-  font-weight: bold;
-  margin-right:0px;
-}
 
-.tt-query, /* UPDATE: newer versions use tt-input instead of tt-query */
-.tt-hint {
-    outline: none;
-}
+
+
 
 .tt-query { /* UPDATE: newer versions use tt-input instead of tt-query */
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -80,4 +58,72 @@
     color: #fff;
     background-color: #0097cf;
 
+}
+
+.navbar-default {
+  background-color: #000000;
+  border-color: #000000;
+}
+.navbar-default .navbar-brand {
+  color: #ffffff;
+}
+
+.navbar-default .navbar-text {
+  color: #ffffff;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #ffffff;
+}
+
+#loginpageheaderbutton
+{
+    line-height : 11px;
+}
+
+#loginlogo 
+{
+	font-family: Futura;
+	font-size: 88px;
+	color: #B00404; 
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 96px;
+}
+
+#signup
+{
+    color: #fff;
+}
+
+#signup_black
+{
+    color: #000;
+}
+
+#footer_nav 
+{
+  background-color: #C8C7C7;
+  border-color: #C8C7C7;
+}
+#footer_nav .navbar-brand {
+  color: #000000;
+}
+
+.my-btn
+{
+  color: #fff;
+  background-color: #B00404;
+  
+}
+
+.my-btn:hover { 
+    color: white;
+}
+
+.dropdown-menu {
+    width: 230px !important;
+}
+#helpabout {
+    list-style-type: none;
 }

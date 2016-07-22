@@ -23,7 +23,16 @@
                 "slurries" => $row["slurries"],
                 ];
             }
-            render("slurryinfo_form.php",["title" => "Slurry Information","options"=>$options]);
+            $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+            $users = [];
+            foreach ($rows as $row)
+            {
+                $users[] = [
+                "firstname" => $row["firstname"],
+                "lastname" => $row["lastname"],
+                ];
+            }
+            render("header.php","slurryinfo_form.php",["title" => "Slurry Information","options"=>$options,"users"=>$users]);
         }
         else
         {

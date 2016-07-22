@@ -27,7 +27,7 @@
             }
             $current = $row["region"];
         } 
-        render("register_form.php", ["title" => "Register","options"=>$options,"regions"=>$regions]);
+        render("header_register.php","register_form.php", ["title" => "Register","options"=>$options,"regions"=>$regions]);
     } 
     //else if user reached page via POST (as by submitting a form via POST)
     else if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -58,9 +58,9 @@
             else
             {
                 $hemisphere = CS50:: query("SELECT hemisphere from places WHERE region = ?", $_POST["region"]);
-                CS50::query("INSERT IGNORE INTO users (username, hash, company, email, region,hemisphere) 
-                VALUES(?, ?, ?, ?,?,?)", 
-                $_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT),$_POST["chosen_company"],$_POST["email"],$_POST["region"],$hemisphere[0]["hemisphere"]);
+                CS50::query("INSERT IGNORE INTO users (username, hash, company, email, region,hemisphere,firstname,lastname) 
+                VALUES(?, ?, ?, ?,?,?,?,?)", 
+                $_POST["username"], password_hash($_POST["password"], PASSWORD_DEFAULT),$_POST["chosen_company"],$_POST["email"],$_POST["region"],$hemisphere[0]["hemisphere"],$_POST["firstname"],$_POST["lastname"]);
                 $rows = CS50::query("SELECT LAST_INSERT_ID() AS id");
                 $id = $rows[0]["id"];
                 $_SESSION["id"] = $id;

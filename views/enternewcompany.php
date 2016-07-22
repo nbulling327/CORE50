@@ -14,12 +14,16 @@
                 </div>
             </div>
         </div>
-        <br/><br/>
-        <div class="form-group">
-            <button class="btn btn-primary" type="submit">
-                <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
-            Add New Company
-            </button>
+        <br/><br/><br/><br/>
+        <div class="row">
+            <div class="col-xs-1 center-block" style="float:none">
+                <div class="form-group">
+                    <button class="btn my-btn" type="submit">
+                        <span aria-hidden="true" class="glyphicon glyphicon-ok"></span>
+                        Add New Company
+                    </button>
+                </div>
+            </div>
         </div>
     </form>
 <br/><br/>

@@ -15,7 +15,16 @@
      */
     function apologize($message)
     {
-        render("apology.php", ["message" => $message]);
+        $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+        $users = [];
+        foreach ($rows as $row)
+        {
+            $users[] = [
+            "firstname" => $row["firstname"],
+            "lastname" => $row["lastname"],
+            ];
+        }
+        render("header.php","apology.php", ["message" => $message, "users"=>$users]);
     }
     
     /**
@@ -70,7 +79,7 @@
     /**
      * Renders view, passing in values.
      */
-    function render($view, $values = [])
+    function render($header,$view, $values = [])
     {
         // if view exists, render it
         if (file_exists("../views/{$view}"))
@@ -79,7 +88,7 @@
             extract($values);
 
             // render view (between header and footer)
-            require("../views/header.php");
+            require("../views/{$header}");
             require("../views/{$view}");
             require("../views/footer.php");
             exit;

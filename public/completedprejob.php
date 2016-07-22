@@ -22,6 +22,7 @@
             $i=$i+1;
             $current_type = 'type_'.$i;
             $current_dens = 'density_'.$i;
+            $current_vol = 'designvolume_'.$i;
             if (empty($_POST["$current_type"]))
             {
                 apologize("You failed to choose a slurry function for slurry $i.");
@@ -30,11 +31,15 @@
             {
                 apologize("You failed to enter a proper density for slurry $i.");
             }
+            else if (1>($_POST["$current_vol"]))
+            {
+                apologize("You failed to enter a proper slurry volume for slurry $i.");
+            }
             else
             {
-                CS50::query("INSERT IGNORE INTO slurries (job_id, stage, function, density) 
-                VALUES(?,?,?,?)", 
-                $_SESSION["job"], "1",$_POST["$current_type"],$_POST["$current_dens"]);
+                CS50::query("INSERT IGNORE INTO slurries (job_id, stage, function, density, des_vol) 
+                VALUES(?,?,?,?,?)", 
+                $_SESSION["job"], "1",$_POST["$current_type"],$_POST["$current_dens"],$_POST["$current_vol"]);
             }
         }
         // redirect to portfolio

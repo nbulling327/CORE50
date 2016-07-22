@@ -38,6 +38,15 @@ CORE
             $districts[] = [
             "district" => $row["district"],
             ];
-        }    
-        render("data.php",["title" => "Main Page","options"=>$options,"jobs"=>$jobs,"districts"=>$districts]);
+        }
+    $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+        $users = [];
+        foreach ($rows as $row)
+        {
+            $users[] = [
+            "firstname" => $row["firstname"],
+            "lastname" => $row["lastname"],
+            ];
+        }
+        render("header.php","data.php",["title" => "Main Page","options"=>$options,"jobs"=>$jobs,"districts"=>$districts,"users"=>$users]);
 ?>

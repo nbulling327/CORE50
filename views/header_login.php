@@ -46,8 +46,8 @@ CORE
     </head>    
     <body>
         <nav class="navbar navbar-default" role="navigation" style="color: #ffffff;">
-            <div class = "container-fluid">
-                <div id="loghead" class="col-xs-3">
+            <div id="loghead" class = "container-fluid">
+                <div class="col-xs-3">
                     <div class="row">
                     Cement
                     </div>
@@ -61,24 +61,13 @@ CORE
                     Evaluation 
                     </div>
                 </div>
-                <div class="col-xs-4 col-xs-offset-2">
-                    <br/>
-                    Signed in as
-                    <?php 
-                        $firstname=$users[0]["firstname"];
-                        $lastname=$users[0]["lastname"];
-                        echo "$firstname" . ' ' ."$lastname";
-                    ?>
-                </div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="logout.php">Log Out</a></li>
-                            <li><a href="#">Update Password</a></li>
-                        </ul>
-                    </li>
-                </ul>
+                <div class="col-xs-1 col-xs-offset-8">
+                    
+                    <div id="loginpageheaderbutton">
+                        <br/>
+                     <button id="register" type="button" class="btn my-btn"> <a id="signup" href="register.php"> Sign Up</a></button>
+                    </div>
+                </div>    
             </div>
         </nav>
         <div id="middle">
