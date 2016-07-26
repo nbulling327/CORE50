@@ -21,6 +21,11 @@ CORE
             <!--<link href="/css/magicsuggest-min.css" rel="stylesheet"/>-->
         <!-- Active JS Files -->
             <!-- https://jquery.com/ -->
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                google.charts.load('current', {packages: ['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+            </script>
             <script src="/js/jquery-1.11.3.min.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
             <script src="/js/typeahead.bundle.min.js"></script>

@@ -81,6 +81,16 @@
     line-height : 11px;
 }
 
+body {
+    padding-bottom: 120px;
+}
+
+#registerform
+{
+    line-height : 12px;
+}
+
+
 #errhead
 {
     line-height : 40px;
@@ -112,6 +122,7 @@
 {
   background-color: #C8C7C7;
   border-color: #C8C7C7;
+  
 }
 #footer_nav .navbar-brand {
   color: #000000;

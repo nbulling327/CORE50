@@ -2,7 +2,7 @@
 <div class = "container-fluid">
     <br/><br/><br/>
     <form action="newcompany.php" method="post">
-        <div class="col-xs-8 col-xs-offset-2 style="min-width: 270px;">
+        <div class="col-xs-8 col-xs-offset-2" style="min-width: 270px;">
             <input name="company" type="text" class="form-control" placeholder="Company Name" style="margin: auto; width:50%;">
         </div>
         <br/><br/><br/>

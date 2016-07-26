@@ -102,29 +102,6 @@
 </div>
 <br/>
 <div class="row">
-    <div class="col-xs-3 col-xs-offset-1 text-left"> Select Supervisor:
-        <div class="row">
-            <div id="prefetch_name" class="col-xs-5 text-left">
-                <input name="well" class="typeahead form-control" type="text" placeholder="Well Name">
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3 col-xs-offset-1 text-left"> Select Pump Operator:
-        <div class="row">
-            <div id="prefetch_number" class="col-xs-5 text-left">
-                <input name="number" class="typeahead form-control" type="text" placeholder="Well Number">
-            </div>
-        </div>
-    </div>
-    <div class="col-xs-3">
-        <br/>
-        <span class="pull-left">
-            <a href="#" class="btn my-btn col-xs-offset-1" role="button">Add Field Employee</a>
-        </span>
-    </div>
-</div>    
-<br/>
-<div class="row">
     <div class="col-xs-4 col-xs-offset-1 text-left">
         Total Number of Slurries:
         <div class="row">

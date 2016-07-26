@@ -34,6 +34,34 @@
                $_POST["district"],$_SESSION["id"]);
         CS50::query("UPDATE users SET area=? WHERE id = ?", 
                $area[0]["area"],$_SESSION["id"]);
+        if("both" == $_POST["role"])
+        {
+        CS50::query("UPDATE users SET pumper=? WHERE id = ?", 
+            1,$_SESSION["id"]);
+        CS50::query("UPDATE users SET supervisor=? WHERE id = ?", 
+            1,$_SESSION["id"]);
+        }
+        else if("pumper" == $_POST["role"])
+        {
+        CS50::query("UPDATE users SET pumper=? WHERE id = ?", 
+            1,$_SESSION["id"]);
+        CS50::query("UPDATE users SET supervisor=? WHERE id = ?", 
+            0,$_SESSION["id"]);
+        }
+        else if("supervisor" == $_POST["role"])
+        {
+        CS50::query("UPDATE users SET pumper=? WHERE id = ?", 
+            0,$_SESSION["id"]);
+        CS50::query("UPDATE users SET supervisor=? WHERE id = ?", 
+            1,$_SESSION["id"]);
+        }
+        else
+        {
+        CS50::query("UPDATE users SET pumper=? WHERE id = ?", 
+            0,$_SESSION["id"]);
+        CS50::query("UPDATE users SET supervisor=? WHERE id = ?", 
+            0,$_SESSION["id"]);
+        }
         // redirect to home
         redirect("/");
     }
