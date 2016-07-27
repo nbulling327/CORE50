@@ -145,3 +145,103 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+    var jsonData = $.ajax({
+        url: "single_job_data.php",
+        dataType: "json",
+        success: function(html){
+            // Succesful, load visualization API and send data
+            google.setOnLoadCallback(drawData(html));
+    
+        }    
+        });
+    
+    var chartDiv = document.getElementById('chart_div');
+    var data = new google.visualization.DataTable(jsonData);
+    var materialOptions = {
+        chart: {
+            title: "Job Data"
+        },
+        width: 900,
+        height: 500,
+        series: {
+            0: {axis: 'Pressure'},
+            1: {axis: 'Rate'},
+            2: {axis: 'Density'}
+        },
+        axes:{
+            y: {
+                Pressure: {label: 'Pressure (psi)'},
+                Rate: {label: 'Rate (bpm)'},
+                Density: {label: 'Density (lb/gal)'}
+            }
+        }
+    };
+    var classicOptions = {
+        title: 'Job Data',
+        width: 900,
+        height:500,
+        series:{
+            0: {targetAxisIndex: 0},
+            1: {targetAxisIndex: 1},
+            2: {targetAxisIndex: 2}
+        },
+        vAxes:
+        {
+            0: {title: 'Pressure'},
+            1: {title: 'Rate'},
+            2: {title: 'Density'}
+        },
+        vAxis: {
+            viewWindow: {
+                max: 30
+        }
+    }
+    };
+    
+    function drawMaterialChart() {
+        var materialChart = new google.charts.Line(chartDiv);
+        materialChart.draw(data, materialOptions);
+    }
+    
+     
+    drawMaterialChart();
+});
+
+    var options = {
+        lines: {
+            show: true    
+        },
+        points: {
+            show: true
+        },
+        xaxis: {
+            tickDecimals: 0,
+            tickSize: 1
+        }
+    };
+    
+    var data = [];
+    
+    $.plot ("#placeholder",data,options);
+    var alreadyFetched = {};
+    
+    function onDataReceived(series) {
+        
+        console.log(series.data);
+        if(!alreadyFetched[series.label]){
+            alreadyFetched[series.label]=true;
+            data.push(series);
+        }
+    
+        $.plot ("#placeholder",data,options);
+    }
+    
+  $.ajax({
+        url: "single_job_data.php",
+        type:"GET",
+        dataType: "json",
+        success: onDataReceived
+    });
+
+    

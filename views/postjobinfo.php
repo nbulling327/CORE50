@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
         <li><a href="/">Input Proposal Information</a></li>
@@ -21,7 +23,7 @@
             </select>
         </div>
         <div id="scrollable-dropdown-menu" hidden class="col-xs-5 col-xs-offset-1">
-            <select id="test" name="wellsite" class="typeahead form-control" type="text" title="Well Name" data-live-search="true">
+            <select id="test" name="wellsite" class="typeahead form-control" type="text" placeholder="Well Name" data-live-search="true">
             </select>
         </div>
     </div>
@@ -60,7 +62,7 @@
     <br/>
     <div class="row">
         <div class="col-xs-2 col-xs-offset-1 text-left">
-            <select  name="time" class="selectpicker" data-size="12" title="Select Elapsed Time Column" data-live-search="true">
+            <select  name="time" class="selectpicker" data-size="8" title="Select Elapsed Time Column" data-live-search="true">
                 <option value="0">A</option>
                 <option value="1">B</option>
                 <option value="2">C</option>
@@ -90,7 +92,7 @@
             </select>
         </div>
         <div class="col-xs-2 col-xs-offset-1 text-left">
-            <select  name="pressure" class="selectpicker" data-size="12" title="Select Pressure Column" data-live-search="true">
+            <select  name="pressure" class="selectpicker" data-size="8" title="Select Pressure Column" data-live-search="true">
                 <option value="0">A</option>
                 <option value="1">B</option>
                 <option value="2">C</option>
@@ -120,7 +122,7 @@
             </select>
         </div>
         <div class="col-xs-2 col-xs-offset-1 text-left">
-            <select  name="rate" class="selectpicker" data-size="12" title="Select Rate Column" data-live-search="true">
+            <select  name="rate" class="selectpicker" data-size="8" title="Select Rate Column" data-live-search="true">
                 <option value="0">A</option>
                 <option value="1">B</option>
                 <option value="2">C</option>
@@ -150,7 +152,7 @@
             </select>
         </div>
         <div class="col-xs-2 col-xs-offset-1 text-left">
-            <select  name="density" class="selectpicker" data-size="12" title="Select Density Column" data-live-search="true">
+            <select  name="density" class="selectpicker" data-size="8" title="Select Density Column" data-live-search="true">
                 <option value="0">A</option>
                 <option value="1">B</option>
                 <option value="2">C</option>

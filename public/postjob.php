@@ -126,8 +126,16 @@
                     (time, pressure, rate, density) VALUES(?,?,?,?)",$data["time"],$data["pressure"],$data["rate"],$data["density"]);
                 }
                 
-                ?><div id="chart_div"></div><?php
-                
+                $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+                $users = [];
+                foreach ($rows as $row)
+                {
+                    $users[] = [
+                    "firstname" => $row["firstname"],
+                    "lastname" => $row["lastname"],
+                    ];
+                }    
+                render("header.php","postjobcomplete_form.php",["title" => "Post Job Chart","users" =>$users]);
                 
             }
             else

@@ -1,11 +1,3 @@
-//function to active select picker for Job District, etc.
-$(document).ready(function() {
-  $('.selectpicker').selectpicker({
-    style: 'btn-default',
-    dropupauto: 'false',
-    size: 4
-  });
-});
 
 //function to populate well register with past well names so that it can prefetch
 $(document).ready(function () {
@@ -69,62 +61,20 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    var jsonData = $.ajax({
-        url: "single_job_data.php",
-        dataType: "json",
-        async: false
-    }).responseText;
+    $.getJSON("single_job_data.php", function(json){
+        var plotarea=$("#placeholder");
+        var data = [json.data];
+        $.plot(plotarea,data);
+    });
+});    
     
-    var chartDiv = document.getElementById('chart_div');
-    var data = new google.visualization.DataTable(jsonData);
-    var materialOptions = {
-        chart: {
-            title: "Job Data"
-        },
-        width: 900,
-        height: 500,
-        series: {
-            0: {axis: 'Pressure'},
-            1: {axis: 'Rate'},
-            2: {axis: 'Density'}
-        },
-        axes:{
-            y: {
-                Pressure: {label: 'Pressure (psi)'},
-                Rate: {label: 'Rate (bpm)'},
-                Density: {label: 'Density (lb/gal)'}
-            }
-        }
-    };
-    var classicOptions = {
-        title: 'Job Data',
-        width: 900,
-        height:500,
-        series:{
-            0: {targetAxisIndex: 0},
-            1: {targetAxisIndex: 1},
-            2: {targetAxisIndex: 2}
-        },
-        vAxes:
-        {
-            0: {title: 'Pressure'},
-            1: {title: 'Rate'},
-            2: {title: 'Density'}
-        },
-        vAxis: {
-            viewWindow: {
-                max: 30
-        }
-    }
-    };
-    
-    function drawMaterialChart() {
-        var materialChart = new google.charts.Line(chartDiv);
-        materialChart.draw(data, materialOptions);
-    }
-    
-     
-    drawMaterialChart();
+
+
+//function to active select picker for Job District, etc.
+$(document).ready(function() {
+  $('.selectpicker').selectpicker({
+    style: 'btn-default',
+    dropupauto: 'false',
+    size: 4
+  });
 });
-
-

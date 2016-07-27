@@ -1,0 +1,1 @@
+<div id="flot-placeholder" style="width:300px;height:150px"></div>

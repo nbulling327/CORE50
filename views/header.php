@@ -20,13 +20,19 @@ CORE
             <!-- http://nicolasbize.com/magicsuggest/ -->
             <!--<link href="/css/magicsuggest-min.css" rel="stylesheet"/>-->
         <!-- Active JS Files -->
+            
+            
+            
+            <!--script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"-->
+            <!--script type="text/javascript"-->
+            <!--    google.charts.load('current', {packages: ['corechart']});-->
+            <!--    google.charts.setOnLoadCallback(drawChart);-->
+            <!--/script-->
             <!-- https://jquery.com/ -->
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script type="text/javascript">
-                google.charts.load('current', {packages: ['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
-            </script>
             <script src="/js/jquery-1.11.3.min.js"></script>
+            <script type="text/javascript" src="/js/flot-0.8.2.min.excanvas.js"></script>
+            <script type="text/javascript" src="/js/flot-0.8.2.min.js"></script>
+            <script type="text/javascript" src="/js/flot.time.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
             <script src="/js/typeahead.bundle.min.js"></script>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
@@ -42,12 +48,17 @@ CORE
             <!-- http://nicolasbize.com/magicsuggest/ -->
             <!--<script src="/js/magicsuggest.js"></script>-->
             
+        
+        
         <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>
             <title>CORE: <?= htmlspecialchars($title) ?></title>
         <?php else: ?>
             <title>CORE</title>
         <?php endif ?>    
+    
+        
+    
     </head>    
     <body>
         <nav class="navbar navbar-default" role="navigation" style="color: #ffffff;">
