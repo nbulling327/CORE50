@@ -53,54 +53,97 @@
     }
     else if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        //echo ini_get('file_uploads');
-        //echo ini_get('upload_max_filesize');
-        //ini_set('upload_max_filesize', '10M');
-        //phpinfo();
-        //echo ini_get('upload_max_filesize');
-        $target_dir="uploads/";
-        $target_file=$target_dir. basename($_FILES["fileToUpload"]["name"]);
-        //echo $target_file;
-        //var_dump($_FILES);
-        //$uploadOk=1;
-        if(isset($_POST["submit"]))
+        if(empty($_POST["chosen_company"]))
         {
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if($check !== false)
+            apologize("You failed to select a customer.");
+        }
+        else if(empty($_POST["wellsite"]))
+        {
+            apologize("You failed to properly select a job.");
+        }
+        else if(empty($_POST["jobdate"]))
+        {
+            apologize("You failed to select a job date.");
+        }
+        else if(empty($_POST["chosen_supervisor"]))
+        {
+            apologize("You failed to choose a supervisor!");
+        }
+        else if(empty($_POST["chosen_pumper"]))
+        {
+            apologize("You failed to choose a pump truck operator.");
+        }
+        else if(empty($_POST["calculated_disp"]))
+        {
+            apologize("You failed to enter the total calculated displacement.");
+        }
+        else if(empty($_POST["time"]))
+        {
+            apologize("You failed to choose the elapsed time column.");
+        }
+        else if(empty($_POST["pressure"]))
+        {
+            apologize("You failed to choose the pressure column.");
+        }
+        else if(empty($_POST["density"]))
+        {
+            apologize("You failed to choose the density column.");
+        }
+        else if(empty($_POST["rate"]))
+        {
+            apologize("You failed to choose the pump rate column.");
+        }
+        else if(empty($_FILES["fileToUpload"]["tmp_name"]))
+        {
+            apologize("You failed to choose the csv to upload.");
+        }
+        else
+        {
+            $jobs= CS50::query("SELECT * FROM jobs WHERE id = ?", $_POST["wellsite"]);
+            $current_job = $jobs[0];
+            $name = $current_job["customer"]." ".$current_job["well_name"]." ".$current_job["well_number"]." ".$current_job["job_type"];
+            $name = str_replace(' ', '_', $name);
+            $target_dir="uploads/";
+            $target_file=$target_dir. $name.".csv";
+            
+            if(isset($_POST["submit"]))
             {
-                echo "File is an image - ". $check["mine"] . ".";
-                $uploadOk = 0;
+                $info = new SplFileInfo($_FILES["fileToUpload"]["name"]);
+                if('csv' != $info->getExtension())
+                {
+                    apologize("File is not a csv.");
+                }
+                
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                if($check !== false)
+                {
+                    apologize("File is an image.");
+                    $uploadOk = 0;
+                }
+                else
+                {
+                    $uploadOk=1;
+                }
+            }
+        
+            if (file_exists($target_file))
+            {
+                apologize("A file for this job already exists.");
+                $uploadOk=0;
+            }
+        
+            if ($_FILES["fileToUpload"]["size"] > 2000000)
+            {
+                apologize("File size" . $_FILES["fileToUpload"]["size"] . ".  Current max size is 2 MB.");
+                $uploadOk=0;
+            }
+        
+            if(!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$target_file))
+            {
+                apologize("Upload of file failed for some unknown reason.");
             }
             else
             {
-                echo "File is not an image.";
-                $uploadOk=1;
-            }
-        }
-        if (file_exists($target_file))
-        {
-            echo "Sorry, file already exists.";
-            $uploadOk=0;
-        }
-        if ($_FILES["fileToUpload"]["size"] > 2000000)
-        {
-            echo "Sorry, file is too large.";
-            $uploadOk=0;
-        }
-        //echo "file size is " . $_FILES["fileToUpload"]["size"]. "!!";
-        //if($imageFileType != "csv")
-        //{
-        //    echo "Sorry - only csvs are allowed.";
-        //    $uploadOk=0;
-        //}
-        if($uploadOk == 0)
-        {
-            echo "Your upload failed.";
-        }
-        
-            if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$target_file))
-            {
-                echo "The file ". basename($_FILES["fileToUpload"]["name"]). " has been uploaded.";
                 CS50::query("TRUNCATE datas");
                 $time_col=$_POST["time"];
                 $pres_col=$_POST["pressure"];
@@ -138,10 +181,7 @@
                 render("header.php","postjobcomplete_form.php",["title" => "Post Job Chart","users" =>$users]);
                 
             }
-            else
-            {
-                echo "File upload failed.";   
-            }
-        
+            
+        }
     }
 ?>

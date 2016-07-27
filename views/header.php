@@ -14,8 +14,10 @@ CORE
             <link href="/css/bootstrap.min.css" rel="stylesheet"/>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
             <link href="/css/bootstrap-select.min.css" rel="stylesheet"/>
+            <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
             <!-- website's own css -->
             <link rel="stylesheet" href="/css/styles.css">
+            
         <!-- Inactive CSS Files -->
             <!-- http://nicolasbize.com/magicsuggest/ -->
             <!--<link href="/css/magicsuggest-min.css" rel="stylesheet"/>-->
@@ -33,6 +35,7 @@ CORE
             <script type="text/javascript" src="/js/flot-0.8.2.min.excanvas.js"></script>
             <script type="text/javascript" src="/js/flot-0.8.2.min.js"></script>
             <script type="text/javascript" src="/js/flot.time.js"></script>
+            <script language="javascript" type="text/javascript" src="/js/flot.selection.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
             <script src="/js/typeahead.bundle.min.js"></script>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
@@ -40,7 +43,9 @@ CORE
             <!-- http://getbootstrap.com/ -->
             <script src="/js/bootstrap.min.js"></script>
             <!-- website's own js -->
-            <script src="/js/scripts.js"></script>
+            <script src="/js/current_scripts.js"></script>
+            <script src="/js/moment.min.js"></script>
+            <script src="/js/bootstrap-datetimepicker.min.js"></script>
         <!-- Inactive JS Files -->
             <!-- http://twitter.github.io/typeahead.js/ -->
             <!--<script src="/js/bloodhound.min.js"></script>-->
