@@ -73,6 +73,10 @@
         {
             apologize("You failed to choose a pump truck operator.");
         }
+        else if(strcmp($_POST["chosen_pumper"], $_POST["chosen_supervisor"]) == 0)
+        {
+            apologize("You chose the same person as pump truck operator and supervisor.");
+        }
         else if(empty($_POST["calculated_disp"]))
         {
             apologize("You failed to enter the total calculated displacement.");
@@ -162,6 +166,14 @@
                         "density"=>$prd[$dens_col],
                     ];
                 }
+                
+                $your_date = date("Y-m-d", strtotime($_POST["jobdate"]));
+                CS50::query("UPDATE jobs 
+                            SET calculated_disp = ?, supervisor_id = ?, pumper_id = ? ,
+                            job_date = ?, time = ?, pressure =?, rate=?, density=? 
+                            WHERE id = ? ",
+                            $_POST["calculated_disp"],$_POST["chosen_supervisor"],$_POST["chosen_pumper"],
+                            $your_date,$_POST["time"],$_POST["pressure"],$_POST["rate"],$_POST["density"],$_POST["wellsite"]);
         
                 foreach ($datas as $data)
                 {
@@ -177,8 +189,33 @@
                     "firstname" => $row["firstname"],
                     "lastname" => $row["lastname"],
                     ];
-                }    
-                render("header.php","postjobcomplete_form.php",["title" => "Post Job Chart","users" =>$users]);
+                }
+                $rows= CS50::query("SELECT * FROM jobs WHERE id=?",$_POST["wellsite"]);
+                $jobs = [];
+                foreach ($rows as $row)
+                {
+                    $jobs[] = [
+                    "customer" => $row["customer"],
+                    "job_type" => $row["job_type"],
+                    "stage_count" => $row["stage_count"],
+                    "well_name" => $row["well_name"],
+                    "well_number" => $row["well_number"],
+                    "number_slurries" => $row["slurries"],
+                    "id"=>$row["id"]
+                    ];
+                }
+                $rows= CS50::query("SELECT * FROM slurries WHERE job_id=?",$_POST["wellsite"]);
+                $slurries = [];
+                foreach ($rows as $row)
+                {
+                    $slurries[] = [
+                    "stage" => $row["stage"],
+                    "function" => $row["function"],
+                    "density" => $row["density"],
+                    ];
+                }
+                render("header.php","postjobcomplete_form.php",["title" => "Post Job Chart",
+                    "users" =>$users,"jobs" =>$jobs,"slurries" =>$slurries]);
                 
             }
             

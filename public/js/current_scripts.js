@@ -6,7 +6,7 @@ $(document).ready(function () {
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         identify: function(obj) { return obj.name; },
         prefetch: {
-            url: "well_register.php",
+            url: "job_register.php",
             cache:"false",
         }
     });
@@ -27,7 +27,7 @@ $(document).ready(function () {
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         identify: function(obj) { return obj.number; },
         prefetch: {
-            url: "well_registers.php",
+            url: "job_registers.php",
             cache:"false",
         }
     });
@@ -48,7 +48,7 @@ $(document).ready(function () {
         var custom = $("#comp_choice").val();
         var parameters ={customer: custom};
         $.getJSON("search.php", parameters)
-        .done(function(data, textStatus, jqXHR)
+        .success(function(data, textStatus, jqXHR)
         {
           document.getElementById("test").options.length = 0;
           var obj=document.getElementById("test"); 

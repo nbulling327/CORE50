@@ -17,9 +17,21 @@
         $slurries = $rows[0]["slurries"];
         $_SESSION["stage_count"] = $rows[0]["stage_count"];
         $_SESSION["slurries"] = $rows[0]["slurries"];
+        $stage_count = $rows[0]["stage_count"];
+        
         for($i=0;$i<$slurries;)
         {
             $i=$i+1;
+            if($stage_count>1)
+            {
+                $current_stage = 'slurry_'.$i.'_stage';
+                var_dump($current_stage);
+                
+            }
+            else
+            {
+                $_POST["$current_stage"] = 1;
+            }
             $current_type = 'type_'.$i;
             $current_dens = 'density_'.$i;
             $current_vol = 'designvolume_'.$i;
@@ -37,9 +49,9 @@
             }
             else
             {
-                CS50::query("INSERT IGNORE INTO slurries (job_id, stage, function, density, des_vol) 
-                VALUES(?,?,?,?,?)", 
-                $_SESSION["job"], "1",$_POST["$current_type"],$_POST["$current_dens"],$_POST["$current_vol"]);
+                CS50::query("INSERT IGNORE INTO slurries (job_id, stage, function, density, des_vol, slurry_number) 
+                VALUES(?,?,?,?,?,?)", 
+                $_SESSION["job"], $_POST["$current_stage"],$_POST["$current_type"],$_POST["$current_dens"],$_POST["$current_vol"],$i);
             }
         }
         // redirect to portfolio
