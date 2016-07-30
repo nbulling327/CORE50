@@ -57,15 +57,16 @@
                                 echo "Slurry "."$i"." information:";
 ?>
                                 <select  name="type_<?php echo "$i";?>" class="selectpicker" data-size="8" title="Slurry Function">
-                                    <option value="Scavenger">Scavenger</option>
                                     <option value="Lead">Lead</option>
                                     <option value="Tail">Tail</option>
+                                    <option value="primary">Primary</option>
+                                    <option value="Scavenger">Scavenger</option>
                                     <option value="Cap">Cap</option>
                                     <option value="top_out">Top Out</option>
                                     <option value="foam_lead">Foamed Lead</option>
                                     <option value="bead_lead">Glass Bead Lead</option>
                                     <option value="bead_tail">Glass Bead Tail</option>
-                                </select>
+                                    </select>
                             </div>
                             <div id="prefetch_density" class="col-xs-3 text-left">
                                 <input name="density_<?php echo "$i";?>" class="typeahead form-control" type="text" placeholder="Slurry Density (i.e. 12.2)">

@@ -53,6 +53,7 @@
     }
     else if($_SERVER["REQUEST_METHOD"] == "POST")
     {
+        var_dump($_POST);
         if(empty($_POST["chosen_company"]))
         {
             apologize("You failed to select a customer.");
@@ -81,23 +82,43 @@
         {
             apologize("You failed to enter the total calculated displacement.");
         }
-        else if(empty($_POST["time"]))
+        if(empty($_POST["time"]))
         {
             apologize("You failed to choose the elapsed time column.");
         }
-        else if(empty($_POST["pressure"]))
+        else
+        {
+            $_POST["time"]=$_POST["time"]-1;
+        }
+        
+        if(empty($_POST["pressure"]))
         {
             apologize("You failed to choose the pressure column.");
         }
-        else if(empty($_POST["density"]))
+        else
+        {
+            $_POST["pressure"]=$_POST["pressure"]-1;
+        }
+        
+        if(empty($_POST["density"]))
         {
             apologize("You failed to choose the density column.");
         }
-        else if(empty($_POST["rate"]))
+        else
+        {
+            $_POST["density"]=$_POST["density"]-1;
+        }
+        
+        if(empty($_POST["rate"]))
         {
             apologize("You failed to choose the pump rate column.");
         }
-        else if(empty($_FILES["fileToUpload"]["tmp_name"]))
+        else
+        {
+            $_POST["rate"]=$_POST["rate"]-1;
+        }
+        
+        if(empty($_FILES["fileToUpload"]["tmp_name"]))
         {
             apologize("You failed to choose the csv to upload.");
         }

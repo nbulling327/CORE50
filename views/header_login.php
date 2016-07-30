@@ -65,7 +65,7 @@ CORE
                     
                     <div id="loginpageheaderbutton">
                         <br/>
-                     <button id="register" type="button" class="btn my-btn"> <a id="signup" href="register.php"> Sign Up</a></button>
+                     <button id="register" type="button" class="btn my-btn"> <a id="signup" href="register.php">Sign Up <span aria-hidden="true" class="glyphicon glyphicon-modal-window"></span></a></button>
                     </div>
                 </div>    
             </div>

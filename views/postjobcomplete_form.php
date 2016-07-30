@@ -18,7 +18,7 @@
 ?>
 <div class = "container">
 <div class= "col-xs-7">
-    <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Job Chart"?></h3>
+    <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Chart"?></h3>
     <div id="flot-placeholder" style="width:700px;height:350px"></div>
 </div>
 <div class= "col-xs-5">

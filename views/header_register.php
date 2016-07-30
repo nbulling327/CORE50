@@ -65,7 +65,7 @@ CORE
                     
                     <div id="loginpageheaderbutton">
                         <br/>
-                     <button id="register" type="button" class="btn my-btn"> <a id="signup" href="index.php"> Go Back to Sign In</a></button>
+                     <button id="register" type="button" class="btn my-btn"> <a id="signup" href="index.php"> <span aria-hidden="true" class="glyphicon glyphicon-arrow-left"></span>Go Back to Sign In</a></button>
                     </div>
                 </div>    
             </div>
