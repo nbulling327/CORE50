@@ -14,6 +14,10 @@
 {
   font-size:x-small;
 }
+#futura
+{
+font-family:"futura-pt", futura, sans-serif;
+}
 #register
 {
   vertical-align: middle;
@@ -22,6 +26,10 @@
 {
     margin-left: auto;
     margin-right: auto;
+    text-align: center;
+}
+.container-fluid
+{
     text-align: center;
 }
 #middle .form-control

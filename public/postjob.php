@@ -53,7 +53,7 @@
     }
     else if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        var_dump($_POST);
+        
         if(empty($_POST["chosen_company"]))
         {
             apologize("You failed to select a customer.");
