@@ -69,8 +69,9 @@ function showTooltip(x,y,contents){
     }).appendTo("body").fadeIn(200);
 }
 
+ var parameter = "job="+"5s";
 $(document).ready(function () {
-    $.getJSON("single_job_data.php")
+    $.getJSON("single_job_data.php",{job: fives})
         .success(function(data, textStatus, jqXHR)
         {
             var pressure=[];

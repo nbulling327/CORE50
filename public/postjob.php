@@ -163,19 +163,19 @@
                 $uploadOk=0;
             }
         
-            if(!move_uploaded_file($_FILES["fileToUpload"]["tmp_name"],$target_file))
-            {
-                apologize("Upload of file failed for some unknown reason.");
-            }
             else
             {
-                CS50::query("TRUNCATE datas");
+                $name=$_POST['wellsite'];
+                $name=$name."s";
+                CS50::query("DROP TABLE $name");
+                CS50::query("CREATE TABLE $name LIKE datas");
+                
                 $time_col=$_POST["time"];
                 $pres_col=$_POST["pressure"];
                 $rate_col=$_POST["rate"];
                 $dens_col=$_POST["density"];
 
-                $fp=fopen($target_file,'r');
+                $fp=fopen($_FILES["fileToUpload"]["tmp_name"],'r');
                 $prd=fgetcsv($fp,1000,",");
                 while(!feof($fp))
                 {
@@ -198,7 +198,7 @@
         
                 foreach ($datas as $data)
                 {
-                    CS50::query("INSERT IGNORE INTO datas 
+                    CS50::query("INSERT IGNORE INTO $name 
                     (time, pressure, rate, density) VALUES(?,?,?,?)",$data["time"],$data["pressure"],$data["rate"],$data["density"]);
                 }
                 
