@@ -40,15 +40,6 @@
                 Pump Operator: <?php echo " ".$pumper_name; ?>
             </div>
         </div>
-        <div class = "row">
-        <div id="dom-target" style="display: none;">
-            <?php 
-                $output = $job_id."s"; //Again, do some operation, get the output.
-                echo htmlspecialchars($output); /* You have to escape because the result
-                                           will not be valid HTML otherwise. */
-            ?>
-        </div>
-        </div>    
     </div>
     <div class= "col-xs-4 text-center" style="border: 2px solid black">
         <div class = "row">

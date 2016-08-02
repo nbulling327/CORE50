@@ -43,8 +43,7 @@ CORE
             <!-- http://getbootstrap.com/ -->
             <script src="/js/bootstrap.min.js"></script>
             <!-- website's own js -->
-            <script src="/js/current_scripts.js"></script>
-            <script src="/js/flot_jobanalysis.js"></script>
+            <script src="/js/current_scripts2.js"></script>
             <script src="/js/moment.min.js"></script>
             <script src="/js/bootstrap-datetimepicker.min.js"></script>
         <!-- Inactive JS Files -->
