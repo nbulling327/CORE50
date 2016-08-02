@@ -1,9 +1,8 @@
-
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
         <li class="active"><a href="/">Input Proposal Information</a></li>
         <li><a href="/postjob.php">Input Post-Job Information</a></li>
-        <li><a href="#">View Job Database</a></li>
+        <li><a href="/jobdatabase.php">View Job Database</a></li>
         <li><a href="#">Analyze Job Data</a></li>
     </ul>
 

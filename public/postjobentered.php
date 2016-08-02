@@ -1064,7 +1064,6 @@ for($k=0;$k<$job_slurries;)
    
 }
 
-var_dump($slurry_volume_push);
 $total_avg_cem_rate=$cement_vol/$total_cem_time;
 $total_dens_acc=100*$total_cem_inspec/$cement_vol;
 $plug_shutdown_time=$_POST["displacement_start"]-$previous_finish;
@@ -1079,9 +1078,9 @@ else
 }
 
 
-CS50::query("UPDATE jobs SET avg_cem_rate=?,dens_accur=?,shutdowns=?,postjobentry=?,act_disp_vol=?,
+CS50::query("UPDATE jobs SET complete=?,avg_cem_rate=?,dens_accur=?,shutdowns=?,postjobentry=?,act_disp_vol=?,
                 cem_vol_variance=?,plug_shutdown_time=?,slurry_swap_time=?,avg_disp_rate=? WHERE id=?",
-                $total_avg_cem_rate,$total_dens_acc,$shutdown_total,$_SESSION["id"],$disp_volume,
+                1,$total_avg_cem_rate,$total_dens_acc,$shutdown_total,$_SESSION["id"],$disp_volume,
                 $tot_cem_vol_var,$plug_shutdown_time,$slurry_swap_time,$avg_disp_rate,$job_id); 
 
 
@@ -1154,6 +1153,5 @@ foreach ($peoples as $people)
     }
 }
 
-
-render("header1.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs,"slurries"=>$slurries,"users"=>$users]);
+render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs,"slurries"=>$slurries,"users"=>$users]);
 ?>

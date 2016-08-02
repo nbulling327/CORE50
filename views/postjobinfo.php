@@ -4,7 +4,7 @@
     <ul class="nav nav-tabs nav-justified">
         <li><a href="/">Input Proposal Information</a></li>
         <li class="active"><a href="/postjob.php">Input Post-Job Information</a></li>
-        <li><a href="#">View Job Database</a></li>
+        <li><a href="/jobdatabase.php">View Job Database</a></li>
         <li><a href="#">Analyze Job Data</a></li>
     </ul>
 </div>

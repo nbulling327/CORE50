@@ -32,7 +32,11 @@ background-color: #B1E5A7;
 {
 background-color:#E5ECE4;
 }
-
+.basetable
+{
+    border: 1px solid #000;
+    line-height : 24px;
+}
 .container
 {
     margin-left: auto;
