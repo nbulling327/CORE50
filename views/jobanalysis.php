@@ -29,7 +29,7 @@
     <div class= "col-xs-8 text-center">
         <div class="row" id="futura">
             <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Chart Analysis"?></h3>
-            <div id="flot-placeholder_analysis" style="width:1000px;height:500px"></div>
+            <div id="flot-placeholder_analysis" style="width:850px;height:450px"></div>
         </div>
         <br/>
         <div class = "row">
@@ -42,7 +42,6 @@
         </div>
     </div>
     <div class= "col-xs-4 text-center" style="border: 2px solid black">
-        <br/>
         <div class = "row">
             <div class= "col-xs-12">
                 <h3>Job Analysis</h3>
@@ -57,7 +56,7 @@
                     <h4><?php echo $slurries[$i]["function"]; ?></h4>
             </div>
         </div>
-        <div class = "row">
+        <div class = "row" id="backgroundred">
             <div class= "col-xs-4">
                 Designed Density
             </div>
@@ -68,7 +67,7 @@
                 # of Shutdowns
             </div>
         </div>
-        <div class = "row">
+        <div class = "row" id="backgroundgray">
             <div class= "col-xs-4">
                 <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
             </div>
@@ -80,7 +79,7 @@
             </div>
         </div>
         <br/>
-        <div class = "row">
+        <div class = "row" id="backgroundred">
             <div class= "col-xs-4">
                 Designed Volume
             </div>
@@ -91,7 +90,7 @@
                 Average Rate
             </div>
         </div>
-        <div class = "row">
+        <div class = "row" id="backgroundgray">
             <div class= "col-xs-4">
                 <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
             </div>
@@ -107,12 +106,12 @@
 ?>        
         
         <div class = "row">
-            <div class= "col-xs-12">
+            <div class= "col-xs-12"">
                     <h4>Displacement</h4>
             </div>
         </div>
         
-        <div class = "row">
+        <div class = "row" id="backgroundred">
             <div class= "col-xs-4">
                 Designed Volume
             </div>
@@ -123,7 +122,7 @@
                 Average Rate
             </div>
         </div>
-        <div class = "row">
+        <div class = "row" id="backgroundgray">
             <div class= "col-xs-4">
                 <?php echo round($calculated_disp,2)." "; ?>bbl
             </div>

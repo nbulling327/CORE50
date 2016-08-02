@@ -69,9 +69,9 @@ function showTooltip(x,y,contents){
     }).appendTo("body").fadeIn(200);
 }
 
- var parameter = "job="+"5s";
+var parameter = "job="+"5s";
 $(document).ready(function () {
-    $.getJSON("single_job_data.php",{job: fives})
+    $.getJSON("single_job_data.php",{job: '17s'})
         .success(function(data, textStatus, jqXHR)
         {
             var pressure=[];
@@ -171,112 +171,6 @@ $(document).ready(function () {
             });
         });
 });
-
-$(document).ready(function () {
-    $.getJSON("single_job_data_analysis.php")
-        .done(function(data, textStatus, jqXHR)
-        {
-            var pressure=[];
-            var rate=[];
-            var density=[];
-            var stage_volume=[];
-            var target_dens=[];
-            var shutdowns=[];
-            
-            for (var i = 0; i<data.length-1; i++)
-            {
-                pressure.push([parseFloat(data[i]["time"]),parseFloat(data[i]["pressure"])]);
-                rate.push([parseFloat(data[i]["time"]),parseFloat(data[i]["rate"])]);
-                density.push([parseFloat(data[i]["time"]),parseFloat(data[i]["density"])]);
-                stage_volume.push([parseFloat(data[i]["time"]),parseFloat(data[i]["stage_volume"])]);
-                target_dens.push([parseFloat(data[i]["time"]),parseFloat(data[i]["target_dens"])]);
-                shutdowns.push([parseFloat(data[i]["time"]),parseFloat(data[i]["shutdowns"])]);
-            }
-            
-            var plotdata = [{data: pressure, label:"Pressure", lines:{show:true}, yaxis: 2,color: '#CE0000'},
-                        {data: rate, label:"Rate", lines:{show:true}, yaxis: 3, color: '#0005FF'},    
-                        {data: density, label:"Density", lines:{show:true},color: '#2C9222'},
-                        {data: stage_volume, label:"Stage Volume", lines:{show:true}, yaxis: 4,color: '#4BCEFC'},
-                        {data: target_dens, label:"Target Density", lines:{show:true}, color: '#27F513'},    
-                        {data: shutdowns, label:"Shutdown", lines:{show:true},yaxis: 5,color: '#FE0000'}];
-            var options = {legend: {position:"ne"}, 
-                        points: {show: false},
-                        xaxis: {axisLabel: "Elapsed time (min)", 
-                            axisLabelUseCanvas: true,
-                            axisLabelFontSizePixels: 12,
-                            axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-                            axisLabelPadding: 5},
-                        yaxes: [
-                        {
-                            tickFormatter: function (val, axis) {
-                                return val + " lb/gal";},
-                            min: 8,
-                            axisLabel: "Density",
-                            axisLabelUseCanvas: true,
-                            axisLabelFontSizePixels: 12,
-                            axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-                            axisLabelPadding: 5
-                        },
-                        {
-                            position: 0,
-                            tickFormatter: function (val, axis) {
-                                return val + " psi";
-                        },
-                            min:0,
-                            axisLabel: "Pressure",
-                            axisLabelUseCanvas: true,
-                            axisLabelFontSizePixels: 12,
-                            axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-                            axisLabelPadding: 5
-                        },
-                        {
-                            tickFormatter: function (val, axis) {
-                                return val + " bpm";},
-                            min: 0,
-                            max: 10,
-                            axisLabel: "Rate",
-                            axisLabelUseCanvas: true,
-                            axisLabelFontSizePixels: 12,
-                            axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-                            axisLabelPadding: 5
-                        },
-                        {
-                            tickFormatter: function (val, axis) {
-                                return val + " bbl";},
-                            min: 0,
-                            axisLabel: "Volume",
-                            axisLabelUseCanvas: true,
-                            axisLabelFontSizePixels: 12,
-                            axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-                            axisLabelPadding: 5
-                        },
-                        {
-                            min: 0,
-                            max: 3,
-                            axisLabelUseCanvas: true,
-                            axisLabelFontSizePixels: 12,
-                            axisLabelFontFamily: "Verdana, Arial, Helvetica, Tahoma, sans-serif",
-                            axisLabelPadding: 5
-                        },
-                        ],
-                        grid:  {hoverable: true}};
-                        
-            chart2 = $.plot("#flot-placeholder_analysis",plotdata,options);
-    });    
-
-
-
-    $(document).ready(function () {
-        $("#flot-placeholder_analysis").bind("plothover",function(event,pos,item){
-            $("#tooltip").remove();
-            if (item){
-                var x = item.datapoint[0].toFixed(2),y = item.datapoint[1].toFixed(2);
-                showTooltip(item.pageX, item.pageY, item.series.label + " at time " +x+ " is "+ y + ".");
-            }
-        });
-    });
-});
-
 
 $(document).ready(function () {
                 $('#datetimepicker1').datetimepicker({

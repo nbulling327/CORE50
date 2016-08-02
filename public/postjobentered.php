@@ -43,6 +43,7 @@ $disp_volume=0;
 $pumping = 0;
 $countdown = $_POST["slurry_1_start"];
 $rows= CS50::query("SELECT * FROM datas ORDER BY id");
+$spec=0;
 
 if (1==$job_slurries)
 {
@@ -79,10 +80,7 @@ if (1==$job_slurries)
             $spec=$previous_total+$inc_vol;
             $previous_total = $spec;
         }
-        else
-        {
-            $spec=0;
-        }
+        
         
         if($row["time"]>$_POST["slurry_1_start"] && $row["time"]<$_POST["slurry_1_stop"] && $row["rate"]>0.1)
         {
@@ -187,10 +185,7 @@ else if (2==$job_slurries)
             $spec=$previous_total+$inc_vol;
             $previous_total = $spec;
         }
-        else
-        {
-            $spec=0;
-        }
+        
         
         if($row["time"]>$_POST["slurry_1_start"] && $row["time"]<$_POST["slurry_1_stop"] && $row["rate"]>0.1)
         {
@@ -273,7 +268,6 @@ else if (2==$job_slurries)
     $slurry2_volume_inspec=$slurry2_volume_inspec-$slurry1_volume_inspec;
     array_push($slurry_volume_inspec_push,$slurry2_volume_inspec);
     
-   
 }
 
 else if (3==$job_slurries)
@@ -292,6 +286,7 @@ else if (3==$job_slurries)
     
     
     $displacement_shutdowns=0;
+    
     foreach ($rows as $row)
     {
     
@@ -317,10 +312,6 @@ else if (3==$job_slurries)
         {
             $spec=$previous_total+$inc_vol;
             $previous_total = $spec;
-        }
-        else
-        {
-            $spec=0;
         }
         
         if($row["time"]>$_POST["slurry_1_start"] && $row["time"]<$_POST["slurry_1_stop"] && $row["rate"]>0.1)
@@ -472,10 +463,7 @@ else if (4==$job_slurries)
             $spec=$previous_total+$inc_vol;
             $previous_total = $spec;
         }
-        else
-        {
-            $spec=0;
-        }
+       
         
         if($row["time"]>$_POST["slurry_1_start"] && $row["time"]<$_POST["slurry_1_stop"] && $row["rate"]>0.1)
         {
@@ -650,10 +638,6 @@ else if (5==$job_slurries)
         {
             $spec=$previous_total+$inc_vol;
             $previous_total = $spec;
-        }
-        else
-        {
-            $spec=0;
         }
         
         if($row["time"]>$_POST["slurry_1_start"] && $row["time"]<$_POST["slurry_1_stop"] && $row["rate"]>0.1)
@@ -858,10 +842,7 @@ else if (6==$job_slurries)
             $spec=$previous_total+$inc_vol;
             $previous_total = $spec;
         }
-        else
-        {
-            $spec=0;
-        }
+        
         
         if($row["time"]>$_POST["slurry_1_start"] && $row["time"]<$_POST["slurry_1_stop"] && $row["rate"]>0.1)
         {
