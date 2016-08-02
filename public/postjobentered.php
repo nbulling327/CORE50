@@ -43,7 +43,7 @@ $slurry_volume_inspec_push=[];
 $disp_volume=0;
 $pumping = 0;
 $countdown = $_POST["slurry_1_start"];
-$rows= CS50::query("SELECT * FROM datas ORDER BY id");
+$rows= CS50::query("SELECT * FROM $table ORDER BY id");
 $spec=0;
 
 if (1==$job_slurries)
@@ -1064,6 +1064,7 @@ for($k=0;$k<$job_slurries;)
    
 }
 
+var_dump($slurry_volume_push);
 $total_avg_cem_rate=$cement_vol/$total_cem_time;
 $total_dens_acc=100*$total_cem_inspec/$cement_vol;
 $plug_shutdown_time=$_POST["displacement_start"]-$previous_finish;
@@ -1086,7 +1087,7 @@ CS50::query("UPDATE jobs SET avg_cem_rate=?,dens_accur=?,shutdowns=?,postjobentr
 
 foreach ($infos as $info)
     {
-        CS50::query("UPDATE datas SET inc_vol = ?, tot_vol=?, dens_in_spec=?, shutdowns=?, pumping=? WHERE id = ? ",
+        CS50::query("UPDATE $table SET inc_vol = ?, tot_vol=?, dens_in_spec=?, shutdowns=?, pumping=? WHERE id = ? ",
             $info["inc_volume"],$info["tot_vol"],$info["spec"],$info["shutdown"],$info["pumping"],$info["id"]);
     }
 

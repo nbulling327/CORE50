@@ -55,7 +55,6 @@
                     <div class = "col-xs-6">
                         <div class = "col-xs-10 col-xs-offset-2">
 <?php
-                            var_dump($slurries);
                             echo "Finish " .$slurries[$i]["function"].":";
                             $i=$i+1;
 ?>

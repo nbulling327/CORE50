@@ -1,7 +1,16 @@
 <?php
-//configuration
+
+    if (empty($_GET["job"]))
+    {
+        http_response_code(400);
+        exit;
+    }
+    
+    $table = $_GET["job"];
+    
+    //configuration
     require("../includes/config.php");
-    $datas = CS50::query("SELECT * FROM datas WHERE pumping = 1");
+    $datas = CS50::query("SELECT * FROM $table WHERE pumping = 1");
     $i=0;
     foreach ($datas as $data) {
         $rows[$i]["time"]=$data["time"];
