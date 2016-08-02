@@ -167,7 +167,16 @@
             {
                 $name=$_POST['wellsite'];
                 $name=$name."s";
-                CS50::query("DROP TABLE $name");
+                
+                $exists = CS50::query("SHOW TABLES");
+                $j=sizeof($exists);
+                for($i=0;$i<$j;$i++)
+                {
+                    if($name==$exists[$i]["Tables_in_CORE"])
+                    {
+                    CS50::query("DROP TABLE $name");
+                    }
+                }
                 CS50::query("CREATE TABLE $name LIKE datas");
                 
                 $time_col=$_POST["time"];
@@ -235,7 +244,7 @@
                     "density" => $row["density"],
                     ];
                 }
-                render("header.php","postjobcomplete_form.php",["title" => "Post Job Chart",
+                render("header_jobupload.php","postjobcomplete_form.php",["title" => "Post Job Chart",
                     "users" =>$users,"jobs" =>$jobs,"slurries" =>$slurries]);
                 
             }

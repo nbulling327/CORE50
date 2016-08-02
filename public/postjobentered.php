@@ -26,7 +26,8 @@ for($k=0;$k<$job_slurries;)
     $k=$k+1;
     $current_start = 'slurry_'.$k.'_start';
     $current_stop = 'slurry_'.$k.'_stop';
-    CS50::query("UPDATE datas SET target_dens = ? WHERE time between ? AND ?",
+    $table=$job_id."s";
+    CS50::query("UPDATE $table SET target_dens = ? WHERE time between ? AND ?",
             $density,(float)$_POST["$current_start"],(float)$_POST["$current_stop"]);
 }
 $prev_dens=0;

@@ -29,7 +29,7 @@
     <div class= "col-xs-8 text-center">
         <div class="row" id="futura">
             <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Chart Analysis"?></h3>
-            <div id="flot-placeholder_analysis" style="width:850px;height:450px"></div>
+            <div id="flot-placeholder_analysis" style="width:750px;height:380px"></div>
         </div>
         <br/>
         <div class = "row">
@@ -48,63 +48,123 @@
             </div>
         </div>
                 
-<?php   for ($i=0;$i<$number_slurries;$i++)
+<?php   if($stage_count==1)
         {
+            for ($i=0;$i<$number_slurries;$i++)
+            {
 ?>
-        <div class = "row">
-            <div class= "col-xs-12">
+            <div class = "row">
+                <div class= "col-xs-12">
                     <h4><?php echo $slurries[$i]["function"]; ?></h4>
+                </div>
             </div>
-        </div>
-        <div class = "row" id="backgroundred">
-            <div class= "col-xs-4">
-                Designed Density
+            <div class = "row" id="backgroundred">
+                <div class= "col-xs-4">
+                    Designed Density
+                </div>
+                <div class= "col-xs-4">
+                    Cement in Spec
+                </div>
+                <div class= "col-xs-4">
+                    # of Shutdowns
+                </div>
             </div>
-            <div class= "col-xs-4">
-                Cement in Spec
+            <div class = "row" id="backgroundgray">
+                <div class= "col-xs-4">
+                    <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+                </div>
+                <div class= "col-xs-4">
+                    <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
+                </div>
+                <div class= "col-xs-4">
+                    <?php echo $slurries[$i]["shutdowns"]; ?>
+                </div>
             </div>
-            <div class= "col-xs-4">
-                # of Shutdowns
+            <br/>
+            <div class = "row" id="backgroundred">
+                <div class= "col-xs-4">
+                    Designed Volume
+                </div>
+                <div class= "col-xs-4">
+                    Actual Volume
+                </div>
+                <div class= "col-xs-4">
+                    Average Rate
+                </div>
             </div>
-        </div>
-        <div class = "row" id="backgroundgray">
-            <div class= "col-xs-4">
-                <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+            <div class = "row" id="backgroundgray">
+                <div class= "col-xs-4">
+                    <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                </div>
+                <div class= "col-xs-4">
+                    <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
+                </div>
+                <div class= "col-xs-4">
+                    <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
+                </div>
             </div>
-            <div class= "col-xs-4">
-                <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
-            </div>
-            <div class= "col-xs-4">
-                <?php echo $slurries[$i]["shutdowns"]; ?>
-            </div>
-        </div>
-        <br/>
-        <div class = "row" id="backgroundred">
-            <div class= "col-xs-4">
-                Designed Volume
-            </div>
-            <div class= "col-xs-4">
-                Actual Volume
-            </div>
-            <div class= "col-xs-4">
-                Average Rate
-            </div>
-        </div>
-        <div class = "row" id="backgroundgray">
-            <div class= "col-xs-4">
-                <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
-            </div>
-            <div class= "col-xs-4">
-                <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
-            </div>
-            <div class= "col-xs-4">
-                <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
-            </div>
-        </div>
 <?php
+            }
+        }
+        else
+        {
+            for ($i=0;$i<$number_slurries;$i++)
+            {
+?>
+                <div class = "row">
+                    <div class= "col-xs-12">
+                        <h4><?php echo "Stage ".$slurries[$i]["stage"]." ".$slurries[$i]["function"]; ?></h4>
+                    </div>
+                </div>
+                <div class = "row" id="backgroundred">
+                    <div class= "col-xs-4">
+                        Designed Density
+                    </div>
+                    <div class= "col-xs-4">
+                        Cement in Spec
+                    </div>
+                    <div class= "col-xs-4">
+                        # of Shutdowns
+                    </div>
+                </div>
+                <div class = "row" id="backgroundgray">
+                    <div class= "col-xs-4">
+                        <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+                    </div>
+                    <div class= "col-xs-4">
+                        <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
+                    </div>
+                    <div class= "col-xs-4">
+                        <?php echo $slurries[$i]["shutdowns"]; ?>
+                    </div>
+                </div>
+                <br/>
+                <div class = "row" id="backgroundred">
+                    <div class= "col-xs-4">
+                        Designed Volume
+                    </div>
+                    <div class= "col-xs-4">
+                        Actual Volume
+                    </div>
+                    <div class= "col-xs-4">
+                        Average Rate
+                    </div>
+                </div>
+                <div class = "row" id="backgroundgray">
+                    <div class= "col-xs-4">
+                        <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                    </div>
+                    <div class= "col-xs-4">
+                        <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
+                    </div>
+                    <div class= "col-xs-4">
+                        <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
+                    </div>
+                </div>
+<?php
+            }
         }
 ?>        
-        
         <div class = "row">
             <div class= "col-xs-12"">
                     <h4>Displacement</h4>

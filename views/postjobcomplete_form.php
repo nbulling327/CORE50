@@ -20,6 +20,15 @@
 <div class= "col-xs-7">
     <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Chart"?></h3>
     <div id="flot-placeholder" style="width:700px;height:350px"></div>
+    <div class = "row">
+        <div id="dom-target" style="display: none;">
+            <?php 
+                $output = $job_id."s"; //Again, do some operation, get the output.
+                echo htmlspecialchars($output); /* You have to escape because the result
+                                           will not be valid HTML otherwise. */
+            ?>
+        </div>
+    </div>
 </div>
 <div class= "col-xs-5">
     <br/><br/>
@@ -46,6 +55,7 @@
                     <div class = "col-xs-6">
                         <div class = "col-xs-10 col-xs-offset-2">
 <?php
+                            var_dump($slurries);
                             echo "Finish " .$slurries[$i]["function"].":";
                             $i=$i+1;
 ?>
