@@ -117,10 +117,10 @@
         {
             $_POST["rate"]=$_POST["rate"]-1;
         }
-        
+        var_dump($_FILES);
         if(empty($_FILES["fileToUpload"]["tmp_name"]))
         {
-            apologize("You failed to choose the csv to upload.");
+            apologize("Most likely, the file you chose is larger than 2 MB.");
         }
         else
         {
@@ -151,20 +151,7 @@
                 }
             }
         
-            if (file_exists($target_file))
-            {
-                apologize("A file for this job already exists.");
-                $uploadOk=0;
-            }
         
-            if ($_FILES["fileToUpload"]["size"] > 2000000)
-            {
-                apologize("File size" . $_FILES["fileToUpload"]["size"] . ".  Current max size is 2 MB.");
-                $uploadOk=0;
-            }
-        
-            else
-            {
                 $name=$_POST['wellsite'];
                 $name=$name."s";
                 
@@ -247,7 +234,7 @@
                 render("header_jobupload.php","postjobcomplete_form.php",["title" => "Post Job Chart",
                     "users" =>$users,"jobs" =>$jobs,"slurries" =>$slurries]);
                 
-            }
+            
             
         }
     }
