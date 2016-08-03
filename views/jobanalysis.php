@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
         <li><a href="/">Input Proposal Information</a></li>
-        <li class="active"><a href="/postjob.php">Input Post-Job Information</a></li>
-        <li><a href="/jobdatabase.php">View Job Database</a></li>
+        <li><a href="/postjob.php">Input Post-Job Information</a></li>
+        <li class="active"><a href="/jobdatabase.php">Job Analysis</a></li>
         <li><a href="#">Analyze Job Data</a></li>
     </ul>
 </div>
@@ -41,207 +41,207 @@
             </div>
         </div>
         <div class = "row">
-        <div id="dom-target" style="display: none;">
-            <?php 
-                $output = $job_id."s"; //Again, do some operation, get the output.
-                echo htmlspecialchars($output); /* You have to escape because the result
-                                           will not be valid HTML otherwise. */
-            ?>
-        </div>
+            <div id="dom-target" style="display: none;">
+                <?php 
+                    $output = $job_id."s"; //Again, do some operation, get the output.
+                    echo htmlspecialchars($output); /* You have to escape because the result
+                                               will not be valid HTML otherwise. */
+                ?>
+            </div>
         </div>    
     </div>
-    <div class= "col-xs-4 text-center" style="border: 2px solid black">
-        <div class = "row">
-            <div class= "col-xs-12">
-                <h3>Job Analysis</h3>
-            </div>
-        </div>
-                
-<?php   if($stage_count==1)
-        {
-            for ($i=0;$i<$number_slurries;$i++)
-            {
-?>
-            <div class = "row">
-                <div class= "col-xs-12">
-                    <h4><?php echo $slurries[$i]["function"]; ?></h4>
-                </div>
-            </div>
-            <div class = "row" id="backgroundred">
-                <div class= "col-xs-4">
-                    Designed Density
-                </div>
-                <div class= "col-xs-4">
-                    Cement in Spec
-                </div>
-                <div class= "col-xs-4">
-                    # of Shutdowns
-                </div>
-            </div>
-            <div class = "row" id="backgroundgray">
-                <div class= "col-xs-4">
-                    <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
-                </div>
-                <div class= "col-xs-4">
-                    <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
-                </div>
-                <div class= "col-xs-4">
-                    <?php echo $slurries[$i]["shutdowns"]; ?>
-                </div>
-            </div>
-            <br/>
-            <div class = "row" id="backgroundred">
-                <div class= "col-xs-4">
-                    Designed Volume
-                </div>
-                <div class= "col-xs-4">
-                    Actual Volume
-                </div>
-                <div class= "col-xs-4">
-                    Average Rate
-                </div>
-            </div>
-            <div class = "row" id="backgroundgray">
-                <div class= "col-xs-4">
-                    <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
-                </div>
-                <div class= "col-xs-4">
-                    <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
-                </div>
-                <div class= "col-xs-4">
-                    <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
-                </div>
-            </div>
-<?php
-            }
-        }
-        else
-        {
-            for ($i=0;$i<$number_slurries;$i++)
-            {
-?>
-                <div class = "row">
-                    <div class= "col-xs-12">
-                        <h4><?php echo "Stage ".$slurries[$i]["stage"]." ".$slurries[$i]["function"]; ?></h4>
-                    </div>
-                </div>
-                <div class = "row" id="backgroundred">
-                    <div class= "col-xs-4">
-                        Designed Density
-                    </div>
-                    <div class= "col-xs-4">
-                        Cement in Spec
-                    </div>
-                    <div class= "col-xs-4">
-                        # of Shutdowns
-                    </div>
-                </div>
-                <div class = "row" id="backgroundgray">
-                    <div class= "col-xs-4">
-                        <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
-                    </div>
-                    <div class= "col-xs-4">
-                        <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
-                    </div>
-                    <div class= "col-xs-4">
-                        <?php echo $slurries[$i]["shutdowns"]; ?>
-                    </div>
-                </div>
-                <br/>
-                <div class = "row" id="backgroundred">
-                    <div class= "col-xs-4">
-                        Designed Volume
-                    </div>
-                    <div class= "col-xs-4">
-                        Actual Volume
-                    </div>
-                    <div class= "col-xs-4">
-                        Average Rate
-                    </div>
-                </div>
-                <div class = "row" id="backgroundgray">
-                    <div class= "col-xs-4">
-                        <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
-                    </div>
-                    <div class= "col-xs-4">
-                        <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
-                    </div>
-                    <div class= "col-xs-4">
-                        <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
-                    </div>
-                </div>
-<?php
-            }
-        }
-?>        
-        <div class = "row">
-            <div class= "col-xs-12"">
-                    <h4>Displacement</h4>
-            </div>
-        </div>
-        
-        <div class = "row" id="backgroundred">
-            <div class= "col-xs-4">
-                Designed Volume
-            </div>
-            <div class= "col-xs-4">
-                Actual Volume
-            </div>
-            <div class= "col-xs-4">
-                Average Rate
-            </div>
-        </div>
-        <div class = "row" id="backgroundgray">
-            <div class= "col-xs-4">
-                <?php echo round($calculated_disp,2)." "; ?>bbl
-            </div>
-            <div class= "col-xs-4">
-                <?php echo round($act_disp_vol,2)." "; ?>bbl
-            </div>
-            <div class= "col-xs-4">
-                <?php echo round($avg_disp_rate,2)." "; ?>bpm
-            </div>
-        </div>
+    <div class= "col-xs-4 text-center">
         <br/>
-        <div style="border: 2px solid black">
-            <div class = "row">
-                <div class= "col-xs-12">
-                    <h4 class="display-4"><strong>Job Stats</strong></h4>
+        <div class= "col-xs-12" style="border: 1px solid #B00404; border-radius: 25px; background: #B00404;">
+            <div class = "row" style="color: #fff">
+                <h4 class="display-4"><strong>Job Summary</strong></h4>
+            </div>
+            <div class = "row" style="background: #fff;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    Density Accuracy
+                </div>
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    Shutdowns > 2 min
                 </div>
             </div>
-            <div class = "row">
-                <div class= "col-xs-6">
-                    Cement Density Accuracy
-                </div>
-                <div class= "col-xs-6">
-                    Number of Shutdowns
-                </div>
-            </div>
-            <div class = "row">
-                <div class= "col-xs-6">
+            <div class = "row" style="background: #C8C7C7;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     <?php echo round($dens_accur,1)." "; ?>%
                 </div>
-                <div class= "col-xs-6">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     <?php echo $shutdowns; ?>
                 </div>
             </div>
-            <br/>
-            <div class = "row">
-                <div class= "col-xs-6">
-                    Average Slurry Swap Time
+            <div class = "row" style="background: #fff;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    Ave Slurry Swap Time
                 </div>
-                <div class= "col-xs-6">
-                    Top Plug Shutdown Length
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    Top Plug Shutdown
                 </div>
             </div>
-            <div class = "row">
-                <div class= "col-xs-6">
+            <div class = "row" style="background: #C8C7C7;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     <?php echo round($slurry_swap_time,1)." "; ?>min
                 </div>
-                <div class= "col-xs-6">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     <?php echo round($plug_shutdown_time,1)." "; ?>min
                 </div>
             </div>
+            <br/>
+        </div>
+        <div>&nbsp;</div>
+        
+        <div class= "col-xs-12" style="border: 1px solid #B00404; border-radius: 25px; background: #B00404;">
+            <div class = "row" style="color: #fff">
+                <h4 class="display-4"><strong>Job Details</strong></h4>
+            </div>
+        
+<?php       if($stage_count==1)
+            {
+                for ($i=0;$i<$number_slurries;$i++)
+                {
+?>
+                    <div class = "row">
+                        <div class= "col-xs-12" style="border: 1px solid #B00404; background: #FAC0C0;">
+                            <h4><b><?php echo $slurries[$i]["function"]; ?></b></h4>
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #fff;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Designed Density
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Cement in Spec
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Shutdowns > 2 min
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #C8C7C7;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo $slurries[$i]["shutdowns"]; ?>
+                        </div>
+                    </div>
+    
+                    <div class = "row" style="background: #fff;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Designed Volume
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Actual Volume
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Average Rate
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #C8C7C7;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
+                        </div>
+                    </div>
+<?php
+                }
+            }
+            else
+            {
+                for ($i=0;$i<$number_slurries;$i++)
+                {
+?>
+                    <div class = "row">
+                        <div class= "col-xs-12" style="border: 1px solid #B00404; background: #FAC0C0;">
+                            <h4><b><?php echo "Stage ".$slurries[$i]["stage"]." ".$slurries[$i]["function"]; ?></b></h4>
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #fff;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Designed Density
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Cement in Spec
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Shutdowns > 2 min
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #C8C7C7;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo $slurries[$i]["shutdowns"]; ?>
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #fff;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Designed Volume
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Actual Volume
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            Average Rate
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #C8C7C7;">
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
+                        </div>
+                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
+                        </div>
+                    </div>
+<?php
+                }
+            }
+?>        
+            <div class = "row">
+                <div class= "col-xs-12" style="border: 1px solid #B00404; background: #FAC0C0;">
+                    <h4><b>Displacement</b></h4>
+                </div>
+            </div>
+            
+            <div class = "row" style="background: #fff;">
+                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    Designed Volume
+                </div>
+                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    Actual Volume
+                </div>
+                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    Average Rate
+                </div>
+            </div>
+            <div class = "row" style="background: #C8C7C7;">
+                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    <?php echo round($calculated_disp,2)." "; ?>bbl
+                </div>
+                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    <?php echo round($act_disp_vol,2)." "; ?>bbl
+                </div>
+                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    <?php echo round($avg_disp_rate,2)." "; ?>bpm
+                </div>
+            </div>
+            <br/>
         </div>
     </div>
 </div>

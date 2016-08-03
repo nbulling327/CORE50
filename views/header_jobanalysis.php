@@ -83,7 +83,7 @@ CORE
                     Evaluation 
                     </div>
                 </div>
-                <div class="col-xs-4 col-xs-offset-2">
+                <div class="col-xs-4 col-xs-offset-1">
                     <br/>
                     Signed in as
                     <?php 
