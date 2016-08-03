@@ -3,7 +3,7 @@
         <li><a href="/">Input Proposal Information</a></li>
         <li><a href="/postjob.php">Input Post-Job Information</a></li>
         <li class="active"><a href="/jobdatabase.php">Job Review</a></li>
-        <li><a href="#">Jobs Analysis</a></li>
+        <li><a href="/jobanalysis.php">Jobs Analysis</a></li>
     </ul>
 <?php
     $size=sizeof($jobs);

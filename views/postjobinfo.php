@@ -5,7 +5,7 @@
         <li><a href="/">Input Proposal Information</a></li>
         <li class="active"><a href="/postjob.php">Input Post-Job Information</a></li>
         <li><a href="/jobdatabase.php">Job Review</a></li>
-        <li><a href="#">Job Analysis</a></li>
+        <li><a href="/jobanalysis.php">Jobs Analysis</a></li>
     </ul>
 </div>
 <br/>
