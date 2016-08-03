@@ -49,7 +49,16 @@
                     ];
             }
         }
-        render("header.php","postjobinfo.php",["title" => "Post Job Entry","jobs"=>$jobs,"customers"=>$customers,"slurries"=>$slurries,"users"=>$users,"pumpers"=>$pumpers,"supervisors"=>$supervisors]);
+        $units = CS50::query("SELECT * FROM pumps ORDER BY pump");
+        $pumps =[];
+        foreach($units as $unit)
+        {
+            $pumps[]= [
+                    "id" => $unit["id"],
+                    "pump" => $unit["pump"], 
+                    ];
+        }
+        render("header.php","postjobinfo.php",["title" => "Post Job Entry","pumps"=>$pumps,"jobs"=>$jobs,"customers"=>$customers,"slurries"=>$slurries,"users"=>$users,"pumpers"=>$pumpers,"supervisors"=>$supervisors]);
     }
     else if($_SERVER["REQUEST_METHOD"] == "POST")
     {
@@ -68,7 +77,11 @@
         }
         else if(empty($_POST["chosen_supervisor"]))
         {
-            apologize("You failed to choose a supervisor!");
+            apologize("You failed to choose a supervisor.");
+        }
+        else if(empty($_POST["chosen_pump"]))
+        {
+            apologize("You failed to choose a pump truck.");
         }
         else if(empty($_POST["chosen_pumper"]))
         {
@@ -117,7 +130,6 @@
         {
             $_POST["rate"]=$_POST["rate"]-1;
         }
-        var_dump($_FILES);
         if(empty($_FILES["fileToUpload"]["tmp_name"]))
         {
             apologize("Most likely, the file you chose is larger than 2 MB.");
@@ -186,11 +198,12 @@
                 
                 $your_date = date("Y-m-d", strtotime($_POST["jobdate"]));
                 CS50::query("UPDATE jobs 
-                            SET calculated_disp = ?, supervisor_id = ?, pumper_id = ? ,
-                            job_date = ?, time = ?, pressure =?, rate=?, density=? 
+                            SET calculated_disp = ?, supervisor_id = ?, pumper_id = ?,
+                            job_date = ?, time = ?, pressure =?, rate=?, density=?, pump_id=?
                             WHERE id = ? ",
                             $_POST["calculated_disp"],$_POST["chosen_supervisor"],$_POST["chosen_pumper"],
-                            $your_date,$_POST["time"],$_POST["pressure"],$_POST["rate"],$_POST["density"],$_POST["wellsite"]);
+                            $your_date,$_POST["time"],$_POST["pressure"],$_POST["rate"],$_POST["density"],$_POST["chosen_pump"],
+                            $_POST["wellsite"]);
         
                 foreach ($datas as $data)
                 {

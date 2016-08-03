@@ -4,8 +4,8 @@
     <ul class="nav nav-tabs nav-justified">
         <li><a href="/">Input Proposal Information</a></li>
         <li class="active"><a href="/postjob.php">Input Post-Job Information</a></li>
-        <li><a href="/jobdatabase.php">View Job Database</a></li>
-        <li><a href="#">Analyze Job Data</a></li>
+        <li><a href="/jobdatabase.php">Job Review</a></li>
+        <li><a href="#">Job Analysis</a></li>
     </ul>
 </div>
 <br/>
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <div id="scrollable-dropdown-menu" hidden class="col-xs-offset-2 col-xs-6">
+            <div id="scrollable-dropdown-menu" hidden class="col-xs-offset-3 col-xs-5">
                 Job:
                 <div class="row">
                     <div class="col-xs-12">
@@ -39,7 +39,7 @@
                 </div>    
             </div>
         </div>
-        <div id="job_date" hidden class="col-xs-6">
+        <div id="job_date" hidden class="col-xs-3 col-xs-offset-3">
             <div class="col-xs-11 col-xs-offset-1">
                 Job Date:
             </div>
@@ -60,43 +60,65 @@
         <div class="col-xs-6">
             <div id="post_well_supervisor" class="col-xs-5 col-xs-offset-1 text-left">
                 Select Supervisor:
-                <div class = "row"> <div class="col-xs-12 text-left">
-                <select  id="sup_choice" name="chosen_supervisor" class="selectpicker" title="Select Supervisor" data-size="6" data-live-search="true">
-                    <?php 
-                        foreach ($supervisors as $supervisor) 
-                        {
-                            $sup_name=$supervisor["name"];
-                            $sup_id=$supervisor["id"];
-                            echo '<option value="' . "$sup_id" . '">' ."$sup_name" . '</option>' ;
-                        }
-                    ?>
-                </select>
-                </div></div>
+                <div class = "row"> 
+                    <div class="col-xs-12 text-left">
+                        <select  id="sup_choice" name="chosen_supervisor" class="selectpicker" title="Select Supervisor" data-size="6" data-live-search="true">
+<?php 
+                            foreach ($supervisors as $supervisor) 
+                            {
+                                $sup_name=$supervisor["name"];
+                                $sup_id=$supervisor["id"];
+                                echo '<option value="' . "$sup_id" . '">' ."$sup_name" . '</option>' ;
+                            }
+?>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div id="post_well_supervisor" class="col-xs-5 col-xs-offset-1 text-left">
                 Select Pump Truck Operator:
-                <div class = "row"> <div class="col-xs-12 text-left">
-                <select  id="pump_choice" name="chosen_pumper" class="selectpicker" title="Select Pump Operator" data-size="6" data-live-search="true">
-                    <?php 
-                        foreach ($pumpers as $pumper) 
-                        {
-                            $pump_name=$pumper["name"];
-                            $pump_id=$pumper["id"];
-                            echo '<option value="' . "$pump_id" . '">' ."$pump_name" . '</option>' ;
-                        }
-                    ?>
-                </select>
-                </div></div>
+                <div class = "row"> 
+                    <div class="col-xs-12 text-left">
+                        <select  id="pump_choice" name="chosen_pumper" class="selectpicker" title="Select Pump Operator" data-size="6" data-live-search="true">
+<?php 
+                            foreach ($pumpers as $pumper) 
+                            {
+                                $pump_name=$pumper["name"];
+                                $pump_id=$pumper["id"];
+                                echo '<option value="' . "$pump_id" . '">' ."$pump_name" . '</option>' ;
+                            }
+?>
+                        </select>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-xs-4">
-            <div class="col-xs-7">
-            <div class="col-xs-10 col-xs-offset-2">
+        <div class="col-xs-6">
+            <div class="col-xs-6">
+                <div class="col-xs-10 col-xs-offset-2">
                 <br/>
-                <span class="pull-left">
-                    <a href="#" class="btn my-btn" role="button">Add Field Employee</a>
-                </span>
-            </div></div>
+                    <span class="pull-left">
+                        <a href="#" class="btn my-btn" role="button">Add Field Employee</a>
+                    </span>
+                </div>
+            </div>
+            <div id="post_well_supervisor" class="col-xs-5 col-xs-offset-1 text-left">
+                Select Pump Truck:
+                <div class = "row"> 
+                    <div class="col-xs-12 text-left">
+                        <select  id="pump" name="chosen_pump" class="selectpicker" title="Select Pump Unit" data-size="6" data-live-search="true">
+<?php 
+                            foreach ($pumps as $pump) 
+                            {
+                                $unit_name=$pump["pump"];
+                                $unit_id=$pump["id"];
+                                echo '<option value="' . "$unit_id" . '">' ."$unit_name" . '</option>' ;
+                            }
+?>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>    
     <br/>
