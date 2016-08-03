@@ -18,19 +18,7 @@ CORE
             <!-- website's own css -->
             <link rel="stylesheet" href="/css/styles.css">
             
-        <!-- Inactive CSS Files -->
-            <!-- http://nicolasbize.com/magicsuggest/ -->
-            <!--<link href="/css/magicsuggest-min.css" rel="stylesheet"/>-->
-        <!-- Active JS Files -->
             
-            
-            
-            <!--script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"-->
-            <!--script type="text/javascript"-->
-            <!--    google.charts.load('current', {packages: ['corechart']});-->
-            <!--    google.charts.setOnLoadCallback(drawChart);-->
-            <!--/script-->
-            <!-- https://jquery.com/ -->
             <script src="/js/jquery-1.11.3.min.js"></script>
             <script type="text/javascript" src="/js/flot-0.8.2.min.excanvas.js"></script>
             <script type="text/javascript" src="/js/flot-0.8.2.min.js"></script>
@@ -46,15 +34,7 @@ CORE
             <script src="/js/current_scripts.js"></script>
             <script src="/js/moment.min.js"></script>
             <script src="/js/bootstrap-datetimepicker.min.js"></script>
-        <!-- Inactive JS Files -->
-            <!-- http://twitter.github.io/typeahead.js/ -->
-            <!--<script src="/js/bloodhound.min.js"></script>-->
-            <!--<script src="/js/typeahead.jquery.min.js"></script>-->
-            <!-- http://nicolasbize.com/magicsuggest/ -->
-            <!--<script src="/js/magicsuggest.js"></script>-->
-            
-        
-        
+       
         <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>
             <title>CORE: <?= htmlspecialchars($title) ?></title>

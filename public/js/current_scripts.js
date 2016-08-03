@@ -61,6 +61,28 @@ $(document).ready(function () {
     });
 });
 
+$(document).ready(function () { 
+    $("#geography").change(function(event){
+        $("#scrollable-dropdown-menu2").removeAttr("hidden");
+        var filter1 = $("#geo_choice").val();
+        var parameters ={geo: filter1};
+        $.getJSON("geo_search.php", parameters)
+        .success(function(data, textStatus, jqXHR)
+        {
+          document.getElementById("filter1").options.length = 0;
+          var obj=document.getElementById("filter1"); 
+          for (var i = 0; i < data.length; i++)     {                
+                opt = document.createElement("option");
+                opt.value = data[i].point;
+                opt.text=data[i].point;
+                obj.appendChild(opt);
+            }
+        });
+    });
+});
+
+
+
 $(document).ready(function () {
                 $('#datetimepicker1').datetimepicker({
                     format: 'MM/DD/YYYY'
@@ -75,4 +97,22 @@ $(document).ready(function() {
     dropupauto: 'false',
     size: 4
   });
+});
+
+$(document).ready(function() {
+    $(function () {
+        $('#datetimepicker6').datetimepicker({
+            format: 'MM/DD/YYYY'
+        });
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false, //Important! See issue #1075
+            format: 'MM/DD/YYYY'
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+    });
 });

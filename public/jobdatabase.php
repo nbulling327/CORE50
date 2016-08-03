@@ -5,7 +5,6 @@ require("../includes/config.php");
 // if user reached page via GET (as by clicking a link or via redirect)
 if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
-    
     $rows= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date DESC");
     $jobs = [];
     $size=sizeof($rows);
