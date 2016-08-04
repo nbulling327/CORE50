@@ -33,11 +33,14 @@
         </div>
         <br/>
         <div class = "row">
-            <div class= "col-xs-6" id="futura">
+            <div class= "col-xs-4" id="futura">
                 Supervisor: <?php echo " ".$supervisor_name; ?>
             </div>
-            <div class= "col-xs-6">
+            <div class= "col-xs-4">
                 Pump Operator: <?php echo " ".$pumper_name; ?>
+            </div>
+            <div class= "col-xs-4">
+                Pump: <?php echo " ".$pumps[0]["name"]; ?>
             </div>
         </div>
         <div class = "row">

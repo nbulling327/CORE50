@@ -23,6 +23,7 @@ CORE
             <script type="text/javascript" src="/js/flot-0.8.2.min.excanvas.js"></script>
             <script type="text/javascript" src="/js/flot-0.8.2.min.js"></script>
             <script type="text/javascript" src="/js/flot.time.js"></script>
+            <script src="/js/flot.axislabels.js"></script>
             <script language="javascript" type="text/javascript" src="/js/flot.selection.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
             <script src="/js/typeahead.bundle.min.js"></script>

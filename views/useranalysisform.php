@@ -109,9 +109,9 @@
                             <option value="0">none</option>
                             <option value="well">Well</option>
                             <option value="date">Job Date</option>
-                            <option value="supervisor">Supervisor</option>
-                            <option value="pumper">Pump Operator</option>
-                            <option value="pump">Pump Unit</option>
+                            <option value="supervisor_id">Supervisor</option>
+                            <option value="pumper_id">Pump Operator</option>
+                            <option value="pump_id">Pump Unit</option>
                             <option value="geo">Geography</option>
                             <option value="job_type">Job Type</option>
                             <option value="slurry_function">Slurry Function</option>
@@ -128,6 +128,9 @@
                             <option value="density">Density Accuracy</option>
                             <option value="shutdowns">Shutdowns</option>
                             <option value="cem_vol_var">Cement Volume Variance</option>
+                            <option value="slurry_swap_time">Slurry Swap Time</option>
+                            <option value="plug_shutdown_time">Plug Shutdown Time</option>
+                            <option value="disp_vol_var">Displacement Volume Variance</option>
                             <option value="jobs"># of Jobs Performed</option>
                         </select>
                     </div>

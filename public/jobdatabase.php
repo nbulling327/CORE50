@@ -60,9 +60,11 @@ $job_id=$_POST["job"];
 $rows= CS50::query("SELECT * FROM jobs WHERE id = ?",$job_id);
 $options = CS50::query("SELECT * FROM slurries WHERE job_id = ? ORDER BY id",$job_id);
 $peoples = CS50::query("SELECT * FROM users WHERE company = ?","Halliburton");
+$units = CS50::query("SELECT * FROM pumps");
 $jobs=[];
 $slurries=[];
 $users=[];
+$pumps=[];
 
 foreach ($options as $option)
 {
@@ -95,6 +97,7 @@ foreach ($rows as $row)
         "plug_shutdown_time"=> $row["plug_shutdown_time"],
         "cem_vol_variance"=> $row["cem_vol_variance"],
         "pumper_id"=> $row["pumper_id"],
+        "pump_id"=>$row["pump_id"],
         "supervisor_id"=> $row["supervisor_id"],
         "calculated_disp"=> $row["calculated_disp"],
         "act_disp_vol"=> $row["act_disp_vol"]
@@ -119,7 +122,14 @@ foreach ($peoples as $people)
         $users[0]["lastname"]=$people["lastname"];
     }
 }
+foreach ($units as $unit)
+{
+    if($unit["id"]=$jobs[0]["pump_id"])
+    {
+        $pumps[0]["name"]=$unit["pump"];
+    }    
+}
 
-render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs,"slurries"=>$slurries,"users"=>$users]);
+render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs, "pumps"=>$pumps,"slurries"=>$slurries,"users"=>$users]);
 }
 ?>
