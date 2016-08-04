@@ -16,8 +16,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
   
     $size=sizeof($rows);
     $all_places=sizeof($geos);
+    $prev_comp="";
+    
+    $comps= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY customer");
+        $options = [];
+        foreach ($comps as $comp)
+        {
+            if(strcmp($prev_comp, $comp["customer"])!=0)
+            $options[] = [
+            "company_option" => $comp["customer"],
+            ];
+            $prev_comp=$comp["customer"];
+        }
+    
 
-  foreach ($geos as $geo)
+
+    foreach ($geos as $geo)
     {
         $places[]=[
             "district"=>$geo["district"],
@@ -49,13 +63,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
             ];
     }
 
-    $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
     foreach ($peoples as $people)
     {
         $users[0]["firstname"]=$people["firstname"];
         $users[0]["lastname"]=$people["lastname"];
     }
 
-    render("header.php","useranalysisform.php",["title" => "Jobs Analytics","jobs"=>$jobs,"users"=>$users]);
+    render("header.php","useranalysisform.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
 }
+else if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    
+    $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
+    $users=[];
+    foreach ($peoples as $people)
+    {
+        $users[0]["firstname"]=$people["firstname"];
+        $users[0]["lastname"]=$people["lastname"];
+    }
+    
+    render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics", "users"=>$users]);
+}    
 ?>

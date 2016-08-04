@@ -54,7 +54,7 @@
         <br/>
         <div class= "col-xs-12" style="border: 1px solid #B00404; border-radius: 25px; background: #B00404;">
             <div class = "row" style="color: #fff">
-                <h4 class="display-4"><strong>Job Summary</strong></h4>
+                <h4 class="display-4" style="line-height: 11px;"><strong>Job Summary</strong></h4>
             </div>
             <div class = "row" style="background: #fff;">
                 <div class= "col-xs-6" style="border: 1px solid #B00404;">
@@ -94,7 +94,7 @@
         
         <div class= "col-xs-12" style="border: 1px solid #B00404; border-radius: 25px; background: #B00404;">
             <div class = "row" style="color: #fff">
-                <h4 class="display-4"><strong>Job Details</strong></h4>
+                <h4 class="display-4" style="line-height: 11px;"><strong>Job Details</strong></h4>
             </div>
         
 <?php       if($stage_count==1)
@@ -103,11 +103,11 @@
                 {
 ?>
                     <div class = "row">
-                        <div class= "col-xs-12" style="border: 1px solid #B00404; background: #FAC0C0;">
-                            <h4><b><?php echo $slurries[$i]["function"]; ?></b></h4>
+                        <div class= "col-xs-12" style="border: 1px solid #B00404; background: #C4E4B5;">
+                            <h4 style="line-height: 9px;"><b><?php echo $slurries[$i]["function"]; ?></b></h4>
                         </div>
                     </div>
-                    <div class = "row" style="background: #fff;">
+                    <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
                         <div class= "col-xs-4" style="border: 1px solid #B00404;">
                             Designed Density
                         </div>
@@ -130,7 +130,7 @@
                         </div>
                     </div>
     
-                    <div class = "row" style="background: #fff;">
+                    <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
                         <div class= "col-xs-4" style="border: 1px solid #B00404;">
                             Designed Volume
                         </div>
@@ -161,11 +161,11 @@
                 {
 ?>
                     <div class = "row">
-                        <div class= "col-xs-12" style="border: 1px solid #B00404; background: #FAC0C0;">
+                        <div class= "col-xs-12" style="border: 1px solid #B00404; background: #C4E4B5;">
                             <h4><b><?php echo "Stage ".$slurries[$i]["stage"]." ".$slurries[$i]["function"]; ?></b></h4>
                         </div>
                     </div>
-                    <div class = "row" style="background: #fff;">
+                    <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
                         <div class= "col-xs-4" style="border: 1px solid #B00404;">
                             Designed Density
                         </div>
@@ -187,7 +187,7 @@
                             <?php echo $slurries[$i]["shutdowns"]; ?>
                         </div>
                     </div>
-                    <div class = "row" style="background: #fff;">
+                    <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
                         <div class= "col-xs-4" style="border: 1px solid #B00404;">
                             Designed Volume
                         </div>
@@ -214,12 +214,12 @@
             }
 ?>        
             <div class = "row">
-                <div class= "col-xs-12" style="border: 1px solid #B00404; background: #FAC0C0;">
-                    <h4><b>Displacement</b></h4>
+                <div class= "col-xs-12" style="border: 1px solid #B00404; background: #C4E4B5;">
+                    <h4 style="line-height: 9px;"><b>Displacement</b></h4>
                 </div>
             </div>
             
-            <div class = "row" style="background: #fff;">
+            <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
                 <div class= "col-xs-4" style="border: 1px solid #B00404;">
                     Designed Volume
                 </div>

@@ -7,7 +7,7 @@
     </ul>
 </div>
 <br/>
-<form action="slurryinfo.php" method="post">
+<form action="jobanalysis.php" method="post">
     <fieldset>
         <div class="row">
             <div class="col-xs-3 col-xs-offset-1 text-left">
@@ -28,7 +28,7 @@
                     <div class="col-xs-3 text-left">
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker6'>
-                                <input type='text' class="form-control" />
+                                <input type='text' class="form-control" name="begin_date"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -43,7 +43,7 @@
                     <div class="col-xs-3 text-left">
                         <div class="form-group">
                             <div class='input-group date' id='datetimepicker7'>
-                                <input type='text' class="form-control" />
+                                <input type='text' class="form-control" name="end_date"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -58,7 +58,7 @@
                 Geographic Filter
                 <div class="row">
                     <div class="col-xs-3 text-left">
-                        <select id="geo_choice" name="chart_type" class="selectpicker" data-size="12">
+                        <select id="geo_choice" name="geo_filter" class="selectpicker" data-size="12">
                             <option value="0">none</option>
                             <option value="hemisphere">Hemisphere</option>
                             <option value="region">Region</option>
@@ -85,7 +85,7 @@
                     Filter By Customer
                     <div class="row">
                         <div class="col-xs-3 text-left">
-                            <select  name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">                
+                            <select name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">                
 <?php   
                                 foreach ($options as $option) 
                                 {
