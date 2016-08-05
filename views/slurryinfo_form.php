@@ -59,7 +59,7 @@
                                 <select  name="type_<?php echo "$i";?>" class="selectpicker" data-size="8" title="Slurry Function">
                                     <option value="Lead">Lead</option>
                                     <option value="Tail">Tail</option>
-                                    <option value="primary">Primary</option>
+                                    <option value="Primary">Primary</option>
                                     <option value="Scavenger">Scavenger</option>
                                     <option value="Cap">Cap</option>
                                     <option value="top_out">Top Out</option>

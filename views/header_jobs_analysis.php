@@ -20,10 +20,8 @@ CORE
         
             <!-- https://jquery.com/ -->
             <script src="/js/jquery-1.11.3.min.js"></script>
-            <script type="text/javascript" src="/js/flot-0.8.2.min.excanvas.js"></script>
-            <script type="text/javascript" src="/js/flot-0.8.2.min.js"></script>
-            <script type="text/javascript" src="/js/flot.time.js"></script>
-            <script language="javascript" type="text/javascript" src="/js/flot.selection.js"></script>
+            
+            
             <!-- http://twitter.github.io/typeahead.js/ -->
             <script src="/js/typeahead.bundle.min.js"></script>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
@@ -32,11 +30,11 @@ CORE
             <script src="/js/bootstrap.min.js"></script>
             <!-- website's own js -->
             <script src="/js/current_scripts.js"></script>
-            <script src="/js/flot_jobs_analysis.js"></script>
             <script src="/js/moment.min.js"></script>
             <script src="/js/bootstrap-datetimepicker.min.js"></script>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="/js/google_jobs_analysis.js"></script>
             
-        
         
         <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>

@@ -47,8 +47,7 @@ CORE
     <body>
         <nav class="navbar navbar-default" role="navigation" style="color: #ffffff;">
             <div id="errhead" class = "container-fluid">
-                <div class="row"></div>
-                <div class="row col-xs-10">
+                <div class="row col-xs-12">
                     Cement Operational Results Evaluation 
                 </div>
             </div>

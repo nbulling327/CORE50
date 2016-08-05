@@ -1,5 +1,5 @@
 <br/>
-<div id="registerform" class="container-fluid">
+<div id="registerform" class="container-fluid" style="text-align: left;">
 <form action="register.php" method="post">
     <div class="row">
         <div class="col-xs-offset-3 col-xs-3">

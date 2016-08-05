@@ -106,9 +106,8 @@
                 <div class="row">
                     <div class="col-xs-3 text-left">
                         <select name="xaxis" class="selectpicker" data-size="12">
-                            <option value="0">none</option>
                             <option value="well">Well</option>
-                            <option value="date">Job Date</option>
+                            <option value="date">Month</option>
                             <option value="supervisor_id">Supervisor</option>
                             <option value="pumper_id">Pump Operator</option>
                             <option value="pump_id">Pump Unit</option>

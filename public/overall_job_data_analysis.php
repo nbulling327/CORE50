@@ -19,7 +19,6 @@ else {
     $customer="";
 }
 
-
 $start_date = date("Y-m-d", strtotime($start));
 $end_date = date("Y-m-d", strtotime($finish));
 
@@ -29,6 +28,7 @@ $geo = $_GET["geo"];
 $districts_included=[];
 $xdata=[];
 $ydata=[];
+$vols=[];
 
 $all_places = CS50::query("SELECT * FROM places");
 
@@ -138,6 +138,7 @@ if("supervisor_id"==$xaxis) {
         foreach($workers as $worker) {
             if($job["supervior_id"]==$worker["id"]) {
                 array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
+                array_push($vols,$job["total_cem_vol"]);
 }   }   }   }
 else if("pumper_id"==$xaxis) {
     $workers= CS50::query("SELECT * FROM users WHERE pumper = 1 ORDER BY lastname");
@@ -145,6 +146,7 @@ else if("pumper_id"==$xaxis) {
         foreach($workers as $worker) {
             if($job["pumper_id"]==$worker["id"]) {
                 array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
+                array_push($vols,$job["total_cem_vol"]);
 }   }   }   }
 else if("pump_id"==$xaxis) {
     $workers= CS50::query("SELECT * FROM pumps");
@@ -152,23 +154,28 @@ else if("pump_id"==$xaxis) {
         foreach($workers as $worker) {
             if($job["pump_id"]==$worker["id"]) {
                 array_push($xdata, $worker["pump"]);
+                array_push($vols,$job["total_cem_vol"]);
 }   }   }   }
 else if("job_type"==$xaxis)
 {
     foreach($jobs as $job) {
         array_push($xdata, $job["job_type"]);
+        array_push($vols,$job["total_cem_vol"]);
 }   }   
 else if("well"==$xaxis) {
     foreach($jobs as $job) {
         array_push($xdata, $job["well_name"]." ".$job["well_number"]);
+        array_push($vols,$job["total_cem_vol"]);
 }   }   
 else if("job"==$xaxis) {
     foreach($jobs as $job) {
         array_push($xdata, $job["well_name"]." ".$job["well_number"]." ".$job["job_type"]);
+        array_push($vols,$job["total_cem_vol"]);
 }   }
 else if("date"==$xaxis) {
     foreach($jobs as $job) {
         array_push($xdata, $job["job_date"]);
+        array_push($vols,$job["total_cem_vol"]);
 }   }
 else if("geography"==$xaxis) {
     if(isset($geo_cat)) {
@@ -177,30 +184,35 @@ else if("geography"==$xaxis) {
                 foreach($places as $place) {
                     if($job["district"]==$place["district"]) {
                         array_push($xdata, $place["region"]);
+                        array_push($vols,$job["total_cem_vol"]);
         }   }   }   }
         else if($region==$geo_cat) {
             foreach($jobs as $job) {
                 foreach($places as $place) {
                     if($job["district"]==$place["district"]) {
                         array_push($xdata, $place["area"]);
+                        array_push($vols,$job["total_cem_vol"]);
         }   }   }   }
         else if($area==$geo_cat) {
             foreach($jobs as $job) {
                 foreach($places as $place) {
                     if($job["district"]==$place["district"]) {
                         array_push($xdata, $place["district"]);
+                        array_push($vols,$job["total_cem_vol"]);
         }   }   }   }
         else if($district==$geo_cat) {
             foreach($jobs as $job) {
                 foreach($places as $place) {
                     if($job["district"]==$place["district"]) {
                         array_push($xdata, $place["district"]);
+                        array_push($vols,$job["total_cem_vol"]);
     }   }   }   }   }
     else {
         foreach($jobs as $job) {
             foreach($places as $place) {
                 if($job["district"]==$place["district"]) {
                     array_push($xdata, $place["hemisphere"]);
+                    array_push($vols,$job["total_cem_vol"]);
 }   }   }   }   }
 
 if("density"==$yaxis) {
@@ -231,8 +243,68 @@ else if("disp_vol_var"==$yaxis) {
     foreach($jobs as $job) {
         $variance=abs($job["calculated_disp"]-$job["act_disp_vol"])/$job["calculated_disp"];
         array_push($ydata, $variance);
-}   }           
+}   }
+
+if("date"==$xaxis)
+{
+   for($i=0;$i<count($xdata);$i++)
+   {
+        $total_y=0;
+        $total_weight=0;
+        $matches=[];
     
+        for($j=$i+1;$j<count($xdata);$j++)
+        {
+            array_push($matches,$i);
+            
+            if(strcmp(substr($xdata[$i],0,4),substr($xdata[$j],0,4))==0&&strcmp(substr($xdata[$i],5,2),substr($xdata[$j],5,2))==0)
+            {
+                array_push($matches,$j);
+                
+            }
+            if($j==count($xdata)-1)
+            {
+                for($z=0;$z<count($matches);$z++)
+                {
+                    $spot=$matches[$z];
+                    $total_y=$total_y+$ydata[$spot]*$vols[$spot];
+                    $total_weight=$total_weight+$vols[$spot];
+                }
+                
+                for($zz=0;$zz<count($matches);$zz++)
+                {
+                    $new_spot=$matches[$zz];
+                    $ydata[$new_spot]=$total_y/$total_weight;
+                }
+            }
+        }    
+   }
+}
+else if ("pumper_id"==$xaxis)
+{
+   $matches=[];
+   
+   $ii=1;
+   for($i=0;$i<count($xdata);$i++)
+   {
+        array_push($matches,0);
+   }
+   for($i=0;$i<count($xdata);$i++)
+   {
+        if($matches[$i]==0)
+        {
+            for($j=$i+1;$j<count($xdata);$j++)
+            {
+                if(strcmp($xdata[$i],$xdata[$j])==0)
+                {
+                    $matches[$j]=$matches[$i];
+                }
+            }
+        }
+   }
+}
+
+
 $plot_data=[];
 $counter=0;
 
@@ -252,4 +324,3 @@ header("Content-type: application/json");
 print(json_encode($plot_data, JSON_PRETTY_PRINT));
 
 ?>
-

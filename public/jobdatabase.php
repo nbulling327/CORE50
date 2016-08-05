@@ -56,6 +56,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 else if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
 
+if(!isset($_POST["job"]))
+{
+    apologize("You must select a job.");
+}
+
 $job_id=$_POST["job"];
 $rows= CS50::query("SELECT * FROM jobs WHERE id = ?",$job_id);
 $options = CS50::query("SELECT * FROM slurries WHERE job_id = ? ORDER BY id",$job_id);
@@ -65,7 +70,8 @@ $jobs=[];
 $slurries=[];
 $users=[];
 $pumps=[];
-
+$slurry_shutdowns=0;
+$job_shutdowns=0;
 foreach ($options as $option)
 {
     $slurries[]= [
@@ -78,6 +84,7 @@ foreach ($options as $option)
         "stage"=>$option["stage"],
         "shutdowns"=>$option["shutdowns"]
         ];
+        $slurry_shutdowns=$slurry_shutdowns+$option["shutdowns"];
 }
 
 foreach ($rows as $row)
@@ -102,8 +109,9 @@ foreach ($rows as $row)
         "calculated_disp"=> $row["calculated_disp"],
         "act_disp_vol"=> $row["act_disp_vol"]
         ];
+        $job_shutdowns=$job_shutdowns+$row["shutdowns"];
 }
-
+$displacement_shutdowns=$job_shutdowns-$slurry_shutdowns;
 foreach ($peoples as $people)
 {
     if ($jobs[0]["supervisor_id"]==$people["id"])
@@ -122,14 +130,15 @@ foreach ($peoples as $people)
         $users[0]["lastname"]=$people["lastname"];
     }
 }
+
 foreach ($units as $unit)
 {
-    if($unit["id"]=$jobs[0]["pump_id"])
+    if(strcmp($unit["id"],$jobs[0]["pump_id"])==0)
     {
         $pumps[0]["name"]=$unit["pump"];
     }    
 }
 
-render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs, "pumps"=>$pumps,"slurries"=>$slurries,"users"=>$users]);
+render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs, "pumps"=>$pumps,"slurries"=>$slurries,"displacement_shutdowns"=>$displacement_shutdowns,"users"=>$users]);
 }
 ?>

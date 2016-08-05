@@ -8,13 +8,13 @@
 </div>
 <div class = "container-fluid" id="futura">
 <?php
-//var_dump($_POST);
+var_dump($_POST);
 ?>
 
 
 <div class= "col-xs-12 text-center">
     <div class="row" id="futura">
-        <div id="flot-placeholder_overallanalysis" style="width:840px;height:420px"></div>
+        <div id="chart_div" style="width:840px;height:420px"></div>
     </div>
     
 

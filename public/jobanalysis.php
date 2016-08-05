@@ -74,6 +74,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
 else if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     
+    if(!isset($_POST["xaxis"]))
+    {
+        apologize("You must select an x-axis");
+    }
     $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
     $users=[];
     foreach ($peoples as $people)

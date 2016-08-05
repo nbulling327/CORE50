@@ -1128,6 +1128,7 @@ foreach ($rows as $row)
         "plug_shutdown_time"=> $row["plug_shutdown_time"],
         "cem_vol_variance"=> $row["cem_vol_variance"],
         "pumper_id"=> $row["pumper_id"],
+        "pump_id"=> $row["pump_id"],
         "supervisor_id"=> $row["supervisor_id"],
         "calculated_disp"=> $row["calculated_disp"],
         "act_disp_vol"=> $row["act_disp_vol"]
@@ -1153,5 +1154,15 @@ foreach ($peoples as $people)
     }
 }
 
-render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs,"slurries"=>$slurries,"users"=>$users]);
+$units = CS50::query("SELECT * FROM pumps");
+$pumps=[];
+foreach ($units as $unit)
+{
+    if(strcmp($unit["id"],$jobs[0]["pump_id"])==0)
+    {
+        $pumps[0]["name"]=$unit["pump"];
+    }    
+}
+
+render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs,"pumps"=>$pumps,"slurries"=>$slurries,"users"=>$users]);
 ?>

@@ -26,7 +26,7 @@
             $pumper_name = $users[0]["pumper_first_name"] . " " . $users[0]["pumper_last_name"];
 ?>
 <div class = "container-fluid" id="futura">
-    <div class= "col-xs-8 text-center">
+    <div class= "col-xs-8 text-left">
         <div class="row" id="futura">
             <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Chart Analysis"?></h3>
             <div id="flot-placeholder_analysis" style="width:750px;height:380px"></div>
@@ -111,47 +111,50 @@
                         </div>
                     </div>
                     <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Designed Density
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Cement in Spec
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            Shutdowns > 2 min
+                    </div>    
+                    <div class = "row" style="background: #C8C7C7;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+                        </div>
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            Designed Volume
+                        </div>
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            Actual Volume
                         </div>
                     </div>
                     <div class = "row" style="background: #C8C7C7;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
-                        </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo $slurries[$i]["shutdowns"]; ?>
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
                         </div>
                     </div>
-    
                     <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            Designed Volume
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            Shutdowns > 2 min
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            Actual Volume
-                        </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Average Rate
                         </div>
                     </div>
                     <div class = "row" style="background: #C8C7C7;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo $slurries[$i]["shutdowns"]; ?>
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
-                        </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
                         </div>
                     </div>
@@ -169,46 +172,50 @@
                         </div>
                     </div>
                     <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Designed Density
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Cement in Spec
-                        </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            Shutdowns > 2 min
                         </div>
                     </div>
                     <div class = "row" style="background: #C8C7C7;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             <?php echo round($slurries[$i]["density"],2)." "; ?>lb/gal
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             <?php echo round($slurries[$i]["dens_acc"],1)." "; ?>%
-                        </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo $slurries[$i]["shutdowns"]; ?>
                         </div>
                     </div>
                     <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Designed Volume
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Actual Volume
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                    </div>
+                    <div class = "row" style="background: #C8C7C7;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                        </div>
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
+                        </div>
+                    </div>
+                    <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            Shutdowns > 2 min
+                        </div>
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             Average Rate
                         </div>
                     </div>
                     <div class = "row" style="background: #C8C7C7;">
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo round($slurries[$i]["des_vol"],2)." "; ?>bbl
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                            <?php echo $slurries[$i]["shutdowns"]; ?>
                         </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                            <?php echo round($slurries[$i]["act_vol"],2)." "; ?>bbl
-                        </div>
-                        <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                        <div class= "col-xs-6" style="border: 1px solid #B00404;">
                             <?php echo round($slurries[$i]["avg_rate"],2)." "; ?>bpm
                         </div>
                     </div>
@@ -223,27 +230,37 @@
             </div>
             
             <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
-                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     Designed Volume
                 </div>
-                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     Actual Volume
                 </div>
-                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+            </div>
+            <div class = "row" style="background: #C8C7C7;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    <?php echo round($calculated_disp,2)." "; ?>bbl
+                </div>
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    <?php echo round($act_disp_vol,2)." "; ?>bbl
+                </div>
+            </div>
+            <div class = "row" style="background: #fff; display: flex; line-height: 16px;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    Shutdowns > 2 min
+                </div>
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     Average Rate
                 </div>
             </div>
             <div class = "row" style="background: #C8C7C7;">
-                <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                    <?php echo round($calculated_disp,2)." "; ?>bbl
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
+                    <?php echo $displacement_shutdowns ;?>
                 </div>
-                <div class= "col-xs-4" style="border: 1px solid #B00404;">
-                    <?php echo round($act_disp_vol,2)." "; ?>bbl
-                </div>
-                <div class= "col-xs-4" style="border: 1px solid #B00404;">
+                <div class= "col-xs-6" style="border: 1px solid #B00404;">
                     <?php echo round($avg_disp_rate,2)." "; ?>bpm
                 </div>
-            </div>
+            </div>    
             <br/>
         </div>
     </div>
