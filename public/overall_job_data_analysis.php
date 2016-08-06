@@ -136,7 +136,7 @@ if("supervisor_id"==$xaxis) {
     $workers= CS50::query("SELECT * FROM users WHERE supervisor = 1 ORDER BY lastname");
     foreach($jobs as $job) {
         foreach($workers as $worker) {
-            if($job["supervior_id"]==$worker["id"]) {
+            if($job["supervisor_id"]==$worker["id"]) {
                 array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
                 array_push($vols,$job["total_cem_vol"]);
 }   }   }   }
@@ -280,7 +280,7 @@ if("date"==$xaxis)
         }    
    }
 }
-else if ("pumper_id"==$xaxis)
+else if ("pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis)
 {
    $matches=[];
    
@@ -293,6 +293,8 @@ else if ("pumper_id"==$xaxis)
    {
         if($matches[$i]==0)
         {
+            $matches[$i]=$ii;
+            $ii++;
             for($j=$i+1;$j<count($xdata);$j++)
             {
                 if(strcmp($xdata[$i],$xdata[$j])==0)
@@ -302,8 +304,49 @@ else if ("pumper_id"==$xaxis)
             }
         }
    }
+    $x_holder=[];
+    for($ll=1;$ll<$ii;$ll++)
+    {
+        $y_holder[$ll-1]=0;
+        $vol_holder[$ll-1]=0;
+        $y_sort[$ll-1]=0;
+    }
+    $y_temp=[];
+    for($jj=1;$jj<$ii;$jj++)
+    {
+        for($k=0;$k<count($xdata);$k++)
+        {
+            if($matches[$k]==$jj)
+            {
+                if (count($x_holder)==($jj-1))
+                {
+                    $x_holder[$jj-1]=$xdata[$k];   
+                }
+                $y_holder[$jj-1]=$y_holder[$jj-1]+$ydata[$k]*$vols[$k];
+                $vol_holder[$jj-1]=$vol_holder[$jj-1]+$vols[$k];
+            }
+        } 
+    }
+    for($l=0;$l<count($y_holder);$l++)
+    {
+        $y_temp[$l]=$y_holder[$l]/$vol_holder[$l];
+    }
+    $x_sort=$x_holder;
+    sort($x_sort, SORT_NATURAL | SORT_FLAG_CASE);
+    for($m=0;$m<count($x_sort);$m++)
+    {
+        for($n=0;$n<count($x_sort);$n++)
+        {
+            if($x_sort[$m]==$x_holder[$n])
+            {
+                $y_sort[$m]=$y_temp[$n];
+            }
+        }
+    }
+    
+    $xdata=$x_sort;
+    $ydata=$y_sort;
 }
-
 
 $plot_data=[];
 $counter=0;
