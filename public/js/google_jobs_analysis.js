@@ -135,20 +135,15 @@ function drawChart(){
         
             var materialOptions = {
                 chart: {
-                    title: 'Overall Jobs Analysis'
+                    title: 'Customized Analysis'
                 },
+                
                 width: 900,
                 height: 450,
                 series: {
-                    0: {axis: 'YAXIS'},
-                colors: 'red',
-                    
+                    0: {axis: 'YAXIS'}
                 },
-                axes: {
-                    y: {
-                        YAXIS: {label: y_info[0]}
-                    }
-                }
+                
             };
             
             console.log(y1);
