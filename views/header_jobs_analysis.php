@@ -33,7 +33,7 @@ CORE
             <script src="/js/moment.min.js"></script>
             <script src="/js/bootstrap-datetimepicker.min.js"></script>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-            <script src="/js/google_jobs_analysis.js"></script>
+            <script src="/js/google_jobs_analysis5.js"></script>
             
         
         <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
