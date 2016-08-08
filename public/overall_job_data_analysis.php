@@ -292,7 +292,7 @@ if("date"==$xaxis)
         }    
    }
 }
-else if ("pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
+else if ("pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis)
 {
    $matches=[];
    

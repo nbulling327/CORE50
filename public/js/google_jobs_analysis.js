@@ -24,10 +24,6 @@ function drawChart(){
     
         var div4 = document.getElementById("dom-target-filter1");
         var geo_picked = div4.textContent.trim();
-        if (geo_picked.length >80 ) {
-            geo_picked="blank";
-        }
-        
         if (empty.length==geo_picked.length)
         {
             geo_picked="blank";
@@ -138,48 +134,31 @@ function drawChart(){
             }
         
             var materialOptions = {
-                    
-                title: 'Customized Analysis',
-                titleTextStyle: { fontName: 'futura'
-                    
+                chart: {
+                    title: 'Customized Analysis'
                 },
-                colors:['#B00404'],
-                hAxis:{
-                    title: x_info[1],
-                    titleTextStyle:{bold: true, fontName: 'futura', italic: false},
-                    slantedText: false,
-                    maxTextlines: 5,
-                    showTextEvery: 1,
-                    maxAlternation: 4
-                },
-                backgroundColor:{
-                    stroke: '#000',
-                    strokeWidth: 1
-                },
-                legend:
-                {
-                  position: 'top'  
-                },
-                vAxis:{
-                    title: y_info[0],
-                    titleTextStyle:{bold: true, fontName: 'futura',italic: false},
-                },
-                    
+                
                 width: 900,
                 height: 450,
                 series: {
                     0: {axis: 'YAXIS'}
                 },
-               
+                
             };
             
+            console.log(y1);
             var table = new google.visualization.DataTable();
             table.addColumn(x_info[0],x_info[1]);
             table.addColumn('number',y_info[1]);
+            for (var i = 0; i<y1.length;i++)
+            {
+                console.log(y1[i]);
+            }
             table.addRows(y1);
         
+            console.log(table);
             function drawMaterialChart() {
-                var materialChart = new google.visualization.LineChart(chartDiv);
+                var materialChart = new google.charts.Line(chartDiv);
                 materialChart.draw(table, materialOptions);
                 }
         
