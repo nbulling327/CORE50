@@ -8,93 +8,52 @@
 <?php
     $size=sizeof($jobs);
 ?>
-
-
-<br/><br/>
+    <br/><br/>
     <form action="jobdatabase.php" method="post">
         <fieldset>
             <div class="row">
-                <div class="col-xs-3 col-xs-offset-9">
+                <div class="col-xs-12">
                     <button class="btn my-btn" type="submit" value="submit" name="submit">
                         Review Selected Job
                         <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
                     </button>
                 </div>
             </div>
-            <br/>
-            <div class="col-xs-1 basetable">
-                <div class="row">
-                    <div class="col-xs-12 basetable"> Job
-                    </div>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover table-condensed" id="joblisting">
+                    <thead>
+                        <tr>
+                            <th>Select</th>    
+                            <th>Job Date</th>
+                            <th>Region</th>
+                            <th>Area</th>
+                            <th>Customer</th>
+                            <th>District</th>
+                            <th>Well</th>
+                            <th>Job Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 <?php
-            for($j=0;$j<$size;$j++)
-            {
+                    for($i=0;$i<$size;$i++)
+                    {
 ?>              
-                <div class="row basetable">
-                            <input type="radio" name="job" value="<?php echo $jobs[$j]["id"];?>"> Review Job
-                </div>
+                        <tr>
+                            <td><input type="radio" name="job" value="<?php echo $jobs[$i]["id"];?>"> Select</td>
+                            <td><?php echo $jobs[$i]["date"]; ?></td>
+                            <td><?php echo $jobs[$i]["region"]; ?></td>
+                            <td><?php echo $jobs[$i]["area"]; ?></td>
+                            <td><?php echo $jobs[$i]["customer"]; ?></td>
+                            <td><?php echo $jobs[$i]["district"]; ?></td>
+                            <td><?php echo $jobs[$i]["well"]; ?></td>
+                            <td><?php echo $jobs[$i]["job_type"]; ?></td>
+                        </tr>
 <?php
             }
-?>
+?>            
+                    </tbody>
+                </table>
             </div>
-            <div class="col-xs-11 basetable">
-            <div class="row">
-                <div class="col-xs-2 basetable">
-                    Job Date
-                </div>
-                <div class="col-xs-2 basetable">
-                    Region
-                </div>
-                <div class="col-xs-2 basetable">
-                    Area
-                </div>
-                <div class="col-xs-2 basetable">
-                    Customer
-                </div>
-                <div class="col-xs-2 basetable">
-                    District
-                </div>
-                <div class="col-xs-2 basetable">
-                    Well
-                </div>
-            </div>
-<?php
-            for($i=0;$i<$size;$i++)
-            {
-?>
-            <div class="row">
-                <div class="col-xs-2 basetable">
-<?php                    
-                    echo $jobs[$i]["date"];
-?>
-                </div>
-                <div class="col-xs-2 basetable">
-<?php                    
-                    echo $jobs[$i]["region"];
-?>
-                </div>
-                <div class="col-xs-2 basetable">
-<?php                    
-                    echo $jobs[$i]["area"];
-?>
-                </div>
-                <div class="col-xs-2 basetable">
-<?php                    
-                    echo $jobs[$i]["customer"];
-?>
-                </div>
-                <div class="col-xs-2 basetable">
-<?php                    
-                    echo $jobs[$i]["district"];
-?>
-                </div>
-                <div class="col-xs-2 basetable">
-<?php                    
-                    echo $jobs[$i]["well"];
-?>
-                </div>
-            </div>
-<?php
-            }
-?>
+        </fieldset>
+    </form>
+</div>    

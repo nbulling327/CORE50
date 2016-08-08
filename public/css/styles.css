@@ -126,6 +126,11 @@ body {
 	line-height: 96px;
 }
 
+th
+{
+    text-align: center;
+}
+
 #signup
 {
     color: #fff;
