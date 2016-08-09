@@ -117,7 +117,3 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    // DataTable
-    $('#joblisting').DataTable();
-} );

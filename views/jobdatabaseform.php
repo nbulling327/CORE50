@@ -15,7 +15,7 @@
                 <div class="col-xs-12">
                     <button class="btn my-btn" type="submit" value="submit" name="submit">
                         Review Selected Job
-                        <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+                        <span aria-hidden="true" class="glyphicon glyphicon-stats"></span>
                     </button>
                 </div>
             </div>

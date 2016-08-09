@@ -44,7 +44,7 @@ function drawChart(){
         var x_name = div6.textContent.trim();
         if("date"==x_name)
         {
-            x_info=['date','Month'];
+            x_info=['string','Month'];
         }
         else if("well"==x_name)
         {
@@ -108,6 +108,10 @@ function drawChart(){
                 xaxis: x_name, yaxis: y_name, series: series_data};
         var chartDiv = document.getElementById('chart_div');
         var x1=[];
+        var x2=[];
+        var month;
+        var year;
+        var add_date;
         
         //console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
@@ -118,7 +122,52 @@ function drawChart(){
             {
                 for (var i = 0; i<data.length; i++)
                 {
-                    x1.push(new Date([parseFloat(data[i]["xdata"].slice(0,4)),parseFloat(data[i]["xdata"].slice(5,7))]));
+                    switch (data[i]["xdata"].slice(5,7)) {
+                        case "01":
+                            month = "January";
+                            break;
+                        case "02":
+                            month = "February";
+                            break;
+                        case "03":
+                            month = "March";
+                            break;
+                        case "04":
+                            month = "April";
+                            break;
+                        case "05":
+                            month = "May";
+                            break;
+                        case "06":
+                            month = "June";
+                            break;
+                        case "07":
+                            month = "July";
+                            break;
+                        case "08":
+                            month = "August";
+                            break;
+                        case "09":
+                            month = "September";
+                            break;
+                        case "10":
+                            month = "October";
+                            break;    
+                        case "11":
+                            month = "November";
+                            break;    
+                        case "12":
+                            month = "December";
+                            break;    
+                    }
+                    year =parseFloat(data[i]["xdata"].slice(0,4));
+                    month+=" ";
+                    month+=year;
+                    
+                    x1.push(month);
+                    
+                    x2.push(new Date([parseFloat(data[i]["xdata"].slice(0,4)),parseFloat(data[i]["xdata"].slice(5,7))]));
+
                 }    
             }
             else
@@ -164,7 +213,7 @@ function drawChart(){
                     title: y_info[0],
                     titleTextStyle:{bold: true, fontName: 'futura',italic: false},
                 },
-                    
+                bar: { groupWidth: "200%" },    
                 width: 900,
                 height: 450,
                 series: {
@@ -175,15 +224,29 @@ function drawChart(){
             
             var table = new google.visualization.DataTable();
             table.addColumn(x_info[0],x_info[1]);
+            
             table.addColumn('number',y_info[1]);
             table.addRows(y1);
         
+            
+            function drawColumnChart(){
+                var columnChart = new google.visualization.ColumnChart(chartDiv);
+                columnChart.draw(table, materialOptions);
+                }
+            
             function drawMaterialChart() {
                 var materialChart = new google.visualization.LineChart(chartDiv);
                 materialChart.draw(table, materialOptions);
                 }
-        
-            drawMaterialChart();
+            console.log(table);
+            if("line"==chart_type)
+            {
+            drawMaterialChart();    
+            }
+            else if("bar"==chart_type)
+            {
+            drawColumnChart();    
+            }
         });
     });
 }

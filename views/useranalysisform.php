@@ -74,7 +74,7 @@
                 Select Filter Value:
                 </div>
                 <div class="row">
-                    <div class="col-xs-11 col-xs-offset-1">==>
+                    <div class="col-xs-11 col-xs-offset-1"><span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
                         <select id="filter1" name="filter1" class="typeahead form-control" data-size="6" type="text" placeholder="Select place" data-live-search="true">
                         </select>
                     </div>
@@ -159,7 +159,7 @@
                 <div class="form-group">
                     <button class="btn my-btn" type="submit">
                         View Jobs Analysis 
-                        <span aria-hidden="true" class="glyphicon glyphicon-arrow-right"></span>
+                        <span aria-hidden="true" class="glyphicon glyphicon glyphicon-stats"></span>
                     </button>
                 </div>
             </div>
