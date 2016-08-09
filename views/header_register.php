@@ -16,9 +16,7 @@ CORE
             <link href="/css/bootstrap-select.min.css" rel="stylesheet"/>
             <!-- website's own css -->
             <link rel="stylesheet" href="/css/styles.css">
-        <!-- Inactive CSS Files -->
-            <!-- http://nicolasbize.com/magicsuggest/ -->
-            <!--<link href="/css/magicsuggest-min.css" rel="stylesheet"/>-->
+        
         <!-- Active JS Files -->
             <!-- https://jquery.com/ -->
             <script src="/js/jquery-1.11.3.min.js"></script>
@@ -30,12 +28,6 @@ CORE
             <script src="/js/bootstrap.min.js"></script>
             <!-- website's own js -->
             <script src="/js/scripts.js"></script>
-        <!-- Inactive JS Files -->
-            <!-- http://twitter.github.io/typeahead.js/ -->
-            <!--<script src="/js/bloodhound.min.js"></script>-->
-            <!--<script src="/js/typeahead.jquery.min.js"></script>-->
-            <!-- http://nicolasbize.com/magicsuggest/ -->
-            <!--<script src="/js/magicsuggest.js"></script>-->
             
         <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>

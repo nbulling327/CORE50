@@ -11,53 +11,37 @@ CORE
     <head>
         <!-- Active CSS Files -->
             <!-- http://getbootstrap.com/ -->
-            <link href="/css/bootstrap.min.css" rel="stylesheet"/>
+                <link href="/css/bootstrap.min.css" rel="stylesheet"/>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
-            <link href="/css/bootstrap-select.min.css" rel="stylesheet"/>
-            <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+                <link href="/css/bootstrap-select.min.css" rel="stylesheet"/>
+            <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+                <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
             <!-- website's own css -->
-            <link rel="stylesheet" href="/css/styles.css">
+                <link rel="stylesheet" href="/css/styles.css">
             
-        <!-- Inactive CSS Files -->
-            <!-- http://nicolasbize.com/magicsuggest/ -->
-            <!--<link href="/css/magicsuggest-min.css" rel="stylesheet"/>-->
         <!-- Active JS Files -->
-            
-            
-            
-            <!--script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"-->
-            <!--script type="text/javascript"-->
-            <!--    google.charts.load('current', {packages: ['corechart']});-->
-            <!--    google.charts.setOnLoadCallback(drawChart);-->
-            <!--/script-->
             <!-- https://jquery.com/ -->
-            <script src="/js/jquery-1.11.3.min.js"></script>
-            <script src="/js/flot-0.8.2.min.excanvas.js"></script>
-            <script src="/js/flot-0.8.2.min.js"></script>
-            <script src="/js/flot.time.js"></script>
-            <script src="/js/flot.selection.js"></script>
+                <script src="/js/jquery-1.11.3.min.js"></script>
+            <!-- http://www.flotcharts.org/ -->
+                <script src="/js/flot-0.8.2.min.excanvas.js"></script>
+                <script src="/js/flot-0.8.2.min.js"></script>
+                <script src="/js/flot.time.js"></script>
+                <script src="/js/flot.selection.js"></script>
+                <script src="/js/flot_jobanalysis.js"></script>
+                <script src="/js/flot.axislabels.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
-            <script src="/js/typeahead.bundle.min.js"></script>
+                <script src="/js/typeahead.bundle.min.js"></script>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
-            <script src="/js/bootstrap-select.min.js"></script>
+                <script src="/js/bootstrap-select.min.js"></script>
             <!-- http://getbootstrap.com/ -->
-            <script src="/js/bootstrap.min.js"></script>
+                <script src="/js/bootstrap.min.js"></script>
+            <!-- http://momentjs.com/ -->        
+                <script src="/js/moment.min.js"></script>
+            <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+                <script src="/js/bootstrap-datetimepicker.min.js"></script>
             <!-- website's own js -->
-            
-            <script src="/js/flot_jobanalysis.js"></script>
-            <script src="/js/flot.axislabels.js"></script>
-            <script src="/js/current_scripts.js"></script>
-            <script src="/js/moment.min.js"></script>
-            <script src="/js/bootstrap-datetimepicker.min.js"></script>
-        <!-- Inactive JS Files -->
-            <!-- http://twitter.github.io/typeahead.js/ -->
-            <!--<script src="/js/bloodhound.min.js"></script>-->
-            <!--<script src="/js/typeahead.jquery.min.js"></script>-->
-            <!-- http://nicolasbize.com/magicsuggest/ -->
-            <!--<script src="/js/magicsuggest.js"></script>-->
-            
-        
-        
+                <script src="/js/scripts.js"></script>
+
         <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>
             <title>CORE: <?= htmlspecialchars($title) ?></title>

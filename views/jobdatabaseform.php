@@ -27,8 +27,8 @@
                             <th>Job Date</th>
                             <th>Region</th>
                             <th>Area</th>
-                            <th>Customer</th>
                             <th>District</th>
+                            <th>Customer</th>
                             <th>Well</th>
                             <th>Job Type</th>
                         </tr>
@@ -39,12 +39,12 @@
                     {
 ?>              
                         <tr>
-                            <td><input type="radio" name="job" value="<?php echo $jobs[$i]["id"];?>"> Select</td>
+                            <td><input type="radio" name="job" value="<?php echo $jobs[$i]["id"];?>"> </td>
                             <td><?php echo $jobs[$i]["date"]; ?></td>
                             <td><?php echo $jobs[$i]["region"]; ?></td>
                             <td><?php echo $jobs[$i]["area"]; ?></td>
-                            <td><?php echo $jobs[$i]["customer"]; ?></td>
                             <td><?php echo $jobs[$i]["district"]; ?></td>
+                            <td><?php echo $jobs[$i]["customer"]; ?></td>
                             <td><?php echo $jobs[$i]["well"]; ?></td>
                             <td><?php echo $jobs[$i]["job_type"]; ?></td>
                         </tr>

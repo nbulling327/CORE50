@@ -74,7 +74,7 @@
                 Select Filter Value:
                 </div>
                 <div class="row">
-                    <div class="col-xs-11 col-xs-offset-1">--->
+                    <div class="col-xs-11 col-xs-offset-1">==>
                         <select id="filter1" name="filter1" class="typeahead form-control" data-size="6" type="text" placeholder="Select place" data-live-search="true">
                         </select>
                     </div>
@@ -102,7 +102,7 @@
         <br/>
         <div class="row">
             <div class="col-xs-3 col-xs-offset-1 text-left">
-                X-AXIS
+                X-Axis
                 <div class="row">
                     <div class="col-xs-3 text-left">
                         <select name="xaxis" class="selectpicker" data-size="12">
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div class="col-xs-3 col-xs-offset-1 text-left">
-                Y-AXIS
+                Y-Axis
                 <div class="row">
                     <div class="col-xs-3 text-left">
                         <select name="yaxis" class="selectpicker" data-size="12">
