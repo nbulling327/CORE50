@@ -42,6 +42,7 @@ function drawChart(){
     
         var div6 = document.getElementById("dom-target-xaxis");
         var x_name = div6.textContent.trim();
+        
         if("date"==x_name)
         {
             x_info=['string','Month'];
@@ -72,7 +73,7 @@ function drawChart(){
         }
         else if("slurry_function"==x_name)
         {
-            x_info==['string','Slurry Function'];
+            x_info=['string','Slurry Function'];
         }
         else if("slurry_density"==x_name)
         {
@@ -192,16 +193,6 @@ function drawChart(){
                 y1.push([x1[i],parseFloat(data[i]["ydata"])]);
             }
         
-            if("well"==x_name)
-            {
-                var sizefont = '7';
-            }
-            else
-            {
-                var sizefont = '<global-font-size>';
-            }
-            
-            console.log(sizefont);
             var materialOptions = {
                     
                 title: user_title,
@@ -211,7 +202,7 @@ function drawChart(){
                 colors:['#B00404'],
                 hAxis:{
                     title: x_info[1],
-                    titleTextStyle:{bold: true, fontName: 'futura', italic: false,fontSize:sizefont},
+                    titleTextStyle:{bold: true, fontName: 'futura', italic: false},
                     slantedText: false,
                     maxTextlines: 5,
                     showTextEvery: 1,

@@ -40,49 +40,6 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () { 
-    $("#post_well_customer").change(function(event){
-        $("#scrollable-dropdown-menu").removeAttr("hidden");
-        $("#job_date").removeAttr("hidden");
-        var custom = $("#comp_choice").val();
-        var parameters ={customer: custom};
-        $.getJSON("search.php", parameters)
-        .success(function(data, textStatus, jqXHR)
-        {
-          document.getElementById("test").options.length = 0;
-          var obj=document.getElementById("test"); 
-          for (var i = 0; i < data.length; i++)     {                
-                opt = document.createElement("option");
-                opt.value = data[i].id;
-                opt.text=data[i].combo;
-                obj.appendChild(opt);
-            }
-        });
-    });
-});
-
-$(document).ready(function () { 
-    $("#geography").change(function(event){
-        $("#scrollable-dropdown-menu2").removeAttr("hidden");
-        var filter1 = $("#geo_choice").val();
-        var parameters ={geo: filter1};
-        $.getJSON("geo_search.php", parameters)
-        .success(function(data, textStatus, jqXHR)
-        {
-          document.getElementById("filter1").options.length = 0;
-          var obj=document.getElementById("filter1"); 
-          for (var i = 0; i < data.length; i++)     {                
-                opt = document.createElement("option");
-                opt.value = data[i].point;
-                opt.text=data[i].point;
-                obj.appendChild(opt);
-            }
-        });
-    });
-});
-
-
-
 $(document).ready(function () {
                 $('#datetimepicker1').datetimepicker({
                     format: 'MM/DD/YYYY'

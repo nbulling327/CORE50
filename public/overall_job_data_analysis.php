@@ -28,17 +28,19 @@ if($end_date<date("Y-m-d", strtotime("01/01/1995")))
 }
 
 // numerically indexed array of places
-$geo_cat = $_GET["geo_cat"];
-$geo = $_GET["geo"];
+
 $districts_included=[];
 $xdata=[];
 $ydata=[];
 $vols=[];
+$jobs=[];
 
 $all_places = CS50::query("SELECT * FROM places");
 
-if(isset($geo_cat)&&isset($geo))
+if(isset($_GET["geo_cat"])&&isset($_GET["geo"]))
 {
+    $geo_cat = $_GET["geo_cat"];
+    $geo = $_GET["geo"];
     $places = CS50::query("SELECT * FROM places WHERE $geo_cat = ?" , $geo);
 }
 else
@@ -58,204 +60,230 @@ else {
     $not_included="true";
 }
 if((strlen($customer)>0)&&(strlen($not_included)>0)) {
-    $jobs=[];
     for($i=0;$i<count($districts_included);$i++) {
         if(isset($start_date)) {
             if(isset($end_date)) {
                 $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND district='$districts_included[$i]' AND job_date>='$start_date' AND job_date<='$end_date' ORDER BY job_date");        
                 foreach ($holders as $holder) {
-                    array_push($jobs,$holder);
-                }
-                
-            }
+                    $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                    if(($start_date<=$check_date)&&($end_date>=$check_date)) {
+                        array_push($jobs,$holder);
+            }   }   }
             else {
                 $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND district='$districts_included[$i]' AND job_date>='$start_date' ORDER BY job_date");        
                 foreach ($holders as $holder) {
-                    array_push($jobs,$holder);
-        }   }   }
+                    $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                    if($start_date<=$check_date) {    
+                        array_push($jobs,$holder);
+        }   }   }   }
         else {
-            $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? AND district=? ORDER BY job_date",$customer,$district_include);
-            echo "3";
+            $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND district='$districts_included[$i]' ORDER BY job_date");        
+            foreach ($holders as $holder) {
+                array_push($jobs,$holder);
                     
-}   }   }
+}   }   }   }   
 else if((strlen($customer)==0)&&(strlen($not_included)>0)) {
-    $jobs=[];
     for($i=0;$i<count($districts_included);$i++) {
         if(isset($start_date)) {
             if(isset($end_date)) {
                 $holders = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND district='$districts_included[$i]' AND job_date>='$start_date' AND job_date<='$end_date' ORDER BY job_date");        
                 foreach ($holders as $holder) {
-                    array_push($jobs,$holder);
-                }
-                
-            }
+                    $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                    if(($start_date<=$check_date)&&($end_date>=$check_date)) {
+                        array_push($jobs,$holder);
+            }   }   }
             else {
-                $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND district=? AND job_date>=$start_date ORDER BY job_date",$district_include);
-                echo "5";
-            
-        }   }
+                $holders = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND district='$districts_included[$i]' AND job_date>='$start_date' ORDER BY job_date");        
+                foreach ($holders as $holder) {
+                    $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                    if($start_date<=$check_date) {    
+                        array_push($jobs,$holder);
+        }   }   }   }
         else {
-            $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND district=? ORDER BY job_date",$district_include);
-            echo "6";
-            
-}   }   }
+            $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND district='$districts_included[$i]' ORDER BY job_date");        
+            foreach ($holders as $holder) {
+                array_push($jobs,$holder);
+}   }   }   }
 else if((strlen($customer)>0)&&(strlen($not_included)==0)) {
     if(isset($start_date)) {
         if(isset($end_date)) {
-            $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? AND job_date>=$start_date AND job_date<=$end_date ORDER BY job_date",$customer);        
-            echo "7";    
-            
-        }
+            $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND job_date>='$start_date' AND job_date<='$end_date' ORDER BY job_date");        
+            foreach ($holders as $holder) {
+                $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                if(($start_date<=$check_date)&&($end_date>=$check_date)) {
+                    array_push($jobs,$holder);
+        }    }  }
         else {
-            $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? AND job_date>=$start_date ORDER BY job_date", $customer);
-            echo "8";
-        
-    }   }
+            $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND job_date>='$start_date' ORDER BY job_date");        
+            foreach ($holders as $holder) {
+                $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                if($start_date<=$check_date) {
+                    array_push($jobs,$holder);
+    }   }   }   }
     else {
-        $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? ORDER BY job_date",$customer);
-        echo "9";
-            
-}   }
+        $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND ORDER BY job_date");        
+        foreach ($holders as $holder) {
+            array_push($jobs,$holder);    
+}   }   }
 else if((strlen($customer)==0)&&(strlen($not_included)==0)) {
     if(isset($start_date)) {
         if(isset($end_date)) {
-            $holders = CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date");        
-            $jobs=[];
+            $holders = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND job_date>='$start_date' AND job_date<='$end_date' ORDER BY job_date");        
             foreach($holders as $holder) {
                 $check_date= date("Y-m-d", strtotime($holder["job_date"]));
                 if(($start_date<=$check_date)&&($end_date>=$check_date)) {
                     array_push($jobs,$holder);
-                   
         }   }   }
         else {
-            $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND job_date>=$start_date ORDER BY job_date");
-            echo "11";
-            
-    }   }
+            $holders = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND job_date>='$start_date' AND ORDER BY job_date");        
+            foreach($holders as $holder) {
+                $check_date= date("Y-m-d", strtotime($holder["job_date"]));
+                if($start_date<=$check_date) {
+                    array_push($jobs,$holder);
+    }   }   }   }
     else {
-        $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date");
-        echo "12";
-        
-}   }
+        $holders = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND ORDER BY job_date");        
+            foreach($holders as $holder) {
+                array_push($jobs,$holder);
+}   }   }
 else {
     echo "This FAILED!";
 }
 
-if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"well"==$xaxis||"job"==$xaxis||"date"==$xaxis||"geo"==$xaxis)
+if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"well"==$xaxis||"job"==$xaxis||"date"==$xaxis||"geo"==$xaxis)
 {
-if("supervisor_id"==$xaxis) {
-    $workers= CS50::query("SELECT * FROM users WHERE supervisor = 1 ORDER BY lastname");
-    foreach($jobs as $job) {
-        foreach($workers as $worker) {
-            if($job["supervisor_id"]==$worker["id"]) {
-                array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
-                array_push($vols,$job["total_cem_vol"]);
-}   }   }   }
-else if("pumper_id"==$xaxis) {
-    $workers= CS50::query("SELECT * FROM users WHERE pumper = 1 ORDER BY lastname");
-    foreach($jobs as $job) {
-        foreach($workers as $worker) {
-            if($job["pumper_id"]==$worker["id"]) {
-                array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
-                array_push($vols,$job["total_cem_vol"]);
-}   }   }   }
-else if("pump_id"==$xaxis) {
-    $workers= CS50::query("SELECT * FROM pumps");
-    foreach($jobs as $job) {
-        foreach($workers as $worker) {
-            if($job["pump_id"]==$worker["id"]) {
-                array_push($xdata, $worker["pump"]);
-                array_push($vols,$job["total_cem_vol"]);
-}   }   }   }
-else if("job_type"==$xaxis)
-{
-    foreach($jobs as $job) {
-        array_push($xdata, $job["job_type"]);
-        array_push($vols,$job["total_cem_vol"]);
-}   }   
-else if("well"==$xaxis) {
-    foreach($jobs as $job) {
-        array_push($xdata, $job["customer"]." ".$job["well_name"]." ".$job["well_number"]);
-        array_push($vols,$job["total_cem_vol"]);
-}   }   
-else if("job"==$xaxis) {
-    foreach($jobs as $job) {
-        array_push($xdata, $job["well_name"]." ".$job["well_number"]." ".$job["job_type"]);
-        array_push($vols,$job["total_cem_vol"]);
-}   }
-else if("date"==$xaxis) {
-    foreach($jobs as $job) {
-        array_push($xdata, $job["job_date"]);
-        array_push($vols,$job["total_cem_vol"]);
-}   }
-else if("geo"==$xaxis) {
-    if(isset($geo_cat)) {
-        if("hemisphere"==$geo_cat) {
+    if("supervisor_id"==$xaxis) {
+        $workers= CS50::query("SELECT * FROM users WHERE supervisor = 1 ORDER BY lastname");
+        foreach($jobs as $job) {
+            foreach($workers as $worker) {
+                if($job["supervisor_id"]==$worker["id"]) {
+                    array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
+                    array_push($vols,$job["total_cem_vol"]);
+    }   }   }   }
+    else if("pumper_id"==$xaxis) {
+        $workers= CS50::query("SELECT * FROM users WHERE pumper = 1 ORDER BY lastname");
+        foreach($jobs as $job) {
+            foreach($workers as $worker) {
+                if($job["pumper_id"]==$worker["id"]) {
+                    array_push($xdata, $worker["lastname"].", ".$worker["firstname"]);
+                    array_push($vols,$job["total_cem_vol"]);
+    }   }   }   }
+    else if("pump_id"==$xaxis) {
+        $workers= CS50::query("SELECT * FROM pumps");
+        foreach($jobs as $job) {
+            foreach($workers as $worker) {
+                if($job["pump_id"]==$worker["id"]) {
+                    array_push($xdata, $worker["pump"]);
+                    array_push($vols,$job["total_cem_vol"]);
+    }   }   }   }
+    else if("job_type"==$xaxis) {
+        foreach($jobs as $job) {
+            array_push($xdata, $job["job_type"]);
+            array_push($vols,$job["total_cem_vol"]);
+    }   }   
+    else if("slurry_function"==$xaxis) {
+        $functions=[];
+        $workers= CS50::query("SELECT * FROM slurries");
+        foreach($jobs as $job) {
+            foreach($workers as $worker) {
+                if($job["id"]==$worker["job_id"]) {
+                    array_push($xdata, $worker["function"]);
+                    array_push($vols,$worker["act_vol"]);
+                    array_push($functions,$worker["function"]);
+    }   }   }   }
+    else if("well"==$xaxis) {
+        foreach($jobs as $job) {
+            array_push($xdata, $job["customer"]." ".$job["well_name"]." ".$job["well_number"]);
+            array_push($vols,$job["total_cem_vol"]);
+    }   }   
+    else if("job"==$xaxis) {
+        foreach($jobs as $job) {
+            array_push($xdata, $job["well_name"]." ".$job["well_number"]." ".$job["job_type"]);
+            array_push($vols,$job["total_cem_vol"]);
+    }   }
+    else if("date"==$xaxis) {
+        foreach($jobs as $job) {
+            array_push($xdata, $job["job_date"]);
+            array_push($vols,$job["total_cem_vol"]);
+    }   }
+    else if("geo"==$xaxis) {
+        if(isset($geo_cat)) {
+            if("hemisphere"==$geo_cat) {
+                foreach($jobs as $job) {
+                    foreach($places as $place) {
+                        if($job["district"]==$place["district"]) {
+                            array_push($xdata, $place["region"]);
+                            array_push($vols,$job["total_cem_vol"]);
+            }   }   }   }
+            else if("region"==$geo_cat) {
+                foreach($jobs as $job) {
+                    foreach($places as $place) {
+                        if($job["district"]==$place["district"]) {
+                            array_push($xdata, $place["area"]);
+                            array_push($vols,$job["total_cem_vol"]);
+            }   }   }   }
+            else if("area"==$geo_cat) {
+                foreach($jobs as $job) {
+                    foreach($places as $place) {
+                        if($job["district"]==$place["district"]) {
+                            array_push($xdata, $place["district"]);
+                            array_push($vols,$job["total_cem_vol"]);
+            }   }   }   }
+            else if("district"==$geo_cat) {
+                foreach($jobs as $job) {
+                    foreach($places as $place) {
+                        if($job["district"]==$place["district"]) {
+                            array_push($xdata, $place["district"]);
+                            array_push($vols,$job["total_cem_vol"]);
+        }   }   }   }   }
+        else {
             foreach($jobs as $job) {
                 foreach($places as $place) {
                     if($job["district"]==$place["district"]) {
-                        array_push($xdata, $place["region"]);
-                        array_push($vols,$job["total_cem_vol"]);
-        }   }   }   }
-        else if("region"==$geo_cat) {
-            foreach($jobs as $job) {
-                foreach($places as $place) {
-                    if($job["district"]==$place["district"]) {
-                        array_push($xdata, $place["area"]);
-                        array_push($vols,$job["total_cem_vol"]);
-        }   }   }   }
-        else if("area"==$geo_cat) {
-            foreach($jobs as $job) {
-                foreach($places as $place) {
-                    if($job["district"]==$place["district"]) {
-                        array_push($xdata, $place["district"]);
-                        array_push($vols,$job["total_cem_vol"]);
-        }   }   }   }
-        else if("district"==$geo_cat) {
-            foreach($jobs as $job) {
-                foreach($places as $place) {
-                    if($job["district"]==$place["district"]) {
-                        array_push($xdata, $place["district"]);
+                        array_push($xdata, $place["hemisphere"]);
                         array_push($vols,$job["total_cem_vol"]);
     }   }   }   }   }
-    else {
-        foreach($jobs as $job) {
-            foreach($places as $place) {
-                if($job["district"]==$place["district"]) {
-                    array_push($xdata, $place["hemisphere"]);
-                    array_push($vols,$job["total_cem_vol"]);
-}   }   }   }   }
 
-if("density"==$yaxis) {
-    foreach($jobs as $job) {
-        array_push($ydata, $job["dens_accur"]);
-}   }   
-else if("shutdowns"==$yaxis) {
-    foreach($jobs as $job) {
-        array_push($ydata, $job["shutdowns"]);
-}   }   
-else if("cem_vol_var"==$yaxis) {
-    foreach($jobs as $job) {
-        array_push($ydata, $job["cem_vol_variance"]);
-}   }       
-else if("slurry_swap_time"==$yaxis) {
-    foreach($jobs as $job) {
-        array_push($ydata, $job["slurry_swap_time"]);
-}   }
-else if("plug_shutdown_time"==$yaxis) {
-    foreach($jobs as $job) {
-        array_push($ydata, $job["plug_shutdown_time"]);
-}   }       
-else if("jobs"==$yaxis) {
-    foreach($jobs as $job) {
-        array_push($ydata, 1);
-}   }       
-else if("disp_vol_var"==$yaxis) {
-    foreach($jobs as $job) {
-        $variance=abs($job["calculated_disp"]-$job["act_disp_vol"])/$job["calculated_disp"];
-        array_push($ydata, $variance);
-}   }
-
+    if("slurry_function"!=$xaxis) {
+        if("density"==$yaxis) {
+            foreach($jobs as $job) {
+                array_push($ydata, $job["dens_accur"]);
+        }   }   
+        else if("shutdowns"==$yaxis) {
+            foreach($jobs as $job) {
+                array_push($ydata, $job["shutdowns"]);
+        }   }   
+        else if("cem_vol_var"==$yaxis) {
+            foreach($jobs as $job) {
+                array_push($ydata, $job["cem_vol_variance"]);
+        }   }       
+        else if("slurry_swap_time"==$yaxis) {
+            foreach($jobs as $job) {
+                array_push($ydata, $job["slurry_swap_time"]);
+        }   }
+        else if("plug_shutdown_time"==$yaxis)   {
+            foreach($jobs as $job) {
+                array_push($ydata, $job["plug_shutdown_time"]);
+        }   }       
+        else if("jobs"==$yaxis) {
+            foreach($jobs as $job) {
+                array_push($ydata, 1);
+        }   }       
+        else if("disp_vol_var"==$yaxis) {
+            foreach($jobs as $job) {
+                $variance=abs($job["calculated_disp"]-$job["act_disp_vol"])/$job["calculated_disp"];
+                array_push($ydata, $variance);
+    }   }   }
+    else if ("slurry_function"==$xaxis) {
+        if("density"==$yaxis) {
+            foreach($jobs as $job) {
+                foreach($workers as $worker) {
+                    if($job["id"]==$worker["job_id"]) {
+                        array_push($ydata, $worker["dens_acc"]);
+                    }
+                }
+            }    
+    }   }   
 }
 
 
@@ -300,7 +328,7 @@ if("date"==$xaxis)
    }
 }
 
-if ("date"==$xaxis||"pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
+if ("date"==$xaxis||"slurry_function"==$xaxis||"pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
 {
    $matches=[];
    $ii=1;

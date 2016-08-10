@@ -7,10 +7,6 @@
     </ul>
 </div>
 <div class = "container-fluid" id="futura">
-<?php
-//var_dump($_POST);
-?>
-
 
 <div class= "col-xs-12 text-center">
     <div class="row" id="futura">

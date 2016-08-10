@@ -60,11 +60,16 @@ $(document).ready(function () {
         });
     });
 });
-
 $(document).ready(function () { 
+    $("#scrollable-dropdown-menu2").css("visibility", "hidden");
     $("#geography").change(function(event){
-        $("#scrollable-dropdown-menu2").removeAttr("hidden");
+        $("#scrollable-dropdown-menu2").css("visibility", "visible");
         var filter1 = $("#geo_choice").val();
+        if ('0'==filter1)
+        {
+            $("#scrollable-dropdown-menu2").css("visibility", "hidden");
+        }
+        
         var parameters ={geo: filter1};
         $.getJSON("geo_search.php", parameters)
         .success(function(data, textStatus, jqXHR)
@@ -80,8 +85,6 @@ $(document).ready(function () {
         });
     });
 });
-
-
 
 $(document).ready(function () {
                 $('#datetimepicker1').datetimepicker({

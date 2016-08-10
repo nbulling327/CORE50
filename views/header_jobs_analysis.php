@@ -34,7 +34,7 @@ CORE
             <!-- https://www.gstatic.com/charts/loader.js -->
                 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <!-- website's own js -->
-                <script src="/js/analysis_scripts.js"></script>
+                <script src="/js/analysis_script.js"></script>
                 <script src="/js/google_jobs_analysis.js"></script>
 
         <link rel="icon" href="/images/favicon.ico?" type="image/x-icon">

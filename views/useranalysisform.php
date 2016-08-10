@@ -17,7 +17,6 @@
                         <select  name="chart_type" class="selectpicker" data-size="12">
                             <option value="line">Line Chart</option>
                             <option value="bar">Bar Chart</option>
-                            <option value="pie">Pie Chart</option>
                         </select>
                     </div>
                 </div>
