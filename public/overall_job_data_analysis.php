@@ -22,6 +22,11 @@ else {
 $start_date = date("Y-m-d", strtotime($start));
 $end_date = date("Y-m-d", strtotime($finish));
 
+if($end_date<date("Y-m-d", strtotime("01/01/1995")))
+{
+    $end_date=date("Y-m-d", strtotime("12/31/2050"));
+}
+
 // numerically indexed array of places
 $geo_cat = $_GET["geo_cat"];
 $geo = $_GET["geo"];
@@ -52,21 +57,22 @@ if(count($places)==count($all_places)) {
 else {
     $not_included="true";
 }
-
 if((strlen($customer)>0)&&(strlen($not_included)>0)) {
-    echo("actually entered here");
-    foreach($districts_included as $district_include) {
+    $jobs=[];
+    for($i=0;$i<count($districts_included);$i++) {
         if(isset($start_date)) {
             if(isset($end_date)) {
-                $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? AND district=? AND job_date>=$start_date AND job_date<=$end_date ORDER BY job_date",$customer,$district_include);        
-                echo "1";
+                $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND district='$districts_included[$i]' AND job_date>='$start_date' AND job_date<='$end_date' ORDER BY job_date");        
+                foreach ($holders as $holder) {
+                    array_push($jobs,$holder);
+                }
                 
             }
             else {
-                $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? AND district=? AND job_date>=$start_date ORDER BY job_date", $customer,$district_include);
-                echo "2";
-                
-        }   }
+                $holders = CS50::query("SELECT * FROM jobs WHERE customer='$customer' AND complete = 1 AND district='$districts_included[$i]' AND job_date>='$start_date' ORDER BY job_date");        
+                foreach ($holders as $holder) {
+                    array_push($jobs,$holder);
+        }   }   }
         else {
             $jobs = CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer=? AND district=? ORDER BY job_date",$customer,$district_include);
             echo "3";
@@ -287,15 +293,16 @@ if("date"==$xaxis)
                 {
                     $new_spot=$matches[$zz];
                     $ydata[$new_spot]=$total_y/$total_weight;
+                    
                 }
             }
         }    
    }
 }
-else if ("pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
+
+if ("date"==$xaxis||"pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
 {
    $matches=[];
-   
    $ii=1;
    for($i=0;$i<count($xdata);$i++)
    {
@@ -355,13 +362,31 @@ else if ("pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_t
             }
         }
     }
-    $xdata=$x_sort;
-    $ydata=$y_sort;
+    $xdata=[];
+    $ydata=[];
+    for($n=0;$n<count($y_sort);$n++)
+    {
+        if($n==0)
+        {
+            array_push($xdata,$x_sort[$n]);
+            array_push($ydata,$y_sort[$n]);
+        }
+        else if("date"==$xaxis&&strcmp(substr($x_sort[$n],0,7),substr($x_sort[$n-1],0,7))!=0)
+        {
+            array_push($xdata,$x_sort[$n]);
+            array_push($ydata,$y_sort[$n]);
+        }
+        else if ("date"!=$xaxis)
+        {
+            array_push($xdata,$x_sort[$n]);
+            array_push($ydata,$y_sort[$n]);
+        }
+    }
+    
 }
 
 $plot_data=[];
 $counter=0;
-
 if (count($xdata)==count($ydata))
 {
     foreach($xdata as $xdatum)

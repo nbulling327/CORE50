@@ -1,4 +1,4 @@
-google.charts.load('current', {packages: ['line','corechart']});
+google.charts.load('current', {packages: ['bar','line','corechart']});
 google.charts.setOnLoadCallback(drawChart);
             
 function drawChart(){
@@ -108,10 +108,19 @@ function drawChart(){
                 xaxis: x_name, yaxis: y_name, series: series_data};
         var chartDiv = document.getElementById('chart_div');
         var x1=[];
-        var x2=[];
         var month;
         var year;
-        var add_date;
+        var user_title =y_info[0];
+        user_title+=" by ";
+        user_title+=x_info[1];
+        console.log(company_name);
+        if(company_name==("blank"))
+        {}
+        else
+        {
+        user_title+=" for ";
+        user_title+=company_name;
+        }
         
         //console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
@@ -165,9 +174,6 @@ function drawChart(){
                     month+=year;
                     
                     x1.push(month);
-                    
-                    x2.push(new Date([parseFloat(data[i]["xdata"].slice(0,4)),parseFloat(data[i]["xdata"].slice(5,7))]));
-
                 }    
             }
             else
@@ -186,16 +192,26 @@ function drawChart(){
                 y1.push([x1[i],parseFloat(data[i]["ydata"])]);
             }
         
+            if("well"==x_name)
+            {
+                var sizefont = '7';
+            }
+            else
+            {
+                var sizefont = '<global-font-size>';
+            }
+            
+            console.log(sizefont);
             var materialOptions = {
                     
-                title: 'Customized Analysis',
+                title: user_title,
                 titleTextStyle: { fontName: 'futura'
                     
                 },
                 colors:['#B00404'],
                 hAxis:{
                     title: x_info[1],
-                    titleTextStyle:{bold: true, fontName: 'futura', italic: false},
+                    titleTextStyle:{bold: true, fontName: 'futura', italic: false,fontSize:sizefont},
                     slantedText: false,
                     maxTextlines: 5,
                     showTextEvery: 1,
@@ -203,8 +219,9 @@ function drawChart(){
                 },
                 backgroundColor:{
                     stroke: '#000',
-                    strokeWidth: 1
+                    strokeWidth: 0
                 },
+                
                 legend:
                 {
                   position: 'top'  
@@ -213,7 +230,7 @@ function drawChart(){
                     title: y_info[0],
                     titleTextStyle:{bold: true, fontName: 'futura',italic: false},
                 },
-                bar: { groupWidth: "200%" },    
+                
                 width: 900,
                 height: 450,
                 series: {
@@ -221,7 +238,7 @@ function drawChart(){
                 },
                
             };
-            
+            console.log(materialOptions);
             var table = new google.visualization.DataTable();
             table.addColumn(x_info[0],x_info[1]);
             
@@ -230,8 +247,8 @@ function drawChart(){
         
             
             function drawColumnChart(){
-                var columnChart = new google.visualization.ColumnChart(chartDiv);
-                columnChart.draw(table, materialOptions);
+                var columnChart = new google.charts.Bar(chartDiv);
+                columnChart.draw(table, google.charts.Bar.convertOptions(materialOptions));
                 }
             
             function drawMaterialChart() {
