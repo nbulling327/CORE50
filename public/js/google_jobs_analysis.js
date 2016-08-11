@@ -96,7 +96,77 @@ function drawChart(){
                 y_info=['Density Accuracy','Density Accuracy'];
             }
         }
-    
+        //get axis name and series name
+        else if('shutdowns'==y_name)
+        {
+            
+            if(geo_picked!="blank")
+            {
+                y_info=['Unplanned Shutdowns per Job',geo_picked];    
+            }
+            else
+            {
+                y_info=['Unplanned Shutdowns per Job','Unplanned Shutdowns per Job'];
+            }
+        }
+        else if('cem_vol_var'==y_name)
+        {
+            
+            if(geo_picked!="blank")
+            {
+                y_info=['Cement Volume Variance',geo_picked];    
+            }
+            else
+            {
+                y_info=['Cement Volume Variance','Cement Volume Variance'];
+            }
+        }
+        else if('disp_vol_var'==y_name)
+        {
+            if(geo_picked!="blank")
+            {
+                y_info=['Displacement Volume Variance',geo_picked];    
+            }
+            else
+            {
+                y_info=['Displacement Volume Variance','Displacement Volume Variance'];
+            }
+        }
+        else if('plug_shutdown_time'==y_name)
+        {
+            
+            if(geo_picked!="blank")
+            {
+                y_info=['Time down before Displacement',geo_picked];    
+            }
+            else
+            {
+                y_info=['Time down before Displacement','Top Plug Shutdown Time'];
+            }
+        }
+        else if('jobs'==y_name)
+        {
+            if(geo_picked!="blank")
+            {
+                y_info=['Number of Jobs',geo_picked];    
+            }
+            else
+            {
+                y_info=['Number of Jobs','Number of Jobs'];
+            }
+        }
+        else if('slurry_swap_time'==y_name)
+        {
+            if(geo_picked!="blank")
+            {
+                y_info=['Average Slurry Swap Time',geo_picked];    
+            }
+            else
+            {
+                y_info=['Average Slurry Swap Time','Average Slurry Swap Time'];
+            }
+        }
+        
         var div8 = document.getElementById("dom-target-series");
         var series_data = div8.textContent.trim();
         if (empty.length==series_data.length)
@@ -114,14 +184,12 @@ function drawChart(){
         var user_title =y_info[0];
         user_title+=" by ";
         user_title+=x_info[1];
-        console.log(company_name);
-        if(company_name==("blank"))
-        {}
+        if(company_name==("blank")) {}
         else
-        {
-        user_title+=" for ";
-        user_title+=company_name;
-        }
+            {
+            user_title+=" for ";
+            user_title+=company_name;
+            }
         
         //console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
@@ -229,7 +297,6 @@ function drawChart(){
                 },
                
             };
-            console.log(materialOptions);
             var table = new google.visualization.DataTable();
             table.addColumn(x_info[0],x_info[1]);
             
@@ -245,15 +312,13 @@ function drawChart(){
             function drawMaterialChart() {
                 var materialChart = new google.visualization.LineChart(chartDiv);
                 materialChart.draw(table, materialOptions);
-                }
-            console.log(table);
-            if("line"==chart_type)
-            {
-            drawMaterialChart();    
             }
-            else if("bar"==chart_type)
-            {
-            drawColumnChart();    
+            
+            if("line"==chart_type) {
+                drawMaterialChart();    
+            }
+            else if("bar"==chart_type) {
+                drawColumnChart();    
             }
         });
     });

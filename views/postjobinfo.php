@@ -98,7 +98,7 @@
                 <div class="col-xs-10 col-xs-offset-2">
                 <br/>
                     <span class="pull-left">
-                        <a href="#" class="btn my-btn" role="button">Add Field Employee</a>
+                        <a href="#" class="btn my-btn" role="button">Add Supervisor / Pump Operator</a>
                     </span>
                 </div>
             </div>

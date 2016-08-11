@@ -21,7 +21,7 @@
             ?>
         </select>
     </div>
-    <div class="col-xs-3 col-xs-offset-1 text-left">
+    <div class="col-xs-2 col-xs-offset-1 text-left">
         <select  name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">
             <?php 
                 foreach ($options as $option) 
@@ -32,7 +32,7 @@
             ?>
         </select>
     </div>
-    <div class="col-xs-3">
+    <div class="col-xs-2">
         <span class="pull-left">
             <a href="newcompany.php" class="btn my-btn col-xs-offset-1" role="button">Add New Company</a>
         </span>
