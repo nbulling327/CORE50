@@ -1164,5 +1164,5 @@ foreach ($units as $unit)
     }    
 }
 
-render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs,"pumps"=>$pumps,"slurries"=>$slurries,"users"=>$users]);
+render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","displacement_shutdowns"=>$displacement_shutdowns,"jobs"=>$jobs,"pumps"=>$pumps,"slurries"=>$slurries,"users"=>$users]);
 ?>

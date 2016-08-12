@@ -14,11 +14,12 @@ CORE
                 <link href="/css/bootstrap.min.css" rel="stylesheet"/>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
                 <link href="/css/bootstrap-select.min.css" rel="stylesheet"/>
-            <!-- https://eonasdan.github.io/bootstrap-datetimepicker/ -->
+            <!-- https://eonasdan.github.io/bootstrap-datetimepicker/-->
                 <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+            <!-- https://datatables.net/-->
+                <link href="/css/datatables.min.css" rel="stylesheet"/>
             <!-- website's own css -->
                 <link rel="stylesheet" href="/css/styles.css">
-        
         <!-- Active JS Files -->
             <!-- https://jquery.com/ -->
                 <script src="/js/jquery-1.11.3.min.js"></script>
@@ -26,8 +27,10 @@ CORE
                 <script type="text/javascript" src="/js/flot-0.8.2.min.excanvas.js"></script>
                 <script type="text/javascript" src="/js/flot-0.8.2.min.js"></script>
                 <script type="text/javascript" src="/js/flot.time.js"></script>
-                <script type="text/javascript" src="/js/flot.selection.js"></script>
                 <script src="/js/flot.axislabels.js"></script>
+                <script language="javascript" type="text/javascript" src="/js/flot.selection.js"></script>
+            <!-- https://datatables.net/-->
+                <script src="/js/jquery.datatables.min.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
                 <script src="/js/typeahead.bundle.min.js"></script>
             <!-- http://silviomoreto.github.io/bootstrap-select/ -->
@@ -39,19 +42,15 @@ CORE
             <!--https://eonasdan.github.io/bootstrap-datetimepicker/-->
                 <script src="/js/bootstrap-datetimepicker.min.js"></script>
             <!-- website's own js -->
-            
                 <script src="/js/scripts.js"></script>
-                <script src="/js/flot_jobupload.js"></script>
-        
-        
-        <link rel="icon" href="/images/favicon.ico?" type="image/x-icon">
+                <script src="/js/datatable.js"></script>
+            
+        <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>
             <title>CORE: <?= htmlspecialchars($title) ?></title>
         <?php else: ?>
             <title>CORE</title>
         <?php endif ?>    
-    
-        
     
     </head>    
     <body>

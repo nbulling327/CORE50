@@ -190,12 +190,12 @@ function drawChart(){
             user_title+=" for ";
             user_title+=company_name;
             }
-        
+        console.log(parameters);
         //console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
         .done(function(data, textStatus, jqXHR)
         {
-            
+            console.log("In java!");    
             if("date"==x_name)
             {
                 for (var i = 0; i<data.length; i++)

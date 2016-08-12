@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
         $users[0]["lastname"]=$people["lastname"];
     }
 
-    render("header.php","jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
+    render("header_review.php","jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST")
 {

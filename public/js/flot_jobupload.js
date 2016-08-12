@@ -16,7 +16,6 @@ $(document).ready(function () {
         var density=[];
         var optionsOverview;
         var overview;
-        console.log(pressure);
         for (var i = 0; i<data.length-1; i++)
         {
             pressure.push([parseFloat(data[i]["time"]),parseFloat(data[i]["pressure"])]);
