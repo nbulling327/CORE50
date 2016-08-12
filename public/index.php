@@ -1,52 +1,85 @@
-<!--
-Created by Nick Bullington
-A method of tracking on-location cement job results for improvement.
-
-CORE
--->
-
 <?php
-    // configuration
-    require("../includes/config.php"); 
 
-    $rows= CS50::query("SELECT * FROM companies ORDER BY company");
+// configuration
+require("../includes/config.php"); 
+// if user reached page via GET (as by clicking a link or via redirect)
+if ($_SERVER["REQUEST_METHOD"] == "GET")
+{
+    
+    $rows= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date DESC");
+    $geos=CS50::query("SELECT * FROM places");
+    $pumps=CS50::query("SELECT * FROM pumps");
+    $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
+  
+    $places=[];
+    $jobs=[];
+    $users=[];
+  
+    $size=sizeof($rows);
+    $all_places=sizeof($geos);
+    $prev_comp="";
+    
+    $comps= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY customer");
         $options = [];
-        foreach ($rows as $row)
+        foreach ($comps as $comp)
         {
+            if(strcmp($prev_comp, $comp["customer"])!=0)
             $options[] = [
-            "company_option" => $row["company"],
+            "company_option" => $comp["customer"],
             ];
+            $prev_comp=$comp["customer"];
         }
-    $rows= CS50::query("SELECT * FROM jobtypes ORDER BY type");
-        $jobs = [];
-        foreach ($rows as $row)
+    
+
+
+    foreach ($geos as $geo)
+    {
+        $places[]=[
+            "district"=>$geo["district"],
+            "area"=>$geo["area"],
+            "region"=>$geo["region"]
+            ];
+    }
+
+    foreach ($rows as $row)
+    {
+        for($i=0;$i<$all_places;$i++)
         {
-            $primsec = "secondary";
-            if($row["primary"]==1)
+            if($row["district"]==$places[$i]["district"])
             {
-                $primsec = "primary";
+                $area=$places[$i]["area"];
+                $region=$places[$i]["region"];
             }
-            $jobs[] = [
-            "jobtype" => $row["type"],
-            "primsec" => $primsec
-            ];
         }
-    $rows= CS50::query("SELECT * FROM places ORDER BY district");
-        $districts = [];
-        foreach ($rows as $row)
-        {
-            $districts[] = [
-            "district" => $row["district"],
+        $jobs[]= [
+            "id"=>$row["id"],
+            "date"=> $row["job_date"],
+            "district"=> $row["district"],
+            "area"=>$area,
+            "region"=>$region,
+            "customer"=> $row["customer"],
+            "job_type"=> $row["job_type"],
+            "well"=> $row["well_name"]." ".$row["well_number"],
+            "dens_acc"=>$row["dens_accur"]
             ];
-        }
-    $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
-        $users = [];
-        foreach ($rows as $row)
-        {
-            $users[] = [
-            "firstname" => $row["firstname"],
-            "lastname" => $row["lastname"],
-            ];
-        }
-        render("header.php","data.php",["title" => "Proposal Info","options"=>$options,"jobs"=>$jobs,"districts"=>$districts,"users"=>$users]);
-?>
+    }
+
+    foreach ($peoples as $people)
+    {
+        $users[0]["firstname"]=$people["firstname"];
+        $users[0]["lastname"]=$people["lastname"];
+        $userdistrict=$people["district"];
+    }
+    
+$_POST["chart_type"] = "bar";
+$_POST["geo_filter"] = "district";
+$_POST["filter1"] = $userdistrict;
+$_POST["xaxis"] = "date";
+$_POST["yaxis"] = "density";
+$_POST["begin_date"]="";
+$_POST["end_date"]="";
+$_POST["chosen_company"]="";
+$_POST["series"]="";
+
+    render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+} 

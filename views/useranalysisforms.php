@@ -1,4 +1,4 @@
-<?php //var_dump($_POST); ?>
+<?php var_dump($_POST); ?>
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
         <li><a href="/proposal.php">Input Proposal Information</a></li>

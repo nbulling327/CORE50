@@ -137,11 +137,11 @@ function drawChart(){
             
             if(geo_picked!="blank")
             {
-                y_info=['Time down before Displacement',geo_picked];    
+                y_info=['Time down before Displacement (min)',geo_picked];    
             }
             else
             {
-                y_info=['Time down before Displacement','Top Plug Shutdown Time'];
+                y_info=['Time down before Displacement (min)','Top Plug Shutdown Time'];
             }
         }
         else if('jobs'==y_name)
@@ -190,12 +190,9 @@ function drawChart(){
             user_title+=" for ";
             user_title+=company_name;
             }
-        console.log(parameters);
-        //console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
         .done(function(data, textStatus, jqXHR)
         {
-            console.log("In java!");    
             if("date"==x_name)
             {
                 for (var i = 0; i<data.length; i++)
@@ -308,6 +305,11 @@ function drawChart(){
                 var columnChart = new google.charts.Bar(chartDiv);
                 columnChart.draw(table, google.charts.Bar.convertOptions(materialOptions));
                 }
+                
+            function drawOriginalColumnChart() {
+                var originalchart = new google.visualization.ColumnChart(chartDiv);
+                originalchart.draw(table, materialOptions);
+            }
             
             function drawMaterialChart() {
                 var materialChart = new google.visualization.LineChart(chartDiv);
@@ -318,7 +320,7 @@ function drawChart(){
                 drawMaterialChart();    
             }
             else if("bar"==chart_type) {
-                drawColumnChart();    
+                drawOriginalColumnChart();    
             }
         });
     });

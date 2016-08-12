@@ -44,7 +44,7 @@ CORE
             <!-- website's own js -->
                 <script src="/js/scripts.js"></script>
             
-        <link rel="icon" href="/img/favicon.ico?" type="image/x-icon">
+        <link rel="icon" href="/images/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>
             <title>CORE: <?= htmlspecialchars($title) ?></title>
         <?php else: ?>

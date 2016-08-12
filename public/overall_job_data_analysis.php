@@ -275,10 +275,9 @@ if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pum
         }   }       
         else if("slurry_swap_time"==$yaxis) {
             foreach($jobs as $job) {
-                if($job["slurries"]-$job["stages"]>0) {
+                if($job["slurries"]-$job["stage_count"]>0) {
                     array_push($ydata, $job["slurry_swap_time"]);    
                 }
-                
         }   }
         else if("plug_shutdown_time"==$yaxis)   {
             foreach($jobs as $job) {
@@ -384,9 +383,9 @@ if ("date"==$xaxis||"slurry_function"==$xaxis||"pumper_id"==$xaxis||"supervisor_
                     
                 }
                 else {
+                    
                     $y_holder[$jj-1]=$y_holder[$jj-1]+$ydata[$k]*$vols[$k];
                     $vol_holder[$jj-1]=$vol_holder[$jj-1]+$vols[$k];
-            
                 }    
             }
         } 

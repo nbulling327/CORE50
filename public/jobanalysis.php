@@ -5,6 +5,7 @@ require("../includes/config.php");
 // if user reached page via GET (as by clicking a link or via redirect)
 if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
+    
     $rows= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date DESC");
     $geos=CS50::query("SELECT * FROM places");
     $pumps=CS50::query("SELECT * FROM pumps");
@@ -67,10 +68,21 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
     {
         $users[0]["firstname"]=$people["firstname"];
         $users[0]["lastname"]=$people["lastname"];
+        $userdistrict=$people["district"];
     }
+    
+$_POST["chart_type"] = "bar";
+$_POST["geo_filter"] = "district";
+$_POST["filter1"] = $userdistrict;
+$_POST["xaxis"] = "date";
+$_POST["yaxis"] = "density";
+$_POST["begin_date"]="";
+$_POST["end_date"]="";
+$_POST["chosen_company"]="";
+$_POST["series"]="";
 
-    render("header.php","useranalysisform.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
-}
+    render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+}    
 else if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     

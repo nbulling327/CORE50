@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
-        <li><a href="/">Input Proposal Information</a></li>
+        <li><a href="/proposal.php">Input Proposal Information</a></li>
         <li><a href="/postjob.php">Input Post-Job Information</a></li>
         <li class="active"><a href="/jobdatabase.php">Job Review</a></li>
         <li><a href="/jobanalysis.php">Jobs Analysis</a></li>

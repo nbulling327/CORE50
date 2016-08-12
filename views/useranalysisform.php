@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
-        <li><a href="/">Input Proposal Information</a></li>
+        <li><a href="/proposal.php">Input Proposal Information</a></li>
         <li><a href="/postjob.php">Input Post-Job Information</a></li>
         <li><a href="/jobdatabase.php">Job Review</a></li>
         <li class="active"><a href="/jobanalysis.php">Jobs Analysis</a></li>
@@ -134,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xs-3 col-xs-offset-1 text-left">
+            <div class="col-xs-3 col-xs-offset-1 text-left" style="visibility: hidden;">
                 Series
                 <div class="row">
                     <div class="col-xs-3 text-left">
