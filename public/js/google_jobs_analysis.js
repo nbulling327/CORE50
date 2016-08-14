@@ -1,20 +1,50 @@
 google.charts.load('current', {packages: ['bar','line','corechart']});
 google.charts.setOnLoadCallback(drawChart);
-            
+  
 function progressBar(al){
     var bar = document.getElementById('progressBar');
     var status = document.getElementById('status');
     var message = document.getElementById('finalMessage');
-    if (al == 100){
-        status.innerHTML="100%";
-        bar.value=100;
-        message.innerHTML="Chart is loaded!";
-    }
-    else {
+    var chart = document.getElementById('chart_div');
+    var co = 0;
+    
+    if (al<79) {
         status.innerHTML = al +"%";
-        bar.value = al;
+        
         message.innerHTML="Chart is loading";
+        chart.style.display='none';
+        bar.style.display='inline';
+        status.style.display='inline';
+        message.style.display='inline';
     }
+    else if (79< al && al < 100){
+        message.innerHTML="Chart is loading";    
+        status.innerHTML=al+"%";
+        $('#progressBar').attr('aria-valuenow', al).css('width',al+'%');
+        
+        chart.style.display='none';
+        bar.style.display='inline';
+        status.style.display='inline';
+        message.style.display='inline';
+        al=al+2;
+        setTimeout('progressBar('+al+')', 300);
+    }
+    else if (al == 100) {
+        message.innerHTML="Chart is loaded!";
+        setTimeout('progressBar(101)', 300);
+        chart.style.display='inline';
+        bar.style.display='none';
+        status.style.display='none';
+        message.style.display='none'; 
+    }
+    else if (al > 100) {
+        message.innerHTML="Chart is loaded!";
+        chart.style.display='inline';
+        bar.style.display='none';
+        status.style.display='none';
+        message.style.display='none'; 
+    }
+    
 }
 
 function drawChart(){
@@ -313,18 +343,14 @@ function drawChart(){
                 },
                
             };
-            progressBar(70);
+            progressBar(65);
             var table = new google.visualization.DataTable();
             table.addColumn(x_info[0],x_info[1]);
             
             table.addColumn('number',y_info[1]);
             table.addRows(y1);
         
-            progressBar(80);
-            function drawColumnChart(){
-                var columnChart = new google.charts.Bar(chartDiv);
-                columnChart.draw(table, google.charts.Bar.convertOptions(materialOptions));
-                }
+            progressBar(70);
                 
             function drawOriginalColumnChart() {
                 var originalchart = new google.visualization.ColumnChart(chartDiv);
@@ -335,16 +361,18 @@ function drawChart(){
                 var materialChart = new google.visualization.LineChart(chartDiv);
                 materialChart.draw(table, materialOptions);
             }
-            progressBar(90);
+            progressBar(75);
             if("line"==chart_type) {
                 drawMaterialChart();    
             
-                progressBar(100);
+            progressBar(80);
+                
             }
             else if("bar"==chart_type) {
                 drawOriginalColumnChart();    
             
-                progressBar(100);
+            progressBar(80);
+                
             }
             
             

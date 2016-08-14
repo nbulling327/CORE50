@@ -12,9 +12,15 @@
 <div class= "col-xs-7">
     <div class="row" id="futura">
         <div id="chart_div" style="width:840px;height:420px"></div>
-        <progress id="progressBar" value ="0" max="100" style="width: 300px"></progress>
+        <br/><br/><br/>
+        <div class = "progress center-block" style="width: 300px;" >
+            <div id="progressBar" class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+        </div>    
+        <br/>
         <span id="status"></span>
+        <br/>
         <h1 id="finalMessage"></h1>
+    
     </div>
     
 
