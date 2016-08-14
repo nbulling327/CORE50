@@ -12,6 +12,9 @@
 <div class= "col-xs-7">
     <div class="row" id="futura">
         <div id="chart_div" style="width:840px;height:420px"></div>
+        <progress id="progressBar" value ="0" max="100" style="width: 300px"></progress>
+        <span id="status"></span>
+        <h1 id="finalMessage"></h1>
     </div>
     
 

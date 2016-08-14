@@ -1,5 +1,5 @@
 <?php
-
+    
     //configuration
     require("../includes/config.php");
     
@@ -25,13 +25,13 @@
             if($stage_count>1)
             {
                 $current_stage = 'slurry_'.$i.'_stage';
-                var_dump($current_stage);
-                
             }
             else
             {
-                $_POST["$current_stage"] = 1;
+                $current_stage='$current_stage';
+                $_POST[$current_stage] = 1;
             }
+            
             $current_type = 'type_'.$i;
             $current_dens = 'density_'.$i;
             $current_vol = 'designvolume_'.$i;
@@ -52,9 +52,20 @@
                 CS50::query("INSERT IGNORE INTO slurries (job_id, stage, function, density, des_vol, slurry_number) 
                 VALUES(?,?,?,?,?,?)", 
                 $_SESSION["job"], $_POST["$current_stage"],$_POST["$current_type"],$_POST["$current_dens"],$_POST["$current_vol"],$i);
+            
+                $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+                $users = [];
+                foreach ($rows as $row)
+                {
+                    $users[] = [
+                    "firstname" => $row["firstname"],
+                    "lastname" => $row["lastname"],
+                    ];
+                }
+                
             }
         }
         // redirect to portfolio
-        redirect("/");
+        render("header.php","proposal_complete.php",["title" => "Proposal Entry Complete","users"=>$users]);
     }
 ?>

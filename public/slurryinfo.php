@@ -80,9 +80,35 @@
                 
                 $rows = CS50::query("SELECT LAST_INSERT_ID() AS id");
                 $_SESSION["job"] = $rows[0]["id"];
-
+                
+                $rows= CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+                $users = [];
+                foreach ($rows as $row)
+                {
+                    $users[] = [
+                    "firstname" => $row["firstname"],
+                    "lastname" => $row["lastname"],
+                    ];
+                }
+                
+                $rows= CS50::query("SELECT * FROM jobs WHERE id =?", $_SESSION["job"]);
+                $options = [];
+                foreach ($rows as $row)
+                {
+                    $options[] = [
+                    "job_id" => $row["id"],
+                    "district" => $row["district"],
+                    "customer" => $row["customer"],
+                    "stage_count" => $row["stage_count"],
+                    "job_type" => $row["job_type"],
+                    "well_name" => $row["well_name"],
+                    "well_number" => $row["well_number"],
+                    "slurries" => $row["slurries"],
+                    ];
+                }
                 // redirect to portfolio
-                redirect("/slurryinfo.php");
+                render("header.php","slurryinfo_form.php",["title" => "Slurry Information","options"=>$options,"users"=>$users]);
+                
         }
     }
 ?>

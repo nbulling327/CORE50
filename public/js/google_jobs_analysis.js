@@ -1,6 +1,22 @@
 google.charts.load('current', {packages: ['bar','line','corechart']});
 google.charts.setOnLoadCallback(drawChart);
             
+function progressBar(al){
+    var bar = document.getElementById('progressBar');
+    var status = document.getElementById('status');
+    var message = document.getElementById('finalMessage');
+    if (al == 100){
+        status.innerHTML="100%";
+        bar.value=100;
+        message.innerHTML="Chart is loaded!";
+    }
+    else {
+        status.innerHTML = al +"%";
+        bar.value = al;
+        message.innerHTML="Chart is loading";
+    }
+}
+
 function drawChart(){
     $(document).ready(function () {
         
@@ -8,13 +24,13 @@ function drawChart(){
     
         var div0 = document.getElementById("dom-target-chart_type");
         var chart_type = div0.textContent.trim();
-    
+        progressBar(1);
         var div1 = document.getElementById("dom-target-begin_date");
         var begin = div1.textContent.trim();
     
         var div2 = document.getElementById("dom-target-end_date");
         var end = div2.textContent.trim();
-    
+        progressBar(4);
         var div3 = document.getElementById("dom-target-geo_filter");
         var geo_type = div3.textContent.trim();
         if (empty.length==geo_type.length)
@@ -22,6 +38,7 @@ function drawChart(){
             geo_type="blank";
         }
     
+        
         var div4 = document.getElementById("dom-target-filter1");
         var geo_picked = div4.textContent.trim();
         if (geo_picked.length >80 ) {
@@ -32,7 +49,7 @@ function drawChart(){
         {
             geo_picked="blank";
         }
-    
+        progressBar(7);
         var div5 = document.getElementById("dom-target-chosen_company");
         var company_name = div5.textContent.trim();
         if (empty.length==company_name.length)
@@ -42,7 +59,7 @@ function drawChart(){
     
         var div6 = document.getElementById("dom-target-xaxis");
         var x_name = div6.textContent.trim();
-        
+        progressBar(10);
         if("date"==x_name)
         {
             x_info=['string','Month'];
@@ -79,7 +96,7 @@ function drawChart(){
         {
             x_info==['number','Slurry Density'];
         }    
-    
+        progressBar(14);
         var div7 = document.getElementById("dom-target-yaxis");
         var y_name = div7.textContent.trim();
         
@@ -166,14 +183,14 @@ function drawChart(){
                 y_info=['Average Slurry Swap Time','Average Slurry Swap Time'];
             }
         }
-        
+        progressBar(20);
         var div8 = document.getElementById("dom-target-series");
         var series_data = div8.textContent.trim();
         if (empty.length==series_data.length)
         {
             series_data="blank";
         }
-    
+        progressBar(21);
         var parameters = {start: begin, finish: end, geo_cat: geo_type,
                 geo: geo_picked, customer: company_name,
                 xaxis: x_name, yaxis: y_name, series: series_data};
@@ -190,9 +207,11 @@ function drawChart(){
             user_title+=" for ";
             user_title+=company_name;
             }
+        progressBar(25);    
         $.getJSON("overall_job_data_analysis.php",parameters)
         .done(function(data, textStatus, jqXHR)
         {
+            progressBar(50);
             if("date"==x_name)
             {
                 for (var i = 0; i<data.length; i++)
@@ -250,7 +269,7 @@ function drawChart(){
                 }    
             }
             
-        
+            progressBar(60);
             var y1=[];
             
             for (var i = 0; i<data.length; i++)
@@ -294,13 +313,14 @@ function drawChart(){
                 },
                
             };
+            progressBar(70);
             var table = new google.visualization.DataTable();
             table.addColumn(x_info[0],x_info[1]);
             
             table.addColumn('number',y_info[1]);
             table.addRows(y1);
         
-            
+            progressBar(80);
             function drawColumnChart(){
                 var columnChart = new google.charts.Bar(chartDiv);
                 columnChart.draw(table, google.charts.Bar.convertOptions(materialOptions));
@@ -315,13 +335,19 @@ function drawChart(){
                 var materialChart = new google.visualization.LineChart(chartDiv);
                 materialChart.draw(table, materialOptions);
             }
-            
+            progressBar(90);
             if("line"==chart_type) {
                 drawMaterialChart();    
+            
+                progressBar(100);
             }
             else if("bar"==chart_type) {
                 drawOriginalColumnChart();    
+            
+                progressBar(100);
             }
+            
+            
         });
     });
 }
