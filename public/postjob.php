@@ -149,8 +149,7 @@
                 if('csv' != $info->getExtension())
                 {
                     apologize("File is not a csv.");
-                }
-                
+                }       
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                 if($check !== false)
                 {
@@ -246,9 +245,6 @@
                 }
                 render("header_jobupload.php","postjobcomplete_form.php",["title" => "Post Job Chart",
                     "users" =>$users,"jobs" =>$jobs,"slurries" =>$slurries]);
-                
-            
-            
         }
     }
 ?>

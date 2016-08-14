@@ -27,7 +27,6 @@ CORE
                 <script src="/js/flot-0.8.2.min.js"></script>
                 <script src="/js/flot.time.js"></script>
                 <script src="/js/flot.selection.js"></script>
-                <script src="/js/flot_jobanalysis.js"></script>
                 <script src="/js/flot.axislabels.js"></script>
             <!-- http://twitter.github.io/typeahead.js/ -->
                 <script src="/js/typeahead.bundle.min.js"></script>
@@ -41,6 +40,8 @@ CORE
                 <script src="/js/bootstrap-datetimepicker.min.js"></script>
             <!-- website's own js -->
                 <script src="/js/scripts.js"></script>
+                <script src="/js/flot_jobanalysis.js"></script>
+                
 
         <link rel="icon" href="/images/favicon.ico?" type="image/x-icon">
         <?php if (isset($title)): ?>

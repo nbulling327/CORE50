@@ -14,13 +14,12 @@
         <div id="chart_div" style="width:840px;height:420px"></div>
         <br/><br/><br/>
         <div class = "progress center-block" style="width: 300px;" >
-            <div id="progressBar" class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+            <div id="progressBar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
         </div>    
         <br/>
         <span id="status"></span>
         <br/>
         <h1 id="finalMessage"></h1>
-    
     </div>
     
 

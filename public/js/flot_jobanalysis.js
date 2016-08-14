@@ -1,3 +1,39 @@
+function progressBarupdate(al){
+    var bar = document.getElementById('progressBar');
+    var status = document.getElementById('progressBar');
+    var message = document.getElementById('finalMessage');
+    var chart = document.getElementById('chart_stuff');
+    var disappear = document.getElementById('disappear');
+    
+    if (al<100) {
+        $('#progressBar').attr('aria-valuenow', al).css('width',al+'%');
+        status.innerHTML = al +"%";
+        message.innerHTML="Chart is loading";
+        chart.style.display='none';
+        bar.style.display='inline';
+        status.style.display='inline';
+        message.style.display='inline';
+    }
+    else if (al == 100) {
+        message.innerHTML="Chart is loaded!";
+        $('#progressBar').attr('aria-valuenow', al).css('width',al+'%');
+        setTimeout('progressBarupdate(101)', 1000);
+        chart.style.display='inline';
+        bar.style.display='none';
+        status.style.display='none';
+        message.style.display='none';
+        disappear.style.display='none';
+        
+    }
+    else if (al > 100) {
+        message.innerHTML="Chart is loaded!";
+        chart.style.display='inline';
+        bar.style.display='none';
+        status.style.display='none';
+        message.style.display='none'; 
+    }
+}
+
 function showTooltip(x,y,contents){
     $('<div id="tooltip">)' + contents + '</div>').css({
         position: 'absolute', display:'none',top: y+5,left:x+5,
@@ -6,12 +42,13 @@ function showTooltip(x,y,contents){
 }
 
 $(document).ready(function () {
+    setTimeout(progressBarupdate(25),100)
     var div = document.getElementById("dom-target");
     var myData = div.textContent;
     $.getJSON("single_job_data_analysis.php",{job: myData})
         .done(function(data, textStatus, jqXHR)
         {
-            
+            setTimeout(progressBarupdate(40),100);
             var pressure=[];
             var rate=[];
             var density=[];
@@ -28,7 +65,7 @@ $(document).ready(function () {
                 target_dens.push([parseFloat(data[i]["time"]),parseFloat(data[i]["target_dens"])]);
                 shutdowns.push([parseFloat(data[i]["time"]),parseFloat(data[i]["shutdowns"])]);
             }
-            
+            setTimeout(progressBarupdate(50),100);
             var plotdata = [{data: pressure, label:"Pressure", lines:{show:true}, yaxis: 2,color: '#CE0000'},
                         {data: rate, label:"Rate", lines:{show:true}, yaxis: 3, color: '#0005FF'},    
                         {data: density, label:"Density", lines:{show:true},color: '#2C9222'},
@@ -99,7 +136,8 @@ $(document).ready(function () {
                         ],
                         grid:  {hoverable: true}};
                         
-                        
+                        setTimeout(progressBarupdate(75),200);
+                        setTimeout(progressBarupdate(100),100);
                         chart2 = $.plot("#flot-placeholder_analysis",plotdata,options);
     
 });});

@@ -26,23 +26,38 @@
             $pumper_name = $users[0]["pumper_first_name"] . " " . $users[0]["pumper_last_name"];
 ?>
 <div class = "container-fluid" id="futura">
-    <div class= "col-xs-8 text-left">
-        <div class="row" id="futura">
+    <div class= "col-xs-8">
+        
+        <div id="disappear" 
+            <br/>&nbsp;<br/>&nbsp;<br/>&nbsp;
+            <div class = "progress center-block" style="width: 380px;" >
+                
+                <div id="progressBar" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                </div>
+            <br/>
+            </div>    
+        </div>   
+        <h1 class="center-block" id="finalMessage">
+            <br/>
+        </h1>
+        <div id="chart_stuff" class="row" id="futura">
             <h3><?php echo $customer." ".$well_name." ".$well_number." ".$type." Chart Analysis"?></h3>
-            <div id="flot-placeholder_analysis" style="width:750px;height:380px"></div>
-        </div>
-        <br/>
-        <div class = "row">
-            <div class= "col-xs-4" id="futura">
-                Supervisor: <?php echo " ".$supervisor_name; ?>
+            <div id="flot-placeholder_analysis" style="width:800px;height:380px"></div>
+            <br/>
+            <div class = "row">
+                <div class= "text-left col-xs-4" id="futura">
+                    Supervisor: <?php echo " ".$supervisor_name; ?>
+                </div>
+                <div class= "text-left col-xs-4">
+                    Pump Operator: <?php echo " ".$pumper_name; ?>
+                </div>
+                <div class= "text-left col-xs-4">
+                    Pump: <?php echo " ".$pumps[0]["name"]; ?>
+                </div>
             </div>
-            <div class= "col-xs-4">
-                Pump Operator: <?php echo " ".$pumper_name; ?>
-            </div>
-            <div class= "col-xs-4">
-                Pump: <?php echo " ".$pumps[0]["name"]; ?>
-            </div>
-        </div>
+        </div>    
+        
+        
         <div class = "row">
             <div id="dom-target" style="display: none;">
                 <?php 
