@@ -84,7 +84,10 @@ CORE
                         <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="logout.php">Log Out</a></li>
-                            <li><a href="#">Update Password</a></li>
+                            <li><a href="password_update.php">Update Password</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="delete_proposals.php">Edit Pending Jobs</a></li>
+                            <li><a href="edit_complete_jobs.php">Edit Complete Jobs</a></li>
                         </ul>
                     </li>
                 </ul>
