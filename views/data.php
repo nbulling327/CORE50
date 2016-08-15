@@ -9,14 +9,43 @@
 <br/><br/>
 <form action="slurryinfo.php" method="post">
 <fieldset>
+<?php 
+if(isset($job_to_edit)) {
+    $a = $job_to_edit[0]["district"];
+    $b = $job_to_edit[0]["customer"];
+    $c = $job_to_edit[0]["job_type"];
+    $d = $job_to_edit[0]["stage_count"];
+    $e = $job_to_edit[0]["well_name"];
+    $f = $job_to_edit[0]["well_number"];
+    $g = $job_to_edit[0]["slurries"];
+            
+}
+else {
+    $a="abcdef";
+    $b="abcdef";
+    $c="abcdef";
+    $d="abcdef";
+    $e="abcdef";
+    $f="abcdef";
+    $g="abcdef";
+}
+
+
+
+?>
 <div class="row">
     <div class="col-xs-3 col-xs-offset-1 text-left">
-        <select  name="district" class="selectpicker" title="Select Job District.." data-size="8" data-live-search="true">
+        <select name="district" class="selectpicker" title="Select Job District.." data-size="8" data-live-search="true">
             <?php
                 foreach ($districts as $district) 
                 {
                     $district_list = $district["district"];
-                    echo '<option value="' . "$district_list" . '">' ."$district_list" . '</option>' ;
+                    if ($district_list == $a) {
+                        echo '<option value="' . "$district_list" . '" selected="selected">' ."$district_list" . '</option>' ;    
+                    }
+                    else {
+                        echo '<option value="' . "$district_list" . '">' ."$district_list" . '</option>' ;
+                    }    
                 }
             ?>
         </select>
@@ -27,7 +56,12 @@
                 foreach ($options as $option) 
                 {
                     $company_name=$option["company_option"];
-                    echo '<option value="' . "$company_name" . '">' ."$company_name" . '</option>' ;
+                    if ($company_name == $b) {
+                        echo '<option value="' . "$company_name" . '" selected="selected">' ."$company_name" . '</option>' ;    
+                    }
+                    else {
+                        echo '<option value="' . "$company_name" . '">' ."$company_name" . '</option>' ;
+                    }    
                 }
             ?>
         </select>
@@ -49,8 +83,13 @@
                     {
                         if($job["primsec"]=="primary")
                         {
-                        $type=$job["jobtype"];
-                        echo '<option value="' . "$type" . '">' ."$type" . '</option>' ;
+                            $type=$job["jobtype"];
+                            if ($type == $c) {
+                                echo '<option value="' . "$type" . '" selected="selected">' ."$type" . '</option>' ;    
+                            }
+                            else {
+                                echo '<option value="' . "$type" . '">' ."$type" . '</option>' ;
+                            }   
                         }
                     }
                 ?>
@@ -62,7 +101,12 @@
                         if($job["primsec"]=="secondary")
                         {
                             $type=$job["jobtype"];
-                            echo '<option value="' . "$type" . '">' ."$type" . '</option>' ;
+                            if ($type == $c) {
+                                echo '<option value="' . "$type" . '" selected="selected">' ."$type" . '</option>' ;    
+                            }
+                            else {
+                                echo '<option value="' . "$type" . '">' ."$type" . '</option>' ;
+                            }
                         }
                     }
                 ?>
@@ -74,9 +118,16 @@
         <div class="row">
             <div class="col-xs-3 text-left">
                 <select  name="stage_count" class="selectpicker" data-size="12">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                    <?php
+                        for ($z=1;$z<4;$z++) {
+                            if ($z == $d) {
+                                echo '<option value="' . "$z" . '" selected="selected">' ."$z" . '</option>' ;    
+                            }
+                            else {
+                                echo '<option value="' . "$z" . '">' ."$z" . '</option>' ;
+                            }
+                        }
+                    ?>
                 </select>
             </div>
         </div>
@@ -87,14 +138,36 @@
     <div class="col-xs-3 col-xs-offset-1 text-left"> Enter Well Name:
         <div class="row">
             <div id="prefetch_name" class="col-xs-5 text-left">
-                <input name="well" class="typeahead form-control" type="text" placeholder="Well Name">
+                <?php
+                    if ('abcdef' == $e) {
+                ?>
+                        <input name="well" class="typeahead form-control" type="text" placeholder="Well Name">
+                <?php
+                    }
+                    else {
+                ?>
+                        <input name="well" class="typeahead form-control" type="text" value=<?php echo $e; ?>>
+                <?php
+                    }
+                ?>
             </div>
         </div>
     </div>
     <div class="col-xs-3 col-xs-offset-1 text-left"> Enter Well Number:
         <div class="row">
             <div id="prefetch_number" class="col-xs-5 text-left">
-                <input name="number" class="typeahead form-control" type="text" placeholder="Well Number">
+                <?php
+                    if ('abcdef' == $f) {
+                ?>
+                        <input name="number" class="typeahead form-control" type="text" placeholder="Well Number">
+                <?php
+                    }
+                    else {
+                ?>
+                        <input name="number" class="typeahead form-control" type="text" value=<?php echo $f; ?>>
+                <?php
+                    }
+                ?>
             </div>
         </div>
     </div>
@@ -106,12 +179,16 @@
         <div class="row">
             <div class="col-xs-5 text-left">
                 <select  name="slurries" class="selectpicker" data-size="12">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
+                    <?php
+                        for ($z=1;$z<7;$z++) {
+                            if ($z == $g) {
+                                echo '<option value="' . "$z" . '" selected="selected">' ."$z" . '</option>' ;    
+                            }
+                            else {
+                                echo '<option value="' . "$z" . '">' ."$z" . '</option>' ;
+                            }
+                        }
+                    ?>
                 </select>
             </div>
         </div>

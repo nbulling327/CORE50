@@ -41,5 +41,6 @@
             "lastname" => $row["lastname"],
             ];
         }
+         
         render("header.php","data.php",["title" => "Proposal Info","options"=>$options,"jobs"=>$jobs,"districts"=>$districts,"users"=>$users]);
 ?>
