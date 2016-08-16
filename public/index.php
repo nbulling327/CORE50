@@ -89,7 +89,7 @@ else {
     $_POST["chosen_company"]=$users[0]["company"];
     $_POST["geo_filter"] = "0";
     $_POST["series"]="0";
-    render("header_jobs_analysis.php","customer_overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+    render("customer_header_jobs_analysis.php","customer_overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
 }
 
 } 
