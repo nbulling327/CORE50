@@ -69,19 +69,28 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
         $users[0]["firstname"]=$people["firstname"];
         $users[0]["lastname"]=$people["lastname"];
         $userdistrict=$people["district"];
+        $users[0]["company"] = $people["company"];
     }
     
 $_POST["chart_type"] = "bar";
-$_POST["geo_filter"] = "district";
-$_POST["filter1"] = $userdistrict;
 $_POST["xaxis"] = "date";
 $_POST["yaxis"] = "density";
 $_POST["begin_date"]="";
 $_POST["end_date"]="";
-$_POST["chosen_company"]="";
-$_POST["series"]="";
-
-    render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+    
+if (strcmp('Halliburton', $users[0]["company"])==0) {
+    $_POST["chosen_company"]="";
+    $_POST["geo_filter"] = "district";
+    $_POST["filter1"] = $userdistrict;
+    $_POST["series"]="";
+    render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);    
+}
+else {
+    $_POST["chosen_company"]=$users[0]["company"];
+    $_POST["geo_filter"] = "0";
+    $_POST["series"]="0";
+    render("header_jobs_analysis.php","customer_overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+}
 }    
 else if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
@@ -109,9 +118,6 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST")
             ];
             $prev_comp=$comp["customer"];
         }
-    
-
-
     foreach ($geos as $geo)
     {
         $places[]=[
@@ -148,9 +154,13 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $users[0]["firstname"]=$people["firstname"];
         $users[0]["lastname"]=$people["lastname"];
+        $users[0]["company"] = $people["company"];
     }
-
-    
-    render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+    if (strcmp('Halliburton', $users[0]["company"])==0) {
+        render("header_jobs_analysis.php","overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);    
+    }
+    else {
+        render("header_jobs_analysis.php","customer_overallanalysis.php",["title" => "Jobs Analytics","jobs"=>$jobs,"options"=>$options,"users"=>$users]);
+    }
 }    
 ?>

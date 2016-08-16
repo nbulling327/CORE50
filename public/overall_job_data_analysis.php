@@ -8,8 +8,10 @@ $finish = $_GET["finish"];
 $xaxis = $_GET["xaxis"];
 $yaxis = $_GET["yaxis"];
 
-if(0!=$_GET["series"]) {
-    $series = $_GET["series"];
+if(isset($_GET["series"])) {
+    if(0!=$_GET["series"]) {
+        $series = $_GET["series"];
+    }
 }
 
 if("blank"!=($_GET["customer"])) {

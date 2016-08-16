@@ -1,7 +1,5 @@
 <div class="container-fluid">
     <ul class="nav nav-tabs nav-justified">
-        <li><a href="/proposal.php">Input Proposal Information</a></li>
-        <li><a href="/postjob.php">Input Post-Job Information</a></li>
         <li><a href="/jobdatabase.php">Job Review</a></li>
         <li class="active"><a href="/jobanalysis.php">Jobs Analysis</a></li>
     </ul>
@@ -9,7 +7,6 @@
 <div class = "container-fluid" id="futura">
 
 <div class= "col-xs-7">
-
     <div class="row" id="futura">
         <div id="chart_div" style="width:840px;height:420px"></div>
         <br/><br/><br/>
@@ -23,6 +20,7 @@
     </div>
     
 
+            
     <div class = "row">
         <div id="dom-target-chart_type" style="display: none;">
 <?php 
@@ -62,6 +60,7 @@
         </div>
         <div id="dom-target-chosen_company" style="display: none;">
 <?php 
+            $company_name=$_POST["chosen_company"];
             $output = $_POST["chosen_company"]; //Again, do some operation, get the output.
             echo htmlspecialchars($output); /* You have to escape because the result
                                                will not be valid HTML otherwise. */
@@ -186,17 +185,13 @@
             </div>
             <div class="row">
                 <br/>
-                <div class = "col-xs-12 text-left">
+                <div class = "col-xs-12 text-left" hidden>
                     Filter By Customer
                     <div class="row">
                         <div class="col-xs-3 text-left">
-                            <select name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">                
+                            <select name="chosen_company" value=<?php echo $company_name; ?>>                
 <?php   
-                                foreach ($options as $option) 
-                                {
-                                    $company_name=$option["company_option"];
                                     echo '<option value="' . "$company_name" . '">' ."$company_name" . '</option>' ;
-                                }
 ?>
                             </select>
                         </div>

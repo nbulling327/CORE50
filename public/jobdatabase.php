@@ -5,7 +5,21 @@ require("../includes/config.php");
 // if user reached page via GET (as by clicking a link or via redirect)
 if ($_SERVER["REQUEST_METHOD"] == "GET")
 {
-    $rows= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date DESC");
+    $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
+    $users=[];
+    foreach ($peoples as $people)
+    {
+        $users[0]["firstname"]=$people["firstname"];
+        $users[0]["lastname"]=$people["lastname"];
+        $users[0]["company"] = $people["company"];
+    }
+    if (strcmp('Halliburton', $users[0]["company"])==0) {
+        $rows= CS50::query("SELECT * FROM jobs WHERE complete = 1 ORDER BY job_date DESC");
+    }
+    else {
+        $well_operator=$users[0]["company"];
+        $rows= CS50::query("SELECT * FROM jobs WHERE complete = 1 AND customer = ? ORDER BY job_date DESC",$well_operator);
+    }
     $jobs = [];
     $size=sizeof($rows);
     $geos=CS50::query("SELECT * FROM places");
@@ -42,16 +56,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
             "dens_acc"=>$row["dens_accur"]
             ];
     }
-
-    $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
-    $users=[];
-    foreach ($peoples as $people)
-    {
-        $users[0]["firstname"]=$people["firstname"];
-        $users[0]["lastname"]=$people["lastname"];
+    
+    if (strcmp('Halliburton', $users[0]["company"])==0) {
+        render("header_review.php","jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
     }
-
-    render("header_review.php","jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
+    else {
+        render("header_review.php","customer_jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
+    }
+    
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!isset($_POST["job"])) {
