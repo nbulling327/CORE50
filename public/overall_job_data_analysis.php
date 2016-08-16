@@ -39,7 +39,7 @@ $jobs=[];
 
 $all_places = CS50::query("SELECT * FROM places");
 
-if(isset($_GET["geo_cat"])&&isset($_GET["geo"]))
+if(isset($_GET["geo_cat"])&&isset($_GET["geo"])&&strcmp("blank",$_GET["geo"])!=0)
 {
     $geo_cat = $_GET["geo_cat"];
     $geo = $_GET["geo"];

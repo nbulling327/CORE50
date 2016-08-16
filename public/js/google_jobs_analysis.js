@@ -196,7 +196,6 @@ function drawChart(){
             user_title+=company_name;
             }
         progressBarupdate(21);
-        console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
         .done(function(data, textStatus, jqXHR) {
             progressBarupdate(50);

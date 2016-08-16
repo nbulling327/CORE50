@@ -56,14 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET")
             "dens_acc"=>$row["dens_accur"]
             ];
     }
-    
     if (strcmp('Halliburton', $users[0]["company"])==0) {
         render("header_review.php","jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
     }
     else {
-        render("header_review.php","customer_jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
+        render("customer_header_review.php","customer_jobdatabaseform.php",["title" => "Completed Jobs","jobs"=>$jobs,"users"=>$users]);
     }
-    
 }
 else if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!isset($_POST["job"])) {
@@ -129,18 +127,26 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $users[0]["pumper_first_name"]=$people["firstname"];
             $users[0]["pumper_last_name"]=$people["lastname"];
         }
-        if ($_SESSION["id"]==$people["id"]) {
-            $users[0]["firstname"]=$people["firstname"];
-            $users[0]["lastname"]=$people["lastname"];
-        }
     }
-
+    $peoples = CS50::query("SELECT * FROM users WHERE id = ?", $_SESSION["id"]);
+    foreach ($peoples as $people)
+    {
+        $users[0]["firstname"]=$people["firstname"];
+        $users[0]["lastname"]=$people["lastname"];
+        $users[0]["company"] = $people["company"];
+    }
+    
     foreach ($units as $unit) {
         if(strcmp($unit["id"],$jobs[0]["pump_id"])==0) {
             $pumps[0]["name"]=$unit["pump"];
         }    
     }
-
-    render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs, "pumps"=>$pumps,"slurries"=>$slurries,"displacement_shutdowns"=>$displacement_shutdowns,"users"=>$users]);
+    if (strcmp('Halliburton', $users[0]["company"])==0) {
+        render("header_jobanalysis.php","jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs, "pumps"=>$pumps,"slurries"=>$slurries,"displacement_shutdowns"=>$displacement_shutdowns,"users"=>$users]);
+    }
+    else {
+        render("customer_header_jobanalysis.php","customer_jobanalysis.php",["title" => "Job Analysis","jobs"=>$jobs, "pumps"=>$pumps,"slurries"=>$slurries,"displacement_shutdowns"=>$displacement_shutdowns,"users"=>$users]);
+    }
+    
 }
 ?>
