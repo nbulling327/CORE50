@@ -124,20 +124,24 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
         foreach ($rows as $row) {
             $job_to_edit[] = [
             "customer" => $row["customer"],
-            "supervisor" => $row["job_type"],
-            "pumper" => $row["stage_count"],
-            "unit" => $row["well_name"],
-            "displacement" => $row["well_number"],
+            "job_name" => $row["customer"]." ".$row["well_name"]." ".$row["well_number"]." ".$row["job_type"],
+            "supervisor_id" => $row["supervisor_id"],
+            "pumper_id" => $row["pumper_id"],
+            "pump_id" => $row["pump_id"],
+            "calculated_disp" => $row["calculated_disp"],
             "slurries" => $row["slurries"],
+            "stage_count" => $row["stage_count"],
             ];
         }
         
         /* Edit out complete, pressure, rate, density, time column analysis info */
         
-        CS50::query("DELETE FROM jobs WHERE id = ?", $job_id);
-        CS50::query("DELETE FROM slurries WHERE job_id = ?", $job_id);
-        
-        
+        CS50::query("UPDATE jobs SET complete=?,avg_cem_rate=?,dens_accur=?,shutdowns=?,postjobentry=?,act_disp_vol=?,
+                cem_vol_variance=?,plug_shutdown_time=?,slurry_swap_time=?,avg_disp_rate=?, total_cem_vol=? WHERE id=?",
+                0,0,0,0,0,0,0,0,0,0,0, $job_id); 
+        CS50::query("UPDATE slurries SET avg_rate=?,dens_acc=?,vol_var=?,shutdowns=?,act_vol=? WHERE job_id=?",
+                0,0,0,0,0,0, $job_id);         
+                
         $rows= CS50::query("SELECT * FROM jobs WHERE complete = ? ORDER BY customer", 'FALSE');
         $prev_customer = "blank";
         foreach ($rows as $row)
@@ -190,8 +194,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "pump" => $unit["pump"], 
                     ];
         }
-        render("header.php","postjobinfo.php",["title" => "Post Job Entry","pumps"=>$pumps,"jobs"=>$jobs,"customers"=>$customers,"slurries"=>$slurries,"users"=>$users,"pumpers"=>$pumpers,"supervisors"=>$supervisors]);
-
+        render("header.php","postjobinfo_update.php",["title" => "Post Job Edit","pumps"=>$pumps,"jobs"=>$jobs,"customers"=>$customers,"job_to_edit"=>$job_to_edit,"slurries"=>$slurries,"users"=>$users,"pumpers"=>$pumpers,"supervisors"=>$supervisors]);
     }
     
 }
