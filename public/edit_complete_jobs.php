@@ -131,6 +131,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
             "calculated_disp" => $row["calculated_disp"],
             "slurries" => $row["slurries"],
             "stage_count" => $row["stage_count"],
+            "job_date" => $row["job_date"],
             ];
         }
         
@@ -140,7 +141,7 @@ else if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 cem_vol_variance=?,plug_shutdown_time=?,slurry_swap_time=?,avg_disp_rate=?, total_cem_vol=? WHERE id=?",
                 0,0,0,0,0,0,0,0,0,0,0, $job_id); 
         CS50::query("UPDATE slurries SET avg_rate=?,dens_acc=?,vol_var=?,shutdowns=?,act_vol=? WHERE job_id=?",
-                0,0,0,0,0,0, $job_id);         
+                0,0,0,0,0, $job_id);         
                 
         $rows= CS50::query("SELECT * FROM jobs WHERE complete = ? ORDER BY customer", 'FALSE');
         $prev_customer = "blank";

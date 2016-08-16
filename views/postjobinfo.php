@@ -18,7 +18,8 @@
                 <div class="row">
                     <div id="post_well_customer" class="col-xs-11 text-left">
                         <select  id="comp_choice" name="chosen_company" class="selectpicker" title="Select Customer Name.." data-size="12" data-live-search="true">
-                    <?php 
+                    <?php
+                        $b='';
                         foreach ($customers as $customer) 
                         {
                             $company_name=$customer["customer"];

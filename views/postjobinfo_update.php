@@ -9,18 +9,30 @@
     </ul>
 </div>
 <br/>
+<div id="dom-target-default_date" style="display: none;">
 <?php
-
-            $a = $job_to_edit[0]["customer"];
-            $b = $job_to_edit[0]["job_name"];
-            $c = $job_to_edit[0]["supervisor_id"];
-            $d = $job_to_edit[0]["pumper_id"];
-            $e = $job_to_edit[0]["pump_id"];
-            $f = $job_to_edit[0]["calculated_disp"];
-            $g = $job_to_edit[0]["slurries"];
-            $h = $job_to_edit[0]["stage_count"];
-            
+    $a = $job_to_edit[0]["customer"];
+    $b = $job_to_edit[0]["job_name"];
+    $c = $job_to_edit[0]["supervisor_id"];
+    $d = $job_to_edit[0]["pumper_id"];
+    $e = $job_to_edit[0]["pump_id"];
+    $f = $job_to_edit[0]["calculated_disp"];
+    $g = $job_to_edit[0]["slurries"];
+    $h = $job_to_edit[0]["stage_count"];
+    $default_date = $job_to_edit[0]["job_date"];
+    $default_date = date_create_from_format('Y-m-j', $default_date);
+    $default_date = date_format($default_date, 'm/d/Y');
+                                            //Again, do some operation, get the output.
+    echo htmlspecialchars($default_date);   /* You have to escape because the result
+                                            will not be valid HTML otherwise. */
 ?>
+</div>
+<div id="dom-target-job_name" style="display: none;">
+<?php
+    echo htmlspecialchars($b);
+?>
+</div>
+
 <form action = "postjob.php" method="post" enctype="multipart/form-data">
     <div id="small_font">
     <div class="row">
@@ -50,7 +62,7 @@
                 Job:
                 <div class="row">
                     <div class="col-xs-12">
-                <select id="test" name="wellsite" class="typeahead form-control" type="text" value=<?php echo $b; ?> data-live-search="true">
+                <select id="update" name="wellsite" class="typeahead form-control" type="text" value=<?php echo $b; ?> data-live-search="true">
                 </select>
                     </div>
                 </div>    
@@ -63,7 +75,7 @@
             <div class = "row"> 
                 <div class="col-xs-offset-1 col-xs-3 text-left">
                     <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
+                        <div class='input-group date' id='datetimepicker2'>
                             <input name="jobdate" type='text' class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>

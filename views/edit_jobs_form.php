@@ -12,25 +12,19 @@
     <form action="edit_complete_jobs.php" method="post">
         <fieldset>
             <div class="row">
-                <div class="col-xs-2 col-xs-offset-3">
+                <div class="col-xs-3 col-xs-offset-3">
                     <button onClick="return confirm('Are you sure you want to reenter job info?  This will delete the current job.')" class="btn my-btn" type="submit" value="1" name="submit">
                         Reenter Proposal Info
                         <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
                     </button>
                 </div>
-                <div class="col-xs-2">
+                <div class="col-xs-3">
                     <button onClick="return confirm('Are you sure you want to reload CSV?')" class="btn my-btn" type="submit" value="2" name="submit">
                         Reupload CSV Data
                         <span aria-hidden="true" class="glyphicon glyphicon-open-file"></span>
                     </button>
                 </div>
-                <div class="col-xs-2">
-                    <button onClick="return confirm('Are you sure you want to reselect?')" class="btn my-btn" type="submit" value="3" name="submit">
-                        Reselect Times
-                        <span aria-hidden="true" class="glyphicon glyphicon-hourglass"></span>
-                    </button>
                 </div>
-            </div>
             </br>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover table-condensed" id="joblisting">

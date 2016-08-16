@@ -7,7 +7,7 @@
 
     // TODO: search database for places matching $_GET["geo"], store in $jobinfos
     $key_word = $_GET["customer"];
-        $jobinfos = CS50::query("SELECT * FROM jobs WHERE customer = ? ORDER BY well_name DESC" , $key_word);
+        $jobinfos = CS50::query("SELECT * FROM jobs WHERE customer = ? AND complete = 0 ORDER BY well_name DESC" , $key_word);
         $i=0;    
         foreach($jobinfos as $jobinfo)
         {

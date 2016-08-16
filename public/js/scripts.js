@@ -55,11 +55,35 @@ $(document).ready(function () {
                 opt = document.createElement("option");
                 opt.value = data[i].id;
                 opt.text=data[i].combo;
-                obj.appendChild(opt);
+                obj.appendChild(opt);    
             }
         });
     });
 });
+$(document).ready(function () { 
+        var custom = $("#comp_choice").val();
+        var parameters ={customer: custom};
+        if (document.getElementById("dom-target-job_name")) {
+            var div0 = document.getElementById("dom-target-job_name");
+            var compare = div0.textContent.trim();
+        }
+        $.getJSON("search.php", parameters)
+        .success(function(data, textStatus, jqXHR)
+        {
+          document.getElementById("update").options.length = 0;
+          var obj=document.getElementById("update"); 
+          for (var i = 0; i < data.length; i++)     {                
+                opt = document.createElement("option");
+                opt.value = data[i].id;
+                opt.text=data[i].combo.trim();
+                if (compare == opt.text ) {
+                    opt.setAttribute("selected","selected");
+                }
+                obj.appendChild(opt);    
+            }
+        });
+    });
+    
 $(document).ready(function () { 
     $("#scrollable-dropdown-menu2").css("visibility", "hidden");
     $("#geography").change(function(event){
@@ -92,6 +116,16 @@ $(document).ready(function () {
                 });
             });
     
+$(document).ready(function () {
+                if (document.getElementById("dom-target-default_date")) {
+                    var div0 = document.getElementById("dom-target-default_date");
+                    var default_day = div0.textContent.trim();
+                }
+                $('#datetimepicker2').datetimepicker({
+                    defaultDate: default_day,
+                    format: 'MM/DD/YYYY'
+                });
+            });
 
 //function to active select picker for Job District, etc.
 $(document).ready(function() {
