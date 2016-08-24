@@ -265,6 +265,7 @@ function drawChart(){
                 titleTextStyle: { fontName: 'futura'  
                 },
                 colors:['#B00404'],
+                //colors: ['#0C0FC6'],
                 hAxis:{
                     title: x_info[2],
                     titleTextStyle:{bold: true, fontName: 'futura', italic: false},

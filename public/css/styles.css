@@ -126,7 +126,8 @@ body {
 {
 	font-family: Futura;
 	font-size: 88px;
-	color: #B00404; 
+	/*color: #0d47a1;*/
+  	color: #B00404; 
 	font-style: normal;
 	font-variant: normal;
 	font-weight: bold;
@@ -161,6 +162,7 @@ th
 .my-btn
 {
   color: #fff;
+  /*background-color: #0d47a1;*/
   background-color: #B00404;
   
 }
