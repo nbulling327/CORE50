@@ -318,6 +318,15 @@ if("supervisor_id"==$xaxis||"slurry_density"==$xaxis||"pumper_id"==$xaxis||"slur
                     else if("cem_vol_var"==$yaxis) {
                         array_push($ydata, $worker["vol_var"]);    
                     }
+                    else if("jobs"==$yaxis) {
+                        array_push($ydata, 1);    
+                    }
+                    else if("shutdowns"==$yaxis) {
+                        array_push($ydata, $worker["shutdowns"]); 
+                    }
+                    else if("slurry_swap_time"==$yaxis || "plug_shutdown_time"==$yaxis) {
+                        array_push($ydata, 0); 
+                    }
 }   }   }   }   }   
 
 if("date"==$xaxis) {
