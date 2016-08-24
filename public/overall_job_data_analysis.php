@@ -152,7 +152,7 @@ else {
     echo "This FAILED!";
 }
 
-if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"well"==$xaxis||"job"==$xaxis||"date"==$xaxis||"geo"==$xaxis)
+if("supervisor_id"==$xaxis||"slurry_density"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"well"==$xaxis||"job"==$xaxis||"date"==$xaxis||"geo"==$xaxis)
 {
     if("supervisor_id"==$xaxis) {
         $workers= CS50::query("SELECT * FROM users WHERE supervisor = 1 ORDER BY lastname");
@@ -187,6 +187,20 @@ if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pum
             if("disp_vol_var"==$yaxis) { array_push($vols,$job["act_disp_vol"]); }
             else {array_push($vols,$job["total_cem_vol"]); }
     }   }   
+    else if("slurry_density"==$xaxis) {
+        if("disp_vol_var"==$yaxis) {
+            echo json_encode(array("1","1"));
+            exit(400);
+        }
+        $functions=[];
+        $workers= CS50::query("SELECT * FROM slurries");
+        foreach($jobs as $job) {
+            foreach($workers as $worker) {
+                if($job["id"]==$worker["job_id"]) {
+                    array_push($xdata, $worker["density"]);
+                    array_push($vols,$worker["act_vol"]);
+                    array_push($functions,$worker["density"]);
+    }   }   }   }
     else if("slurry_function"==$xaxis) {
         if("disp_vol_var"==$yaxis) {
             echo json_encode(array("1","1"));
@@ -262,7 +276,7 @@ if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pum
                         else {array_push($vols,$job["total_cem_vol"]); }
     }   }   }   }   }
 
-    if("slurry_function"!=$xaxis) {
+    if("slurry_function"!=$xaxis&&"slurry_density"!=$xaxis) {
         if("density"==$yaxis) {
             foreach($jobs as $job) {
                 array_push($ydata, $job["dens_accur"]);
@@ -294,22 +308,25 @@ if("supervisor_id"==$xaxis||"pumper_id"==$xaxis||"slurry_function"==$xaxis||"pum
                 $variance=abs($job["calculated_disp"]-$job["act_disp_vol"])*100/$job["calculated_disp"];
                 array_push($ydata, $variance);
     }   }   }
-    else if ("slurry_function"==$xaxis) {
-        if("density"==$yaxis) {
-            foreach($jobs as $job) {
-                foreach($workers as $worker) {
-                    if($job["id"]==$worker["job_id"]) {
+    else if ("slurry_function"==$xaxis||"slurry_density"==$xaxis) {
+        foreach($jobs as $job) {
+            foreach($workers as $worker) {
+                if($job["id"]==$worker["job_id"]) {
+                    if("density"==$yaxis) {
                         array_push($ydata, $worker["dens_acc"]);
-}   }   }   }   }   }
+                    }
+                    else if("cem_vol_var"==$yaxis) {
+                        array_push($ydata, $worker["vol_var"]);    
+                    }
+}   }   }   }   }   
 
 if("date"==$xaxis) {
-   for($i=0;$i<count($xdata);$i++) {
+    for($i=0;$i<count($xdata);$i++) {
         $total_y=0;
         $total_weight=0;
         $matches=[];
         array_push($matches,$i);
         for($j=$i+1;$j<count($xdata);$j++) {
-            
             if(strcmp(substr($xdata[$i],0,4),substr($xdata[$j],0,4))==0&&strcmp(substr($xdata[$i],5,2),substr($xdata[$j],5,2))==0) {
                 array_push($matches,$i);
             }
@@ -337,7 +354,8 @@ if("date"==$xaxis) {
                         $new_spot=$zz+$i;
                         $ydata[$new_spot]=$total_y/$total_weight;
 }   }   }   }   }   }
-if ("date"==$xaxis||"slurry_function"==$xaxis||"pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
+
+if ("date"==$xaxis||"slurry_function"==$xaxis||"slurry_density"==$xaxis||"pumper_id"==$xaxis||"supervisor_id"==$xaxis||"pump_id"==$xaxis||"job_type"==$xaxis||"geo"==$xaxis||"well"==$xaxis)
 {
    $matches=[];
    $ii=1;
@@ -381,19 +399,16 @@ if ("date"==$xaxis||"slurry_function"==$xaxis||"pumper_id"==$xaxis||"supervisor_
                 }
                 else if ("jobs"==$yaxis) {
                     $y_holder[$jj-1]=$y_holder[$jj-1]+$ydata[$k];
-                    $vol_holder[$jj-1]=1;    
-                    
+                    $vol_holder[$jj-1]=1;
                 }
                 else {
-                    
                     $y_holder[$jj-1]=$y_holder[$jj-1]+$ydata[$k]*$vols[$k];
                     $vol_holder[$jj-1]=$vol_holder[$jj-1]+$vols[$k];
                 }    
             }
         } 
     }
-    for($l=0;$l<count($y_holder);$l++)
-    {
+    for($l=0;$l<count($y_holder);$l++) {
         $y_temp[$l]=$y_holder[$l]/$vol_holder[$l];
     }
     $x_sort=$x_holder;

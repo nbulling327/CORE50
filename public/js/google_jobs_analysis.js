@@ -6,6 +6,7 @@ function progressBarupdate(al){
     var status = document.getElementById('status');
     var message = document.getElementById('finalMessage');
     var chart = document.getElementById('chart_div');
+    var bars = document.getElementById('ProgressBar');
     
     if (al<45) {
         $('#progressBar').attr('aria-valuenow', al).css('width',al+'%');
@@ -24,25 +25,19 @@ function progressBarupdate(al){
         message.innerHTML="Chart is loading";
         status.innerHTML=al+"%";
         $('#progressBar').attr('aria-valuenow', al).css('width',al+'%');
-        al=al+5;
-        setTimeout('progressBarupdate('+al+')', 300);
+        al=al+11;
+        setTimeout('progressBarupdate('+al+')', 700);
     }
     else if (al == 100) {
         message.innerHTML="Chart is loaded!";
         $('#progressBar').attr('aria-valuenow', al).css('width',al+'%');
-        setTimeout('progressBarupdate(101)', 1000);
         chart.style.display='inline';
         bar.style.display='none';
+        bars.style.display='none';
         status.style.display='none';
         message.style.display='none'; 
     }
-    else if (al > 100) {
-        message.innerHTML="Chart is loaded!";
-        chart.style.display='inline';
-        bar.style.display='none';
-        status.style.display='none';
-        message.style.display='none'; 
-    }
+    
 }
 
 function drawChart(){
@@ -83,32 +78,33 @@ function drawChart(){
         var div6 = document.getElementById("dom-target-xaxis");
         var x_name = div6.textContent.trim();
         progressBarupdate(10);
+        console.log(x_name);
         if("date"==x_name) {
             x_info=['string','Month'];
         }
         else if("well"==x_name) {
-            x_info=['string','Well'];
+            x_info=['string','Well',''];
         }
         else if("supervisor_id"==x_name) {
-            x_info=['string','Supervisor'];
+            x_info=['string','Supervisor',''];
         }
         else if("pumper_id"==x_name) {
-            x_info=['string','Pump Operator'];
+            x_info=['string','Pump Operator',''];
         }
         else if("pump_id"==x_name) {
-            x_info=['string','Pump'];
+            x_info=['string','Pump',''];
         }
         else if("geo"==x_name) {
-            x_info=['string','Place'];
+            x_info=['string','Place',''];
         }
         else if("job_type"==x_name) {
-            x_info=['string','Job Type'];
+            x_info=['string','Job Type',''];
         }
         else if("slurry_function"==x_name) {
-            x_info=['string','Slurry Function'];
+            x_info=['string','Slurry Function',''];
         }
         else if("slurry_density"==x_name) {
-            x_info==['number','Slurry Density'];
+            x_info=['number','Slurry Density',''];
         }    
         progressBarupdate(12);
         var div7 = document.getElementById("dom-target-yaxis");
@@ -117,59 +113,59 @@ function drawChart(){
         //get axis name and series name
         if('density'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Density Accuracy',geo_picked];    
+                y_info=['Density Accuracy, %',geo_picked,'Density Accuracy'];    
             }
             else {
-                y_info=['Density Accuracy','Density Accuracy'];
+                y_info=['Density Accuracy, %','Density Accuracy','Density Accuracy'];
             }
         }
         //get axis name and series name
         else if('shutdowns'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Unplanned Shutdowns per Job',geo_picked];    
+                y_info=['Unplanned Shutdowns per Job',geo_picked,'Unplanned Shutdowns per Job'];    
             }
             else {
-                y_info=['Unplanned Shutdowns per Job','Unplanned Shutdowns per Job'];
+                y_info=['Unplanned Shutdowns per Job','Unplanned Shutdowns per Job','Unplanned Shutdowns per Job'];
             }
         }
         else if('cem_vol_var'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Cement Volume Variance',geo_picked];    
+                y_info=['Cement Volume Variance, %',geo_picked,'Cement Volume Variance'];    
             }
             else {
-                y_info=['Cement Volume Variance','Cement Volume Variance'];
+                y_info=['Cement Volume Variance, %','Cement Volume Variance','Cement Volume Variance'];
             }
         }
         else if('disp_vol_var'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Displacement Volume Variance',geo_picked];    
+                y_info=['Displacement Volume Variance, %',geo_picked,'Displacement Volume Variance'];    
             }
             else {
-                y_info=['Displacement Volume Variance','Displacement Volume Variance'];
+                y_info=['Displacement Volume Variance, %','Displacement Volume Variance','Displacement Volume Variance'];
             }
         }
         else if('plug_shutdown_time'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Time down before Displacement (min)',geo_picked];    
+                y_info=['Time down before Displacement (min)',geo_picked,'Top Plug Shutdown Time'];    
             }
             else {
-                y_info=['Time down before Displacement (min)','Top Plug Shutdown Time'];
+                y_info=['Time down before Displacement (min)','Top Plug Shutdown Time','Top Plug Shutdown Time'];
             }
         }
         else if('jobs'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Number of Jobs',geo_picked];    
+                y_info=['Number of Jobs',geo_picked,'Number of Jobs'];    
             }
             else {
-                y_info=['Number of Jobs','Number of Jobs'];
+                y_info=['Number of Jobs','Number of Jobs','Number of Jobs'];
             }
         }
         else if('slurry_swap_time'==y_name) {
             if(geo_picked!="blank") {
-                y_info=['Average Slurry Swap Time',geo_picked];    
+                y_info=['Average Slurry Swap Time, min',geo_picked,'Average Slurry Swap Time'];    
             }
             else {
-                y_info=['Average Slurry Swap Time','Average Slurry Swap Time'];
+                y_info=['Average Slurry Swap Time, min','Average Slurry Swap Time','Average Slurry Swap Time'];
             }
         }
         progressBarupdate(15);
@@ -187,7 +183,8 @@ function drawChart(){
         var x1=[];
         var month;
         var year;
-        var user_title =y_info[0];
+        var slur_dens;
+        var user_title =y_info[2];
         user_title+=" by ";
         user_title+=x_info[1];
         if(company_name==("blank")) {}
@@ -196,9 +193,10 @@ function drawChart(){
             user_title+=company_name;
             }
         progressBarupdate(21);
+        console.log(parameters);
         $.getJSON("overall_job_data_analysis.php",parameters)
         .done(function(data, textStatus, jqXHR) {
-            progressBarupdate(50);
+            progressBarupdate(45);
             if("date"==x_name) {
                 for (var i = 0; i<data.length; i++) {
                     switch (data[i]["xdata"].slice(5,7)) {
@@ -245,6 +243,12 @@ function drawChart(){
                     x1.push(month);
                 }    
             }
+            else if("slurry_density"==x_name) {
+                for (var i = 0; i<data.length; i++) {
+                    slur_dens = parseFloat(data[i]["xdata"].trim());
+                    x1.push(slur_dens);
+                }
+            }
             else {
                 for (var i = 0; i<data.length; i++) {
                     x1.push(data[i]["xdata"]);
@@ -262,9 +266,9 @@ function drawChart(){
                 },
                 colors:['#B00404'],
                 hAxis:{
-                    title: x_info[1],
+                    title: x_info[2],
                     titleTextStyle:{bold: true, fontName: 'futura', italic: false},
-                    slantedText: false,
+                    slantedText: true,
                     maxTextlines: 5,
                     showTextEvery: 1,
                     maxAlternation: 4
